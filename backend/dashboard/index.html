@@ -5,289 +5,722 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>غرفة العمليات — لوحة التحكم</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ───── Variables ───── */
 :root{
-  --bg:#0f172a;--card:#1e293b;--border:#334155;
-  --txt:#e2e8f0;--muted:#94a3b8;
-  --green:#22c55e;--red:#ef4444;--amber:#f59e0b;--blue:#3b82f6;--purple:#a855f7;--cyan:#06b6d4;
-  --palestine-green:#009736;--palestine-red:#ce1126;--palestine-black:#000;--palestine-white:#fff;
+  --bg:#0f172a;--card:#1e293b;--border:#334155;--card-hover:#253349;
+  --txt:#e2e8f0;--muted:#94a3b8;--input-bg:#0f172a;
+  --green:#22c55e;--red:#ef4444;--amber:#f59e0b;--blue:#3b82f6;
+  --purple:#a855f7;--cyan:#06b6d4;--pink:#ec4899;
+  --palestine-green:#009736;--palestine-red:#ce1126;
+  --shadow:0 4px 24px rgba(0,0,0,.3);
+  --font:'Cairo',sans-serif;
+}
+[data-theme="light"]{
+  --bg:#f1f5f9;--card:#ffffff;--border:#e2e8f0;--card-hover:#f8fafc;
+  --txt:#1e293b;--muted:#64748b;--input-bg:#f8fafc;
+  --shadow:0 4px 24px rgba(0,0,0,.08);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+body{font-family:var(--font);background:var(--bg);color:var(--txt);min-height:100vh;transition:all .3s}
 
-/* Header */
-.header{
-  background:linear-gradient(135deg,var(--palestine-black) 0%,#1a1a2e 50%,var(--palestine-green) 100%);
-  padding:16px 32px;display:flex;align-items:center;justify-content:space-between;
-  border-bottom:3px solid var(--palestine-red);
-}
-.header h1{font-size:24px;font-weight:900}
-.header .sub{color:var(--muted);font-size:13px}
-.header .flag{display:flex;gap:3px;align-items:center}
-.header .flag span{width:32px;height:8px;display:block;border-radius:2px}
-.header .status-dot{width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block;margin-inline-end:6px}
+/* ───── Header ───── */
+.header{background:linear-gradient(135deg,#000 0%,#1a1a2e 50%,var(--palestine-green) 100%);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--palestine-red);flex-wrap:wrap;gap:10px}
+.header h1{font-size:22px;font-weight:900;color:#fff}
+.header .sub{color:#94a3b8;font-size:12px}
+.header-controls{display:flex;align-items:center;gap:8px}
+.header-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;padding:7px 14px;border-radius:8px;cursor:pointer;font-family:var(--font);font-size:12px;font-weight:600;transition:all .2s;display:flex;align-items:center;gap:5px}
+.header-btn:hover{background:rgba(255,255,255,.25)}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;margin-inline-end:5px}
 
-/* Layout */
+/* ───── Tabs ───── */
+.tabs{display:flex;gap:0;background:var(--card);border-bottom:1px solid var(--border);overflow-x:auto}
+.tab{padding:12px 24px;cursor:pointer;font-weight:600;font-size:13px;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;color:var(--muted)}
+.tab:hover{color:var(--txt);background:var(--card-hover)}
+.tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.tab-content{display:none}.tab-content.active{display:block}
+
+/* ───── Container ───── */
 .container{max-width:1440px;margin:0 auto;padding:20px}
 
-/* KPI Row */
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:20px}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;position:relative;overflow:hidden}
-.kpi .label{font-size:13px;color:var(--muted);margin-bottom:4px}
-.kpi .value{font-size:32px;font-weight:900}
-.kpi .sub-val{font-size:12px;color:var(--muted)}
+/* ───── KPI ───── */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow);transition:all .2s}
+.kpi:hover{transform:translateY(-2px);border-color:var(--blue)}
+.kpi .label{font-size:12px;color:var(--muted);margin-bottom:2px}
+.kpi .value{font-size:28px;font-weight:900}
+.kpi .sub-val{font-size:11px;color:var(--muted)}
 .kpi::before{content:'';position:absolute;top:0;right:0;left:0;height:3px}
 .kpi.green::before{background:var(--green)}.kpi.red::before{background:var(--red)}
 .kpi.amber::before{background:var(--amber)}.kpi.blue::before{background:var(--blue)}
 .kpi.purple::before{background:var(--purple)}.kpi.cyan::before{background:var(--cyan)}
 
-/* Charts Grid */
-.charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px;margin-bottom:20px}
-.chart-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
-.chart-card h3{font-size:15px;margin-bottom:12px;color:var(--txt);display:flex;align-items:center;gap:8px}
-.chart-card h3 .icon{font-size:18px}
+/* ───── Charts ───── */
+.charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:14px;margin-bottom:18px}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;box-shadow:var(--shadow)}
+.chart-card h3{font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
 
-/* Tables */
-.table-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
-.table-card h3{font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+/* ───── Tables & Forms ───── */
+.data-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.data-card h3{font-size:15px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
 table{width:100%;border-collapse:collapse}
-th,td{padding:10px 14px;text-align:right;border-bottom:1px solid var(--border);font-size:13px}
-th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase}
-td{color:var(--txt)}
-.badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block}
+th,td{padding:9px 12px;text-align:inherit;border-bottom:1px solid var(--border);font-size:12px}
+th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px}
+.badge{padding:2px 10px;border-radius:20px;font-size:10px;font-weight:600;display:inline-block}
 .badge-green{background:rgba(34,197,94,.15);color:var(--green)}
 .badge-red{background:rgba(239,68,68,.15);color:var(--red)}
 .badge-amber{background:rgba(245,158,11,.15);color:var(--amber)}
 .badge-blue{background:rgba(59,130,246,.15);color:var(--blue)}
 
-/* Loading */
-.loading{display:flex;justify-content:center;align-items:center;height:400px;font-size:18px;color:var(--muted)}
-.spinner{border:4px solid var(--border);border-top:4px solid var(--green);border-radius:50%;width:40px;height:40px;animation:spin .8s linear infinite;margin-inline-end:12px}
+/* ───── Buttons ───── */
+.btn{padding:7px 16px;border:none;border-radius:8px;cursor:pointer;font-family:var(--font);font-size:12px;font-weight:600;transition:all .2s}
+.btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{opacity:.85}
+.btn-danger{background:var(--red);color:#fff}.btn-danger:hover{opacity:.85}
+.btn-sm{padding:4px 10px;font-size:11px;border-radius:6px}
+.btn-success{background:var(--green);color:#fff}
+
+/* ───── Modal ───── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;justify-content:center;align-items:center}
+.modal-overlay.active{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;width:90%;max-width:520px;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.modal h3{margin-bottom:16px;font-size:17px}
+.form-group{margin-bottom:12px}
+.form-group label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px;font-weight:600}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 12px;background:var(--input-bg);border:1px solid var(--border);border-radius:8px;color:var(--txt);font-family:var(--font);font-size:13px}
+.form-group textarea{min-height:60px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+
+/* ───── Loading ───── */
+.loading{display:flex;justify-content:center;align-items:center;height:300px;font-size:16px;color:var(--muted)}
+.spinner{border:4px solid var(--border);border-top:4px solid var(--green);border-radius:50%;width:36px;height:36px;animation:spin .8s linear infinite;margin-inline-end:10px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* Responsive */
+/* ───── Toast ───── */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;z-index:2000;opacity:0;transition:opacity .3s}
+.toast.show{opacity:1}.toast-success{background:var(--green);color:#fff}.toast-error{background:var(--red);color:#fff}
+
+/* ───── Map ───── */
+#facilityMap{width:100%;height:550px;border-radius:12px;border:1px solid var(--border);z-index:1}
+.map-legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.map-legend-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--txt)}
+.map-legend-dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.3)}
+.map-filters{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.map-chip{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all .2s;font-family:var(--font)}
+.map-chip:hover{border-color:var(--blue);color:var(--txt)}
+.map-chip.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.map-popup h4{margin:0 0 4px;font-size:14px;color:#1e293b}
+.map-popup .mp-row{font-size:12px;color:#475569;margin:2px 0}
+.map-popup .mp-badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:10px;font-weight:600}
+
 @media(max-width:768px){
   .charts-grid{grid-template-columns:1fr}
   .kpi-row{grid-template-columns:repeat(2,1fr)}
-  .header{flex-direction:column;text-align:center;gap:8px}
+  .header{text-align:center}
+  .form-row{grid-template-columns:1fr}
+  #facilityMap{height:400px}
 }
 </style>
 </head>
 <body>
 
+<!-- Header -->
 <div class="header">
   <div>
-    <h1>🏥 غرفة العمليات — لوحة التحكم الإدارية</h1>
-    <div class="sub"><span class="status-dot"></span>نظام إدارة الأزمات — الضفة الغربية، فلسطين</div>
+    <h1 id="headerTitle">🏥 غرفة العمليات — لوحة التحكم</h1>
+    <div class="sub"><span class="status-dot"></span><span id="headerSub">نظام إدارة الأزمات — الضفة الغربية، فلسطين</span></div>
   </div>
-  <div class="flag">
-    <span style="background:var(--palestine-black)"></span>
-    <span style="background:var(--palestine-white);border:1px solid #666"></span>
-    <span style="background:var(--palestine-green)"></span>
-    <span style="background:var(--palestine-red)"></span>
+  <div class="header-controls">
+    <button class="header-btn" onclick="toggleTheme()" id="themeBtn">🌙 <span id="themeLbl">فاتح</span></button>
+    <button class="header-btn" onclick="toggleLang()" id="langBtn">🌐 English</button>
   </div>
 </div>
 
-<div class="container">
-  <div id="loading" class="loading"><div class="spinner"></div>جاري تحميل البيانات...</div>
-  <div id="content" style="display:none">
+<!-- Tabs -->
+<div class="tabs">
+  <div class="tab active" data-tab="dashboard" onclick="switchTab('dashboard')"><span class="tab-text" data-i18n="tab_dashboard">📊 لوحة المعلومات</span></div>
+  <div class="tab" data-tab="facilities" onclick="switchTab('facilities')"><span class="tab-text" data-i18n="tab_facilities">🏥 المرافق</span></div>
+  <div class="tab" data-tab="resources" onclick="switchTab('resources')"><span class="tab-text" data-i18n="tab_resources">🚑 الموارد</span></div>
+  <div class="tab" data-tab="incidents" onclick="switchTab('incidents')"><span class="tab-text" data-i18n="tab_incidents">⚠️ الحوادث</span></div>
+  <div class="tab" data-tab="map" onclick="switchTab('map');initMap()"><span class="tab-text" data-i18n="tab_map">🗺️ الخريطة</span></div>
+</div>
 
-    <!-- KPI Cards -->
-    <div class="kpi-row" id="kpi-row"></div>
-
-    <!-- Charts -->
-    <div class="charts-grid">
-      <div class="chart-card"><h3><span class="icon">🏥</span>المرافق حسب الحالة</h3><canvas id="chartFacStatus"></canvas></div>
-      <div class="chart-card"><h3><span class="icon">📊</span>المرافق حسب النوع</h3><canvas id="chartFacType"></canvas></div>
-      <div class="chart-card"><h3><span class="icon">🛏️</span>الأسرّة: المتوفرة مقابل المشغولة</h3><canvas id="chartBeds"></canvas></div>
-      <div class="chart-card"><h3><span class="icon">🚑</span>الموارد حسب النوع</h3><canvas id="chartResType"></canvas></div>
-      <div class="chart-card"><h3><span class="icon">⚠️</span>الحوادث حسب الخطورة</h3><canvas id="chartIncSev"></canvas></div>
-      <div class="chart-card"><h3><span class="icon">📍</span>الحوادث حسب المحافظة</h3><canvas id="chartIncDistrict"></canvas></div>
-      <div class="chart-card"><h3><span class="icon">🏛️</span>المرافق حسب المحافظة</h3><canvas id="chartFacGov"></canvas></div>
-      <div class="chart-card"><h3><span class="icon">📦</span>الموارد حسب الحالة</h3><canvas id="chartResStatus"></canvas></div>
-    </div>
-
-    <!-- Tables -->
-    <div class="charts-grid">
-      <div class="table-card">
-        <h3><span class="icon">🚨</span>الحوادث النشطة</h3>
-        <table><thead><tr><th>العنوان</th><th>النوع</th><th>الخطورة</th><th>المنطقة</th></tr></thead><tbody id="incidentsTable"></tbody></table>
-      </div>
-      <div class="table-card">
-        <h3><span class="icon">🏥</span>المرافق المتضررة</h3>
-        <table><thead><tr><th>الاسم</th><th>النوع</th><th>الحالة</th><th>الأسرّة المتوفرة</th></tr></thead><tbody id="facilityTable"></tbody></table>
+<!-- Dashboard Tab -->
+<div class="tab-content active" id="tab-dashboard">
+  <div class="container">
+    <!-- SOS ALERTS BANNER -->
+    <div id="sosAlertsBanner" style="display:none;margin-bottom:16px">
+      <div style="background:linear-gradient(135deg,#dc2626,#991b1b);border-radius:14px;padding:18px 22px;box-shadow:0 4px 20px rgba(220,38,38,.35);border:2px solid #fca5a5;animation:sosPulse 2s infinite">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:28px;animation:sosShake .5s infinite">🚨</span>
+            <div>
+              <div style="color:#fff;font-weight:900;font-size:17px" id="sosAlertTitle">SOS ALERTS</div>
+              <div style="color:#fecaca;font-size:12px" id="sosAlertSub">Real-time emergency reports from mobile users</div>
+            </div>
+          </div>
+          <span style="background:rgba(255,255,255,.2);color:#fff;padding:4px 14px;border-radius:20px;font-size:13px;font-weight:700" id="sosAlertCount">0</span>
+        </div>
+        <div id="sosAlertList" style="margin-top:14px;display:flex;flex-direction:column;gap:8px"></div>
       </div>
     </div>
+    <style>
+      @keyframes sosPulse{0%,100%{box-shadow:0 4px 20px rgba(220,38,38,.35)}50%{box-shadow:0 4px 30px rgba(220,38,38,.6)}}
+      @keyframes sosShake{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+      .sos-card{background:rgba(255,255,255,.12);border-radius:10px;padding:12px 16px;color:#fff;display:flex;align-items:flex-start;gap:12px}
+      .sos-card .sos-icon{font-size:22px;margin-top:2px}
+      .sos-card .sos-info{flex:1}
+      .sos-card .sos-info h4{margin:0;font-size:14px;font-weight:700}
+      .sos-card .sos-info p{margin:3px 0 0;font-size:11px;color:#fecaca}
+      .sos-card .sos-time{font-size:10px;color:#fca5a5;white-space:nowrap}
+      .sos-card .sos-locate{background:rgba(255,255,255,.2);border:none;color:#fff;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:600}
+      .sos-card .sos-locate:hover{background:rgba(255,255,255,.35)}
+    </style>
+    <!-- END SOS ALERTS BANNER -->
 
+    <div id="loading" class="loading"><div class="spinner"></div><span data-i18n="loading">جاري تحميل البيانات...</span></div>
+    <div id="dashContent" style="display:none">
+      <div class="kpi-row" id="kpi-row"></div>
+      <div class="charts-grid">
+        <div class="chart-card"><h3>🏥 <span data-i18n="fac_by_status">المرافق حسب الحالة</span></h3><canvas id="chartFacStatus"></canvas></div>
+        <div class="chart-card"><h3>📊 <span data-i18n="fac_by_type">المرافق حسب النوع</span></h3><canvas id="chartFacType"></canvas></div>
+        <div class="chart-card"><h3>🛏️ <span data-i18n="beds_chart">الأسرّة: المتوفرة مقابل المشغولة</span></h3><canvas id="chartBeds"></canvas></div>
+        <div class="chart-card"><h3>🚑 <span data-i18n="res_by_type">الموارد حسب النوع</span></h3><canvas id="chartResType"></canvas></div>
+        <div class="chart-card"><h3>⚠️ <span data-i18n="inc_by_sev">الحوادث حسب الخطورة</span></h3><canvas id="chartIncSev"></canvas></div>
+        <div class="chart-card"><h3>📍 <span data-i18n="inc_by_dist">الحوادث حسب المحافظة</span></h3><canvas id="chartIncDistrict"></canvas></div>
+        <div class="chart-card"><h3>🏛️ <span data-i18n="fac_by_gov">المرافق حسب المحافظة</span></h3><canvas id="chartFacGov"></canvas></div>
+        <div class="chart-card"><h3>📦 <span data-i18n="res_by_status">الموارد حسب الحالة</span></h3><canvas id="chartResStatus"></canvas></div>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- Facilities Tab -->
+<div class="tab-content" id="tab-facilities">
+  <div class="container">
+    <div class="data-card">
+      <h3><span>🏥 <span data-i18n="manage_fac">إدارة المرافق</span></span><button class="btn btn-primary" onclick="openModal('facility')">+ <span data-i18n="add_new">إضافة جديد</span></button></h3>
+      <table><thead><tr>
+        <th data-i18n="name">الاسم</th><th data-i18n="type">النوع</th><th data-i18n="status">الحالة</th>
+        <th data-i18n="governorate">المحافظة</th><th data-i18n="beds">أسرّة</th><th data-i18n="power">كهرباء</th><th data-i18n="actions">إجراءات</th>
+      </tr></thead><tbody id="facTable"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- Resources Tab -->
+<div class="tab-content" id="tab-resources">
+  <div class="container">
+    <div class="data-card">
+      <h3><span>🚑 <span data-i18n="manage_res">إدارة الموارد</span></span><button class="btn btn-primary" onclick="openModal('resource')">+ <span data-i18n="add_new">إضافة جديد</span></button></h3>
+      <table><thead><tr>
+        <th data-i18n="name">الاسم</th><th data-i18n="type">النوع</th><th data-i18n="status">الحالة</th>
+        <th data-i18n="district">المنطقة</th><th data-i18n="capacity">السعة</th><th data-i18n="actions">إجراءات</th>
+      </tr></thead><tbody id="resTable"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- Incidents Tab -->
+<div class="tab-content" id="tab-incidents">
+  <div class="container">
+    <div class="data-card">
+      <h3><span>⚠️ <span data-i18n="manage_inc">إدارة الحوادث</span></span><button class="btn btn-primary" onclick="openModal('incident')">+ <span data-i18n="add_new">إضافة جديد</span></button></h3>
+      <table><thead><tr>
+        <th data-i18n="title">العنوان</th><th data-i18n="type">النوع</th><th data-i18n="severity">الخطورة</th>
+        <th data-i18n="district">المنطقة</th><th data-i18n="active">نشط</th><th data-i18n="actions">إجراءات</th>
+      </tr></thead><tbody id="incTable"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- Map Tab -->
+<div class="tab-content" id="tab-map">
+  <div class="container">
+    <div class="data-card">
+      <h3><span>🗺️ <span data-i18n="crisis_map">خريطة الأزمات</span></span></h3>
+      <div class="map-legend" id="mapLegend"></div>
+      <div class="map-filters" id="mapFilters"></div>
+      <div id="facilityMap"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
 
 <script>
+/* ═══════ CONFIG ═══════ */
 const API = window.location.origin;
+const H = {'Content-Type':'application/json','ngrok-skip-browser-warning':'true'};
+let LANG = localStorage.getItem('lang')||'ar';
+let THEME = localStorage.getItem('theme')||'dark';
+let chartInstances = {};
 
-const COLORS = {
-  green:'#22c55e',red:'#ef4444',amber:'#f59e0b',blue:'#3b82f6',
-  purple:'#a855f7',cyan:'#06b6d4',pink:'#ec4899',emerald:'#10b981',
-  orange:'#f97316',indigo:'#6366f1',teal:'#14b8a6',rose:'#f43f5e'
+/* ═══════ i18n ═══════ */
+const I18N = {
+  ar:{
+    tab_dashboard:'📊 لوحة المعلومات',tab_facilities:'🏥 المرافق',tab_resources:'🚑 الموارد',tab_incidents:'⚠️ الحوادث',
+    loading:'جاري تحميل البيانات...',fac_by_status:'المرافق حسب الحالة',fac_by_type:'المرافق حسب النوع',
+    beds_chart:'الأسرّة: المتوفرة مقابل المشغولة',res_by_type:'الموارد حسب النوع',inc_by_sev:'الحوادث حسب الخطورة',
+    inc_by_dist:'الحوادث حسب المحافظة',fac_by_gov:'المرافق حسب المحافظة',res_by_status:'الموارد حسب الحالة',
+    manage_fac:'إدارة المرافق',manage_res:'إدارة الموارد',manage_inc:'إدارة الحوادث',
+    add_new:'إضافة جديد',name:'الاسم',type:'النوع',status:'الحالة',governorate:'المحافظة',
+    beds:'أسرّة',power:'كهرباء',actions:'إجراءات',district:'المنطقة',capacity:'السعة',
+    title:'العنوان',severity:'الخطورة',active:'نشط',
+    total_fac:'إجمالي المرافق',avail_beds:'الأسرّة المتوفرة',icu_beds:'عناية مركزة',
+    total_res:'إجمالي الموارد',active_inc:'الحوادث النشطة',shelter_cap:'سعة الملاجئ',
+    with_power:'كهرباء متوفرة',with_oxygen:'أكسجين متوفر',
+    operational:'عامل',of:'من',available:'متوفر',occupancy:'إشغال',facility:'مرفق',
+    edit:'تعديل',delete:'حذف',save:'حفظ',cancel:'إلغاء',confirm_delete:'هل تريد الحذف؟',
+    add_facility:'إضافة مرفق',edit_facility:'تعديل مرفق',add_resource:'إضافة مورد',edit_resource:'تعديل مورد',
+    add_incident:'إضافة حادث',edit_incident:'تعديل حادث',
+    name_ar:'الاسم بالعربية',latitude:'خط العرض',longitude:'خط الطول',address:'العنوان',
+    total_beds:'إجمالي الأسرّة',available_beds:'الأسرّة المتوفرة',icu_total:'عناية إجمالي',icu_avail:'عناية متوفر',
+    has_power:'كهرباء',has_oxygen:'أكسجين',phone:'الهاتف',description:'الوصف',
+    contact_name:'اسم جهة الاتصال',contact_phone:'هاتف جهة الاتصال',total_capacity:'السعة الإجمالية',
+    current_occ:'الإشغال الحالي',reported_by:'الإبلاغ بواسطة',is_active:'نشط',
+    header_title:'🏥 غرفة العمليات — لوحة التحكم',header_sub:'نظام إدارة الأزمات — الضفة الغربية، فلسطين',
+    theme_light:'فاتح',theme_dark:'داكن',
+    created:'تم الإنشاء بنجاح',updated:'تم التحديث بنجاح',deleted:'تم الحذف بنجاح',error_op:'حدث خطأ',
+    total:'إجمالي',avail:'متوفر',general_beds:'أسرّة عامة',icu_label:'عناية مركزة',
+    tab_map:'🗺️ الخريطة',crisis_map:'خريطة الأزمات — المرافق الصحية',
+  },
+  en:{
+    tab_dashboard:'📊 Dashboard',tab_facilities:'🏥 Facilities',tab_resources:'🚑 Resources',tab_incidents:'⚠️ Incidents',
+    loading:'Loading data...',fac_by_status:'Facilities by Status',fac_by_type:'Facilities by Type',
+    beds_chart:'Beds: Available vs Total',res_by_type:'Resources by Type',inc_by_sev:'Incidents by Severity',
+    inc_by_dist:'Incidents by District',fac_by_gov:'Facilities by Governorate',res_by_status:'Resources by Status',
+    manage_fac:'Manage Facilities',manage_res:'Manage Resources',manage_inc:'Manage Incidents',
+    add_new:'Add New',name:'Name',type:'Type',status:'Status',governorate:'Governorate',
+    beds:'Beds',power:'Power',actions:'Actions',district:'District',capacity:'Capacity',
+    title:'Title',severity:'Severity',active:'Active',
+    total_fac:'Total Facilities',avail_beds:'Available Beds',icu_beds:'ICU Beds',
+    total_res:'Total Resources',active_inc:'Active Incidents',shelter_cap:'Shelter Capacity',
+    with_power:'With Power',with_oxygen:'With Oxygen',
+    operational:'operational',of:'of',available:'available',occupancy:'occupancy',facility:'facility',
+    edit:'Edit',delete:'Delete',save:'Save',cancel:'Cancel',confirm_delete:'Confirm delete?',
+    add_facility:'Add Facility',edit_facility:'Edit Facility',add_resource:'Add Resource',edit_resource:'Edit Resource',
+    add_incident:'Add Incident',edit_incident:'Edit Incident',
+    name_ar:'Name (Arabic)',latitude:'Latitude',longitude:'Longitude',address:'Address',
+    total_beds:'Total Beds',available_beds:'Available Beds',icu_total:'ICU Total',icu_avail:'ICU Available',
+    has_power:'Power',has_oxygen:'Oxygen',phone:'Phone',description:'Description',
+    contact_name:'Contact Name',contact_phone:'Contact Phone',total_capacity:'Total Capacity',
+    current_occ:'Current Occupancy',reported_by:'Reported By',is_active:'Active',
+    header_title:'🏥 Situation Room — Admin Dashboard',header_sub:'Crisis Management — West Bank, Palestine',
+    theme_light:'Light',theme_dark:'Dark',
+    created:'Created successfully',updated:'Updated successfully',deleted:'Deleted successfully',error_op:'An error occurred',
+    total:'Total',avail:'Available',general_beds:'General Beds',icu_label:'ICU',
+    tab_map:'🗺️ Map',crisis_map:'Crisis Map — Health Facilities',
+  }
 };
-const PALETTE = Object.values(COLORS);
+const t = k => I18N[LANG]?.[k] || I18N['en']?.[k] || k;
 
-const STATUS_AR = {operational:'عامل',reduced_capacity:'طاقة مخفضة',damaged:'متضرر',offline:'غير متصل'};
-const TYPE_AR = {hospital:'مستشفى',clinic:'عيادة',pharmacy:'صيدلية',field_hospital:'مستشفى ميداني',health_center:'مركز صحي'};
-const RES_AR = {ambulance:'إسعاف',shelter:'مأوى',medical_supply:'مستلزمات طبية',distribution_point:'نقطة توزيع',water_point:'نقطة مياه'};
-const SEV_AR = {critical:'حرج',high:'عالي',medium:'متوسط',low:'منخفض'};
-const RES_STATUS_AR = {available:'متوفر',in_use:'قيد الاستخدام',depleted:'نفذ',maintenance:'صيانة'};
-const INC_TYPE_AR = {
-  checkpoint_closure:'إغلاق حاجز',road_closure:'إغلاق طريق',structural_damage:'أضرار هيكلية',
-  power_outage:'انقطاع كهرباء',water_disruption:'انقطاع مياه',settler_violence:'عنف مستوطنين',
-  building_demolition:'هدم مبنى',communication_outage:'انقطاع اتصالات',security_incident:'حادث أمني',
-  medical_emergency:'طوارئ طبية',unexploded_ordnance:'ذخائر غير منفجرة'
-};
+const STATUS_LABELS={ar:{operational:'عامل',reduced_capacity:'طاقة مخفضة',damaged:'متضرر',offline:'غير متصل'},en:{operational:'Operational',reduced_capacity:'Reduced',damaged:'Damaged',offline:'Offline'}};
+const TYPE_LABELS={ar:{hospital:'مستشفى',clinic:'عيادة',pharmacy:'صيدلية',field_hospital:'مستشفى ميداني',health_center:'مركز صحي'},en:{hospital:'Hospital',clinic:'Clinic',pharmacy:'Pharmacy',field_hospital:'Field Hospital',health_center:'Health Center'}};
+const RES_LABELS={ar:{ambulance:'إسعاف',shelter:'مأوى',medical_supply:'مستلزمات طبية',distribution_point:'نقطة توزيع',water_point:'نقطة مياه'},en:{ambulance:'Ambulance',shelter:'Shelter',medical_supply:'Medical Supply',distribution_point:'Distribution',water_point:'Water Point'}};
+const SEV_LABELS={ar:{critical:'حرج',high:'عالي',medium:'متوسط',low:'منخفض'},en:{critical:'Critical',high:'High',medium:'Medium',low:'Low'}};
+const RES_STATUS_LABELS={ar:{available:'متوفر',in_use:'قيد الاستخدام',depleted:'نفذ',maintenance:'صيانة'},en:{available:'Available',in_use:'In Use',depleted:'Depleted',maintenance:'Maintenance'}};
 
-Chart.defaults.color = '#94a3b8';
-Chart.defaults.borderColor = '#334155';
+const sLabel = s => STATUS_LABELS[LANG]?.[s]||s;
+const tLabel = s => TYPE_LABELS[LANG]?.[s]||s;
+const rLabel = s => RES_LABELS[LANG]?.[s]||s;
+const sevLabel = s => SEV_LABELS[LANG]?.[s]||s;
+const rsLabel = s => RES_STATUS_LABELS[LANG]?.[s]||s;
 
-async function fetchJSON(path){
-  const r = await fetch(API+path,{headers:{'ngrok-skip-browser-warning':'true'}});
+const PALETTE = ['#3b82f6','#22c55e','#f59e0b','#ef4444','#a855f7','#06b6d4','#ec4899','#10b981','#f97316','#6366f1','#14b8a6'];
+
+/* ═══════ Helpers ═══════ */
+async function api(path,method='GET',body=null){
+  const opts={method,headers:H};
+  if(body) opts.body=JSON.stringify(body);
+  const r=await fetch(API+path,opts);
+  if(!r.ok) throw new Error(`${r.status}`);
   return r.json();
 }
 
-function sevBadge(s){
-  const cl = s==='critical'||s==='high'?'badge-red':s==='medium'?'badge-amber':'badge-green';
-  return `<span class="badge ${cl}">${SEV_AR[s]||s}</span>`;
-}
-function statusBadge(s){
-  const cl = s==='operational'?'badge-green':s==='damaged'||s==='offline'?'badge-red':'badge-amber';
-  return `<span class="badge ${cl}">${STATUS_AR[s]||s}</span>`;
+function toast(msg,type='success'){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.className=`toast toast-${type} show`;
+  setTimeout(()=>el.classList.remove('show'),3000);
 }
 
-function makeKPI(label,value,sub,cls){
-  return `<div class="kpi ${cls}"><div class="label">${label}</div><div class="value">${value}</div>${sub?`<div class="sub-val">${sub}</div>`:''}</div>`;
+function sevBadge(s){const c=s==='critical'||s==='high'?'badge-red':s==='medium'?'badge-amber':'badge-green';return `<span class="badge ${c}">${sevLabel(s)}</span>`;}
+function statusBadge(s){const c=s==='operational'?'badge-green':s==='damaged'||s==='offline'?'badge-red':'badge-amber';return `<span class="badge ${c}">${sLabel(s)}</span>`;}
+function makeKPI(label,value,sub,cls){return `<div class="kpi ${cls}"><div class="label">${label}</div><div class="value">${value}</div>${sub?`<div class="sub-val">${sub}</div>`:''}</div>`;}
+
+/* ═══════ Theme & Lang ═══════ */
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme',THEME);
+  document.getElementById('themeLbl').textContent=THEME==='dark'?t('theme_light'):t('theme_dark');
+  document.getElementById('themeBtn').querySelector('span').previousSibling.textContent=THEME==='dark'?'☀️ ':'🌙 ';
 }
+function toggleTheme(){THEME=THEME==='dark'?'light':'dark';localStorage.setItem('theme',THEME);applyTheme();}
+
+function applyLang(){
+  const dir=LANG==='ar'?'rtl':'ltr';
+  document.documentElement.setAttribute('dir',dir);
+  document.documentElement.setAttribute('lang',LANG);
+  document.body.style.fontFamily=LANG==='ar'?"'Cairo',sans-serif":"'Inter',sans-serif";
+  document.getElementById('langBtn').textContent=LANG==='ar'?'🌐 English':'🌐 العربية';
+  document.getElementById('headerTitle').textContent=t('header_title');
+  document.getElementById('headerSub').textContent=t('header_sub');
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');el.textContent=t(k);});
+}
+function toggleLang(){LANG=LANG==='ar'?'en':'ar';localStorage.setItem('lang',LANG);applyLang();loadAll();}
+
+/* ═══════ Tabs ═══════ */
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===name));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='tab-'+name));
+}
+
+/* ═══════ Charts ═══════ */
+function destroyCharts(){Object.values(chartInstances).forEach(c=>c.destroy());chartInstances={};}
 
 function doughnut(id,labels,data,colors){
-  new Chart(document.getElementById(id),{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:colors||PALETTE.slice(0,labels.length),borderWidth:0}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{padding:12,font:{family:'Cairo'}}}}}});
+  chartInstances[id]=new Chart(document.getElementById(id),{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:colors||PALETTE.slice(0,labels.length),borderWidth:0}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{padding:10,font:{family:LANG==='ar'?'Cairo':'Inter',size:11}}}}}});
 }
 function hbar(id,labels,data,colors){
-  new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets:[{data,backgroundColor:colors||PALETTE.slice(0,labels.length),borderRadius:6,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{display:false}}}}});
+  chartInstances[id]=new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets:[{data,backgroundColor:colors||PALETTE.slice(0,labels.length),borderRadius:5,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{display:false}}}}});
 }
 function bar(id,labels,datasets){
-  new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets},options:{responsive:true,plugins:{legend:{position:'top',labels:{font:{family:'Cairo'}}}},scales:{x:{grid:{display:false}},y:{grid:{color:'#1e293b'}}}}});
+  chartInstances[id]=new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets},options:{responsive:true,plugins:{legend:{position:'top',labels:{font:{family:LANG==='ar'?'Cairo':'Inter'}}}},scales:{x:{grid:{display:false}},y:{grid:{color:THEME==='dark'?'#1e293b':'#e2e8f0'}}}}});
 }
 
-async function init(){
+/* ═══════ Dashboard ═══════ */
+async function loadDashboard(){
   try{
-    const [stats,incidents,facilities] = await Promise.all([
-      fetchJSON('/api/v1/dashboard/stats'),
-      fetchJSON('/api/v1/incidents?is_active=true&limit=20'),
-      fetchJSON('/api/v1/facilities?limit=200'),
-    ]);
-
-    const d = stats;
-
-    // KPIs
-    const bedPct = d.facilities.total_beds ? Math.round(d.facilities.available_beds/d.facilities.total_beds*100) : 0;
-    const shelterPct = d.resources.shelter_capacity ? Math.round(d.resources.shelter_occupancy/d.resources.shelter_capacity*100) : 0;
-    document.getElementById('kpi-row').innerHTML = [
-      makeKPI('إجمالي المرافق', d.facilities.total, `${d.facilities.by_status?.operational||0} عامل`, 'green'),
-      makeKPI('الأسرّة المتوفرة', `${d.facilities.available_beds}/${d.facilities.total_beds}`, `${bedPct}% إشغال`, 'blue'),
-      makeKPI('أسرّة العناية المركزة', `${d.facilities.available_icu}/${d.facilities.total_icu}`, '', 'purple'),
-      makeKPI('إجمالي الموارد', d.resources.total, `${d.resources.by_status?.available||0} متوفر`, 'cyan'),
-      makeKPI('الحوادث النشطة', d.incidents.active, `من ${d.incidents.total} إجمالي`, 'red'),
-      makeKPI('سعة الملاجئ', d.resources.shelter_capacity, `${shelterPct}% إشغال`, 'amber'),
-      makeKPI('كهرباء متوفرة', d.facilities.with_power, `من ${d.facilities.total} مرفق`, 'green'),
-      makeKPI('أكسجين متوفر', d.facilities.with_oxygen, `من ${d.facilities.total} مرفق`, 'blue'),
+    const d=await api('/api/v1/dashboard/stats');
+    const bedPct=d.facilities.total_beds?Math.round(d.facilities.available_beds/d.facilities.total_beds*100):0;
+    const shPct=d.resources.shelter_capacity?Math.round(d.resources.shelter_occupancy/d.resources.shelter_capacity*100):0;
+    document.getElementById('kpi-row').innerHTML=[
+      makeKPI(t('total_fac'),d.facilities.total,`${d.facilities.by_status?.operational||0} ${t('operational')}`,'green'),
+      makeKPI(t('avail_beds'),`${d.facilities.available_beds}/${d.facilities.total_beds}`,`${bedPct}% ${t('occupancy')}`,'blue'),
+      makeKPI(t('icu_beds'),`${d.facilities.available_icu}/${d.facilities.total_icu}`,``,'purple'),
+      makeKPI(t('total_res'),d.resources.total,`${d.resources.by_status?.available||0} ${t('available')}`,'cyan'),
+      makeKPI(t('active_inc'),d.incidents.active,`${t('of')} ${d.incidents.total} ${t('total')}`,'red'),
+      makeKPI(t('shelter_cap'),d.resources.shelter_capacity,`${shPct}% ${t('occupancy')}`,'amber'),
+      makeKPI(t('with_power'),d.facilities.with_power,`${t('of')} ${d.facilities.total} ${t('facility')}`,'green'),
+      makeKPI(t('with_oxygen'),d.facilities.with_oxygen,`${t('of')} ${d.facilities.total} ${t('facility')}`,'blue'),
     ].join('');
 
-    // Charts
-    // Facility status
-    const fStatus = d.facilities.by_status;
-    doughnut('chartFacStatus',
-      Object.keys(fStatus).map(k=>STATUS_AR[k]||k),
-      Object.values(fStatus),
-      [COLORS.green,COLORS.amber,COLORS.red,COLORS.purple]
-    );
-
-    // Facility type
-    const fType = d.facilities.by_type;
-    doughnut('chartFacType',
-      Object.keys(fType).map(k=>TYPE_AR[k]||k),
-      Object.values(fType),
-      [COLORS.blue,COLORS.cyan,COLORS.teal,COLORS.indigo,COLORS.purple]
-    );
-
-    // Beds
-    bar('chartBeds',['أسرّة عامة','عناية مركزة'],[
-      {label:'إجمالي',data:[d.facilities.total_beds,d.facilities.total_icu],backgroundColor:COLORS.blue,borderRadius:6},
-      {label:'متوفر',data:[d.facilities.available_beds,d.facilities.available_icu],backgroundColor:COLORS.green,borderRadius:6},
-    ]);
-
-    // Resources by type
-    const rType = d.resources.by_type;
-    doughnut('chartResType',
-      Object.keys(rType).map(k=>RES_AR[k]||k),
-      Object.values(rType)
-    );
-
-    // Resources by status
-    const rStatus = d.resources.by_status;
-    doughnut('chartResStatus',
-      Object.keys(rStatus).map(k=>RES_STATUS_AR[k]||k),
-      Object.values(rStatus),
-      [COLORS.green,COLORS.blue,COLORS.red,COLORS.amber]
-    );
-
-    // Incidents by severity
-    const iSev = d.incidents.by_severity;
-    doughnut('chartIncSev',
-      Object.keys(iSev).map(k=>SEV_AR[k]||k),
-      Object.values(iSev),
-      [COLORS.red,COLORS.orange,COLORS.amber,COLORS.green]
-    );
-
-    // Incidents by district
-    const iDist = d.incidents.by_district;
-    hbar('chartIncDistrict',
-      Object.keys(iDist),
-      Object.values(iDist)
-    );
-
-    // Facilities by governorate
-    const fGov = d.facilities.by_governorate;
-    hbar('chartFacGov',
-      Object.keys(fGov),
-      Object.values(fGov)
-    );
-
-    // Incidents table
-    const tbody = document.getElementById('incidentsTable');
-    (incidents||[]).slice(0,12).forEach(inc=>{
-      tbody.innerHTML += `<tr><td>${inc.title}</td><td>${INC_TYPE_AR[inc.incident_type]||inc.incident_type}</td><td>${sevBadge(inc.severity)}</td><td>${inc.district||'-'}</td></tr>`;
-    });
-    if(!incidents||incidents.length===0) tbody.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted)">لا توجد حوادث نشطة</td></tr>';
-
-    // Damaged facilities table
-    const ftbody = document.getElementById('facilityTable');
-    const damaged = (facilities||[]).filter(f=>f.status!=='operational').slice(0,12);
-    damaged.forEach(f=>{
-      ftbody.innerHTML += `<tr><td>${f.name}</td><td>${TYPE_AR[f.facility_type]||f.facility_type}</td><td>${statusBadge(f.status)}</td><td>${f.available_beds||0}</td></tr>`;
-    });
-    if(damaged.length===0) ftbody.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted)">جميع المرافق عاملة</td></tr>';
+    destroyCharts();
+    const fs=d.facilities.by_status;
+    doughnut('chartFacStatus',Object.keys(fs).map(sLabel),Object.values(fs),['#22c55e','#f59e0b','#ef4444','#a855f7']);
+    const ft=d.facilities.by_type;
+    doughnut('chartFacType',Object.keys(ft).map(tLabel),Object.values(ft));
+    bar('chartBeds',[t('general_beds'),t('icu_label')],[{label:t('total'),data:[d.facilities.total_beds,d.facilities.total_icu],backgroundColor:'#3b82f6',borderRadius:5},{label:t('avail'),data:[d.facilities.available_beds,d.facilities.available_icu],backgroundColor:'#22c55e',borderRadius:5}]);
+    doughnut('chartResType',Object.keys(d.resources.by_type).map(rLabel),Object.values(d.resources.by_type));
+    doughnut('chartResStatus',Object.keys(d.resources.by_status).map(rsLabel),Object.values(d.resources.by_status),['#22c55e','#3b82f6','#ef4444','#f59e0b']);
+    const iSev=d.incidents.by_severity;
+    doughnut('chartIncSev',Object.keys(iSev).map(sevLabel),Object.values(iSev),['#ef4444','#f97316','#f59e0b','#22c55e']);
+    hbar('chartIncDistrict',Object.keys(d.incidents.by_district),Object.values(d.incidents.by_district));
+    hbar('chartFacGov',Object.keys(d.facilities.by_governorate),Object.values(d.facilities.by_governorate));
 
     document.getElementById('loading').style.display='none';
-    document.getElementById('content').style.display='block';
+    document.getElementById('dashContent').style.display='block';
+  }catch(e){document.getElementById('loading').innerHTML=`<span style="color:var(--red)">❌ ${e.message}</span>`;}
+}
 
-  }catch(e){
-    document.getElementById('loading').innerHTML='<span style="color:var(--red)">❌ خطأ في تحميل البيانات: '+e.message+'</span>';
-    console.error(e);
+/* ═══════ CRUD Tables ═══════ */
+let allFacilities=[],allResources=[],allIncidents=[];
+
+async function loadFacilities(){
+  allFacilities=await api('/api/v1/facilities?limit=200');
+  const tb=document.getElementById('facTable');
+  tb.innerHTML=allFacilities.map(f=>`<tr>
+    <td>${f.name}</td><td>${tLabel(f.facility_type)}</td><td>${statusBadge(f.status)}</td>
+    <td>${f.governorate||'-'}</td><td>${f.available_beds}/${f.total_beds}</td>
+    <td>${f.has_power?'✅':'❌'}</td>
+    <td><button class="btn btn-sm btn-primary" onclick="editFacility('${f.id}')">${t('edit')}</button> <button class="btn btn-sm btn-danger" onclick="deleteItem('facilities','${f.id}')">${t('delete')}</button></td>
+  </tr>`).join('');
+}
+
+async function loadResources(){
+  allResources=await api('/api/v1/resources?limit=200');
+  const tb=document.getElementById('resTable');
+  tb.innerHTML=allResources.map(r=>`<tr>
+    <td>${r.name}</td><td>${rLabel(r.resource_type)}</td><td><span class="badge badge-blue">${rsLabel(r.status)}</span></td>
+    <td>${r.district||'-'}</td><td>${r.total_capacity||0}</td>
+    <td><button class="btn btn-sm btn-primary" onclick="editResource('${r.id}')">${t('edit')}</button> <button class="btn btn-sm btn-danger" onclick="deleteItem('resources','${r.id}')">${t('delete')}</button></td>
+  </tr>`).join('');
+}
+
+async function loadIncidents(){
+  allIncidents=await api('/api/v1/incidents?limit=200');
+  const tb=document.getElementById('incTable');
+  tb.innerHTML=allIncidents.map(i=>`<tr>
+    <td>${i.title}</td><td>${i.incident_type}</td><td>${sevBadge(i.severity)}</td>
+    <td>${i.district||'-'}</td><td>${i.is_active?'✅':'❌'}</td>
+    <td><button class="btn btn-sm btn-primary" onclick="editIncident('${i.id}')">${t('edit')}</button> <button class="btn btn-sm btn-danger" onclick="deleteItem('incidents','${i.id}')">${t('delete')}</button></td>
+  </tr>`).join('');
+}
+
+async function deleteItem(entity,id){
+  if(!confirm(t('confirm_delete')))return;
+  try{await api(`/api/v1/${entity}/${id}`,'DELETE');toast(t('deleted'));loadAll();}
+  catch(e){toast(t('error_op'),'error');}
+}
+
+/* ═══════ Modals ═══════ */
+function closeModal(){document.getElementById('modalOverlay').classList.remove('active');}
+
+function openModal(type,data=null){
+  const isEdit=!!data;
+  let html='';
+  if(type==='facility'){
+    const d=data||{};
+    html=`<h3>${isEdit?t('edit_facility'):t('add_facility')}</h3>
+    <div class="form-row"><div class="form-group"><label>${t('name')}</label><input id="f_name" value="${d.name||''}"></div><div class="form-group"><label>${t('name_ar')}</label><input id="f_name_ar" value="${d.name_ar||''}"></div></div>
+    <div class="form-row"><div class="form-group"><label>${t('type')}</label><select id="f_type"><option value="hospital" ${d.facility_type==='hospital'?'selected':''}>Hospital</option><option value="clinic" ${d.facility_type==='clinic'?'selected':''}>Clinic</option><option value="pharmacy" ${d.facility_type==='pharmacy'?'selected':''}>Pharmacy</option><option value="health_center" ${d.facility_type==='health_center'?'selected':''}>Health Center</option></select></div>
+    <div class="form-group"><label>${t('status')}</label><select id="f_status"><option value="operational" ${d.status==='operational'?'selected':''}>Operational</option><option value="reduced_capacity" ${d.status==='reduced_capacity'?'selected':''}>Reduced</option><option value="damaged" ${d.status==='damaged'?'selected':''}>Damaged</option><option value="offline" ${d.status==='offline'?'selected':''}>Offline</option></select></div></div>
+    <div class="form-row"><div class="form-group"><label>${t('latitude')}</label><input type="number" step="any" id="f_lat" value="${d.latitude||31.9}"></div><div class="form-group"><label>${t('longitude')}</label><input type="number" step="any" id="f_lon" value="${d.longitude||35.2}"></div></div>
+    <div class="form-row"><div class="form-group"><label>${t('governorate')}</label><input id="f_gov" value="${d.governorate||''}"></div><div class="form-group"><label>${t('district')}</label><input id="f_dist" value="${d.district||''}"></div></div>
+    <div class="form-group"><label>${t('address')}</label><input id="f_addr" value="${d.address||''}"></div>
+    <div class="form-row"><div class="form-group"><label>${t('total_beds')}</label><input type="number" id="f_tbeds" value="${d.total_beds||0}"></div><div class="form-group"><label>${t('available_beds')}</label><input type="number" id="f_abeds" value="${d.available_beds||0}"></div></div>
+    <div class="form-row"><div class="form-group"><label>${t('icu_total')}</label><input type="number" id="f_ticu" value="${d.icu_beds||0}"></div><div class="form-group"><label>${t('icu_avail')}</label><input type="number" id="f_aicu" value="${d.icu_available||0}"></div></div>
+    <div class="form-row"><div class="form-group"><label>${t('has_power')}</label><select id="f_power"><option value="true" ${d.has_power!==false?'selected':''}>✅</option><option value="false" ${d.has_power===false?'selected':''}>❌</option></select></div>
+    <div class="form-group"><label>${t('has_oxygen')}</label><select id="f_oxy"><option value="true" ${d.has_oxygen!==false?'selected':''}>✅</option><option value="false" ${d.has_oxygen===false?'selected':''}>❌</option></select></div></div>
+    <div class="form-group"><label>${t('phone')}</label><input id="f_phone" value="${d.phone||''}"></div>
+    <div class="modal-actions"><button class="btn btn-primary" onclick="saveFacility(${isEdit?`'${d.id}'`:'null'})">${t('save')}</button><button class="btn" style="background:var(--border)" onclick="closeModal()">${t('cancel')}</button></div>`;
+  }else if(type==='resource'){
+    const d=data||{};
+    html=`<h3>${isEdit?t('edit_resource'):t('add_resource')}</h3>
+    <div class="form-group"><label>${t('name')}</label><input id="r_name" value="${d.name||''}"></div>
+    <div class="form-row"><div class="form-group"><label>${t('type')}</label><select id="r_type"><option value="ambulance" ${d.resource_type==='ambulance'?'selected':''}>Ambulance</option><option value="shelter" ${d.resource_type==='shelter'?'selected':''}>Shelter</option><option value="medical_supply" ${d.resource_type==='medical_supply'?'selected':''}>Medical Supply</option><option value="distribution_point" ${d.resource_type==='distribution_point'?'selected':''}>Distribution</option><option value="water_point" ${d.resource_type==='water_point'?'selected':''}>Water Point</option></select></div>
+    <div class="form-group"><label>${t('status')}</label><select id="r_status"><option value="available" ${d.status==='available'?'selected':''}>Available</option><option value="in_use" ${d.status==='in_use'?'selected':''}>In Use</option><option value="depleted" ${d.status==='depleted'?'selected':''}>Depleted</option><option value="maintenance" ${d.status==='maintenance'?'selected':''}>Maintenance</option></select></div></div>
+    <div class="form-row"><div class="form-group"><label>${t('latitude')}</label><input type="number" step="any" id="r_lat" value="${d.latitude||31.9}"></div><div class="form-group"><label>${t('longitude')}</label><input type="number" step="any" id="r_lon" value="${d.longitude||35.2}"></div></div>
+    <div class="form-row"><div class="form-group"><label>${t('district')}</label><input id="r_dist" value="${d.district||''}"></div><div class="form-group"><label>${t('total_capacity')}</label><input type="number" id="r_cap" value="${d.total_capacity||0}"></div></div>
+    <div class="form-group"><label>${t('description')}</label><textarea id="r_desc">${d.description||''}</textarea></div>
+    <div class="form-row"><div class="form-group"><label>${t('contact_name')}</label><input id="r_cname" value="${d.contact_name||''}"></div><div class="form-group"><label>${t('contact_phone')}</label><input id="r_cphone" value="${d.contact_phone||''}"></div></div>
+    <div class="modal-actions"><button class="btn btn-primary" onclick="saveResource(${isEdit?`'${d.id}'`:'null'})">${t('save')}</button><button class="btn" style="background:var(--border)" onclick="closeModal()">${t('cancel')}</button></div>`;
+  }else if(type==='incident'){
+    const d=data||{};
+    html=`<h3>${isEdit?t('edit_incident'):t('add_incident')}</h3>
+    <div class="form-group"><label>${t('title')}</label><input id="i_title" value="${d.title||''}"></div>
+    <div class="form-row"><div class="form-group"><label>${t('type')}</label><select id="i_type"><option value="road_closure" ${d.incident_type==='road_closure'?'selected':''}>Road Closure</option><option value="checkpoint_closure" ${d.incident_type==='checkpoint_closure'?'selected':''}>Checkpoint</option><option value="structural_damage" ${d.incident_type==='structural_damage'?'selected':''}>Structural Damage</option><option value="power_outage" ${d.incident_type==='power_outage'?'selected':''}>Power Outage</option><option value="medical_emergency" ${d.incident_type==='medical_emergency'?'selected':''}>Medical Emergency</option><option value="security_incident" ${d.incident_type==='security_incident'?'selected':''}>Security</option><option value="settler_violence" ${d.incident_type==='settler_violence'?'selected':''}>Settler Violence</option><option value="sos" ${d.incident_type==='sos'?'selected':''}>SOS Alert</option></select></div>
+    <div class="form-group"><label>${t('severity')}</label><select id="i_sev"><option value="low" ${d.severity==='low'?'selected':''}>Low</option><option value="medium" ${d.severity==='medium'?'selected':''}>Medium</option><option value="high" ${d.severity==='high'?'selected':''}>High</option><option value="critical" ${d.severity==='critical'?'selected':''}>Critical</option></select></div></div>
+    <div class="form-row"><div class="form-group"><label>${t('latitude')}</label><input type="number" step="any" id="i_lat" value="${d.latitude||31.9}"></div><div class="form-group"><label>${t('longitude')}</label><input type="number" step="any" id="i_lon" value="${d.longitude||35.2}"></div></div>
+    <div class="form-group"><label>${t('district')}</label><input id="i_dist" value="${d.district||''}"></div>
+    <div class="form-group"><label>${t('description')}</label><textarea id="i_desc">${d.description||''}</textarea></div>
+    <div class="form-row"><div class="form-group"><label>${t('is_active')}</label><select id="i_active"><option value="true" ${d.is_active!==false?'selected':''}>✅</option><option value="false" ${d.is_active===false?'selected':''}>❌</option></select></div>
+    <div class="form-group"><label>${t('reported_by')}</label><input id="i_reporter" value="${d.reported_by||''}"></div></div>
+    <div class="modal-actions"><button class="btn btn-primary" onclick="saveIncident(${isEdit?`'${d.id}'`:'null'})">${t('save')}</button><button class="btn" style="background:var(--border)" onclick="closeModal()">${t('cancel')}</button></div>`;
+  }
+  document.getElementById('modalContent').innerHTML=html;
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+/* ═══════ Save Functions ═══════ */
+async function saveFacility(id){
+  const body={name:$('#f_name'),name_ar:$('#f_name_ar'),facility_type:$('#f_type'),status:$('#f_status'),latitude:+$('#f_lat'),longitude:+$('#f_lon'),governorate:$('#f_gov'),district:$('#f_dist'),address:$('#f_addr'),total_beds:+$('#f_tbeds'),available_beds:+$('#f_abeds'),icu_beds:+$('#f_ticu'),icu_available:+$('#f_aicu'),has_power:$('#f_power')==='true',has_oxygen:$('#f_oxy')==='true',phone:$('#f_phone')};
+  try{
+    if(id) await api(`/api/v1/facilities/${id}`,'PUT',body); else await api('/api/v1/facilities','POST',body);
+    toast(id?t('updated'):t('created'));closeModal();loadAll();
+  }catch(e){toast(t('error_op'),'error');}
+}
+async function saveResource(id){
+  const body={name:$('#r_name'),resource_type:$('#r_type'),status:$('#r_status'),latitude:+$('#r_lat'),longitude:+$('#r_lon'),district:$('#r_dist'),total_capacity:+$('#r_cap'),current_occupancy:0,description:$('#r_desc'),contact_name:$('#r_cname'),contact_phone:$('#r_cphone')};
+  try{
+    if(id) await api(`/api/v1/resources/${id}`,'PUT',body); else await api('/api/v1/resources','POST',body);
+    toast(id?t('updated'):t('created'));closeModal();loadAll();
+  }catch(e){toast(t('error_op'),'error');}
+}
+async function saveIncident(id){
+  const body={title:$('#i_title'),incident_type:$('#i_type'),severity:$('#i_sev'),latitude:+$('#i_lat'),longitude:+$('#i_lon'),district:$('#i_dist'),description:$('#i_desc'),is_active:$('#i_active')==='true',reported_by:$('#i_reporter')};
+  try{
+    if(id) await api(`/api/v1/incidents/${id}`,'PUT',body); else await api('/api/v1/incidents','POST',body);
+    toast(id?t('updated'):t('created'));closeModal();loadAll();
+  }catch(e){toast(t('error_op'),'error');}
+}
+
+function $(sel){const el=document.querySelector(sel);return el?el.value:'';}
+function editFacility(id){const f=allFacilities.find(x=>x.id===id);if(f)openModal('facility',f);}
+function editResource(id){const r=allResources.find(x=>x.id===id);if(r)openModal('resource',r);}
+function editIncident(id){const i=allIncidents.find(x=>x.id===id);if(i)openModal('incident',i);}
+
+/* ═══════ Map ═══════ */
+let map=null, mapMarkers=[], mapFilter='all';
+const MAP_COLORS={operational:'#22c55e',reduced_capacity:'#f59e0b',damaged:'#ef4444',offline:'#a855f7'};
+const MAP_TYPE_ICONS={hospital:'🏥',clinic:'🩺',pharmacy:'💊',field_hospital:'⛺',health_center:'🏛️'};
+
+function initMap(){
+  if(map){map.invalidateSize();renderMapMarkers();return;}
+  map=L.map('facilityMap',{zoomControl:true}).setView([31.9522,35.2332],9);
+  const isDark=THEME==='dark';
+  L.tileLayer(isDark?'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png':'https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    attribution:'&copy; OpenStreetMap',maxZoom:18
+  }).addTo(map);
+  buildMapLegend();
+  buildMapFilters();
+  renderMapMarkers();
+}
+
+function buildMapLegend(){
+  const items=[
+    {color:'#22c55e',label:LANG==='ar'?'عامل':'Operational'},
+    {color:'#f59e0b',label:LANG==='ar'?'طاقة مخفضة':'Reduced'},
+    {color:'#ef4444',label:LANG==='ar'?'متضرر':'Damaged'},
+    {color:'#a855f7',label:LANG==='ar'?'غير متصل':'Offline'},
+  ];
+  document.getElementById('mapLegend').innerHTML=items.map(i=>`<div class="map-legend-item"><div class="map-legend-dot" style="background:${i.color}"></div>${i.label}</div>`).join('');
+}
+
+function buildMapFilters(){
+  const filters=[
+    {key:'all',label:LANG==='ar'?'الكل':'All'},
+    {key:'hospital',label:LANG==='ar'?'مستشفى':'Hospital'},
+    {key:'clinic',label:LANG==='ar'?'عيادة':'Clinic'},
+    {key:'operational',label:LANG==='ar'?'عامل':'Operational'},
+    {key:'damaged',label:LANG==='ar'?'متضرر':'Damaged'},
+  ];
+  document.getElementById('mapFilters').innerHTML=filters.map(f=>`<button class="map-chip ${mapFilter===f.key?'active':''}" onclick="setMapFilter('${f.key}')">${f.label}</button>`).join('');
+}
+
+function setMapFilter(f){mapFilter=f;buildMapFilters();renderMapMarkers();}
+
+function renderMapMarkers(){
+  mapMarkers.forEach(m=>map.removeLayer(m));mapMarkers=[];
+  let fList=allFacilities;
+  if(mapFilter==='hospital'||mapFilter==='clinic'||mapFilter==='pharmacy'||mapFilter==='health_center'||mapFilter==='field_hospital'){
+    fList=fList.filter(f=>f.facility_type===mapFilter);
+  }else if(mapFilter==='operational'||mapFilter==='damaged'||mapFilter==='reduced_capacity'||mapFilter==='offline'){
+    fList=fList.filter(f=>f.status===mapFilter);
+  }
+  fList.forEach(f=>{
+    if(!f.latitude||!f.longitude)return;
+    const color=MAP_COLORS[f.status]||'#94a3b8';
+    const icon=L.divIcon({
+      className:'',
+      html:`<div style="background:${color};width:28px;height:28px;border-radius:50%;border:3px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer">${MAP_TYPE_ICONS[f.facility_type]||'🏥'}</div>`,
+      iconSize:[28,28],iconAnchor:[14,14]
+    });
+    const powerBg=f.has_power?'#dcfce7':'#fee2e2', powerClr=f.has_power?'#16a34a':'#dc2626';
+    const oxyBg=f.has_oxygen?'#dbeafe':'#fee2e2', oxyClr=f.has_oxygen?'#2563eb':'#dc2626';
+    const statusBg=f.status==='operational'?'#dcfce7':f.status==='damaged'?'#fee2e2':'#fef9c3';
+    const statusClr=f.status==='operational'?'#16a34a':f.status==='damaged'?'#dc2626':'#ca8a04';
+    const popup=`<div class="map-popup" style="min-width:200px">
+      <h4>${MAP_TYPE_ICONS[f.facility_type]||''} ${f.name}</h4>
+      ${f.name_ar?`<div class="mp-row" style="font-family:Cairo">${f.name_ar}</div>`:''}
+      <div class="mp-row"><span class="mp-badge" style="background:${statusBg};color:${statusClr}">${sLabel(f.status)}</span> · ${tLabel(f.facility_type)}</div>
+      <div class="mp-row">📍 ${f.governorate||f.district||'-'}</div>
+      <div class="mp-row">🛏️ ${LANG==='ar'?'أسرّة':'Beds'}: ${f.available_beds}/${f.total_beds}  |  ICU: ${f.icu_available||0}/${f.icu_beds||0}</div>
+      <div class="mp-row"><span class="mp-badge" style="background:${powerBg};color:${powerClr}">${f.has_power?'⚡':'❌'} ${LANG==='ar'?'كهرباء':'Power'}</span> <span class="mp-badge" style="background:${oxyBg};color:${oxyClr}">${f.has_oxygen?'💨':'❌'} ${LANG==='ar'?'أكسجين':'O₂'}</span></div>
+      ${f.phone?`<div class="mp-row">📞 ${f.phone}</div>`:''}
+    </div>`;
+    const marker=L.marker([f.latitude,f.longitude],{icon}).bindPopup(popup,{maxWidth:280});
+    marker.addTo(map);
+    mapMarkers.push(marker);
+  });
+}
+
+/* ═══════ SOS Alerts Polling ═══════ */
+let sosPollingInterval = null;
+const SOS_I18N = {
+  ar: {
+    sos_title: '🚨 تنبيهات نجدة',
+    sos_sub: 'بلاغات طوارئ مباشرة من مستخدمي التطبيق',
+    sos_locate: 'تحديد الموقع',
+    sos_ago: 'منذ',
+    sos_min: 'دقيقة',
+    sos_just: 'الآن',
+  },
+  en: {
+    sos_title: '🚨 SOS ALERTS',
+    sos_sub: 'Real-time emergency reports from mobile users',
+    sos_locate: 'Locate',
+    sos_ago: '',
+    sos_min: 'min ago',
+    sos_just: 'Just now',
+  },
+};
+const st = k => SOS_I18N[LANG]?.[k] || SOS_I18N['en']?.[k] || k;
+
+const SOS_ICONS = {
+  'red_crescent': '🏥',
+  'civil_defense': '🚒',
+  'police': '🚔',
+  'nearest_hospital': '📍',
+};
+
+function timeAgo(iso) {
+  if (!iso) return '';
+  const diff = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
+  if (diff < 1) return st('sos_just');
+  return `${st('sos_ago')} ${diff} ${st('sos_min')}`.trim();
+}
+
+async function pollSOS() {
+  try {
+    const alerts = await api('/api/v1/sos/recent?minutes=60');
+    const banner = document.getElementById('sosAlertsBanner');
+    const list = document.getElementById('sosAlertList');
+    const count = document.getElementById('sosAlertCount');
+    const titleEl = document.getElementById('sosAlertTitle');
+    const subEl = document.getElementById('sosAlertSub');
+
+    if (!alerts || alerts.length === 0) {
+      banner.style.display = 'none';
+      return;
+    }
+
+    banner.style.display = 'block';
+    count.textContent = alerts.length;
+    titleEl.textContent = st('sos_title');
+    subEl.textContent = st('sos_sub');
+
+    list.innerHTML = alerts.map(a => {
+      const icon = SOS_ICONS[a.description?.replace('SOS alert: ', '')] || '🆘';
+      return `<div class="sos-card">
+        <span class="sos-icon">${icon}</span>
+        <div class="sos-info">
+          <h4>${a.title}</h4>
+          <p>📍 ${a.latitude?.toFixed(4)}, ${a.longitude?.toFixed(4)} · ${LANG === 'ar' ? 'بواسطة' : 'by'} ${a.reported_by || '?'}</p>
+        </div>
+        <span class="sos-time">${timeAgo(a.reported_at)}</span>
+        <button class="sos-locate" onclick="locateSOS(${a.latitude},${a.longitude})">${st('sos_locate')}</button>
+      </div>`;
+    }).join('');
+
+  } catch (e) {
+    // Silent fail — don't break dashboard
+    console.warn('SOS poll error:', e);
   }
 }
 
-init();
-// Auto-refresh every 30 seconds
-setInterval(()=>location.reload(),30000);
+function locateSOS(lat, lon) {
+  switchTab('map');
+  initMap();
+  setTimeout(() => {
+    if (map) {
+      map.setView([lat, lon], 15);
+      L.circleMarker([lat, lon], {
+        radius: 14, color: '#ef4444', fillColor: '#ef4444', fillOpacity: 0.5, weight: 3
+      }).addTo(map).bindPopup(`<b>🚨 SOS Location</b><br>${lat.toFixed(4)}, ${lon.toFixed(4)}`).openPopup();
+    }
+  }, 500);
+}
+
+// Start SOS polling every 10 seconds
+function startSOSPolling() {
+  pollSOS(); // immediate first poll
+  if (sosPollingInterval) clearInterval(sosPollingInterval);
+  sosPollingInterval = setInterval(pollSOS, 10000);
+}
+
+/* ═══════ Init ═══════ */
+async function loadAll(){await Promise.all([loadDashboard(),loadFacilities(),loadResources(),loadIncidents()]);}
+
+applyTheme();applyLang();loadAll();startSOSPolling();
 </script>
 </body>
 </html>

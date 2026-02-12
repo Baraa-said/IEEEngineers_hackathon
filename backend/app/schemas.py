@@ -263,6 +263,27 @@ class SystemStatus(BaseModel):
 
 # --- Incident Schemas ---
 
+class IncidentCreate(BaseModel):
+    title: str
+    description: Optional[str] = None
+    incident_type: str
+    severity: str = "medium"
+    latitude: float
+    longitude: float
+    district: Optional[str] = None
+    is_active: bool = True
+    reported_by: Optional[str] = None
+
+class IncidentUpdate(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    incident_type: Optional[str] = None
+    severity: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    district: Optional[str] = None
+    is_active: Optional[bool] = None
+
 class IncidentResponse(BaseModel):
     id: UUID
     title: str
@@ -277,3 +298,59 @@ class IncidentResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+# --- Resource CRUD Schemas ---
+
+class ResourceCreate(BaseModel):
+    name: str
+    resource_type: str
+    status: str = "available"
+    latitude: float
+    longitude: float
+    address: Optional[str] = None
+    district: Optional[str] = None
+    total_capacity: Optional[int] = 0
+    current_occupancy: Optional[int] = 0
+    description: Optional[str] = None
+    contact_name: Optional[str] = None
+    contact_phone: Optional[str] = None
+
+class ResourceUpdate(BaseModel):
+    name: Optional[str] = None
+    resource_type: Optional[str] = None
+    status: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    address: Optional[str] = None
+    district: Optional[str] = None
+    total_capacity: Optional[int] = None
+    current_occupancy: Optional[int] = None
+    description: Optional[str] = None
+    contact_name: Optional[str] = None
+    contact_phone: Optional[str] = None
+
+
+# --- Facility Update Schema ---
+
+class FacilityUpdate(BaseModel):
+    name: Optional[str] = None
+    name_ar: Optional[str] = None
+    facility_type: Optional[str] = None
+    status: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    address: Optional[str] = None
+    district: Optional[str] = None
+    governorate: Optional[str] = None
+    total_beds: Optional[int] = None
+    available_beds: Optional[int] = None
+    icu_beds: Optional[int] = None
+    icu_available: Optional[int] = None
+    trauma_beds: Optional[int] = None
+    trauma_available: Optional[int] = None
+    has_power: Optional[bool] = None
+    has_oxygen: Optional[bool] = None
+    has_water: Optional[bool] = None
+    phone: Optional[str] = None
+    emergency_phone: Optional[str] = None

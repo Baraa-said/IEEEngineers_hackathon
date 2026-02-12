@@ -1,14 +1,15 @@
 """Health facilities endpoints."""
 
-from fastapi import APIRouter, Depends, Query
-from sqlalchemy import select, func, and_
+from fastapi import APIRouter, Depends, Query, HTTPException
+from sqlalchemy import select, func, and_, delete as sa_delete
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Optional, List
-from uuid import UUID
+from uuid import UUID, uuid4
+from datetime import datetime, timezone
 
 from app.database import get_db
 from app.models import HealthFacility, FacilityType, FacilityStatus
-from app.schemas import FacilityResponse, FacilityCreate
+from app.schemas import FacilityResponse, FacilityCreate, FacilityUpdate
 from app.services.auth_service import get_current_user
 
 router = APIRouter()
@@ -121,3 +122,69 @@ async def facility_stats(db: AsyncSession = Depends(get_db)):
         "total_beds": total_beds.scalar() or 0,
         "available_beds": avail_beds.scalar() or 0,
     }
+
+
+@router.post("/facilities", response_model=FacilityResponse, status_code=201)
+async def create_facility(data: FacilityCreate, db: AsyncSession = Depends(get_db)):
+    """Create a new health facility."""
+    facility = HealthFacility(
+        id=str(uuid4()),
+        name=data.name,
+        name_ar=data.name_ar,
+        facility_type=data.facility_type,
+        status=data.status,
+        latitude=data.latitude,
+        longitude=data.longitude,
+        address=data.address,
+        district=data.district,
+        governorate=data.governorate,
+        total_beds=data.total_beds,
+        available_beds=data.available_beds,
+        icu_beds=data.icu_beds,
+        icu_available=data.icu_available,
+        trauma_beds=data.trauma_beds,
+        trauma_available=data.trauma_available,
+        has_power=data.has_power,
+        has_generator=data.has_generator,
+        has_oxygen=data.has_oxygen,
+        has_water=data.has_water,
+        specialties=data.specialties,
+        emergency_department=data.emergency_department,
+        phone=data.phone,
+        emergency_phone=data.emergency_phone,
+        last_status_update=datetime.now(timezone.utc),
+        created_at=datetime.now(timezone.utc),
+        updated_at=datetime.now(timezone.utc),
+    )
+    db.add(facility)
+    await db.commit()
+    await db.refresh(facility)
+    return FacilityResponse.model_validate(facility)
+
+
+@router.put("/facilities/{facility_id}", response_model=FacilityResponse)
+async def update_facility(facility_id: UUID, data: FacilityUpdate, db: AsyncSession = Depends(get_db)):
+    """Update an existing facility."""
+    result = await db.execute(select(HealthFacility).where(HealthFacility.id == str(facility_id)))
+    facility = result.scalar_one_or_none()
+    if not facility:
+        raise HTTPException(status_code=404, detail="Facility not found")
+    for field, value in data.model_dump(exclude_unset=True).items():
+        setattr(facility, field, value)
+    facility.updated_at = datetime.now(timezone.utc)
+    facility.last_status_update = datetime.now(timezone.utc)
+    await db.commit()
+    await db.refresh(facility)
+    return FacilityResponse.model_validate(facility)
+
+
+@router.delete("/facilities/{facility_id}")
+async def delete_facility(facility_id: UUID, db: AsyncSession = Depends(get_db)):
+    """Delete a facility."""
+    result = await db.execute(select(HealthFacility).where(HealthFacility.id == str(facility_id)))
+    facility = result.scalar_one_or_none()
+    if not facility:
+        raise HTTPException(status_code=404, detail="Facility not found")
+    await db.delete(facility)
+    await db.commit()
+    return {"status": "deleted", "id": str(facility_id)}
