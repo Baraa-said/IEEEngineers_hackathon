@@ -16,8 +16,9 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         self.unauthenticated_limit = settings.RATE_LIMIT_UNAUTHENTICATED
 
     async def dispatch(self, request: Request, call_next):
-        # Skip rate limiting for health checks and docs
-        if request.url.path in ("/health", "/docs", "/openapi.json", "/"):
+        # Skip rate limiting for health checks, docs, and dashboard
+        skip = ("/health", "/docs", "/openapi.json", "/", "/dashboard")
+        if request.url.path.startswith(tuple(skip)):
             return await call_next(request)
 
         client_ip = request.client.host if request.client else "unknown"

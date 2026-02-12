@@ -108,12 +108,13 @@ def extract_entities(query: str) -> Dict[str, Any]:
         entities["needs_trauma"] = True
 
     # Extract districts / governorates
-    lebanon_districts = [
-        "beirut", "tripoli", "sidon", "tyre", "baalbek", "zahle",
-        "jounieh", "byblos", "nabatieh", "mount lebanon", "south",
-        "north", "bekaa", "akkar", "batroun", "chouf",
+    westbank_districts = [
+        "ramallah", "al-bireh", "nablus", "hebron", "al-khalil", "bethlehem",
+        "jenin", "tulkarm", "qalqilya", "salfit", "tubas", "jericho",
+        "jerusalem", "huwara", "beit jala", "beit sahour", "dura",
+        "yatta", "azzun", "anabta", "silwad", "birzeit", "al-aghwar",
     ]
-    for dist in lebanon_districts:
+    for dist in westbank_districts:
         if dist in query_lower:
             entities["district"] = dist.title()
 
@@ -383,7 +384,7 @@ async def get_statistics(db: AsyncSession) -> Dict[str, Any]:
 # ---- LLM Response Generation ----
 
 def build_system_prompt() -> str:
-    return """You are a Crisis Situation Room AI Agent for Lebanon's health emergency response.
+    return """You are a Crisis Situation Room AI Agent for Palestine West Bank's health and humanitarian emergency response.
 Your role is to help crisis managers and first responders by answering questions about:
 - Health facility status, capacity, and availability
 - Resource locations and availability (ambulances, shelters, supplies)

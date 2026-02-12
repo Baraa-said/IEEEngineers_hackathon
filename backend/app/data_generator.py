@@ -1,11 +1,13 @@
 """
-Synthetic Data Generator for Lebanon Health Crisis Situation Room
+Synthetic Data Generator for Palestine West Bank Health Crisis Situation Room
 
 Generates realistic sample data based on:
-- Actual facility locations from OpenStreetMap (hospitals, clinics, pharmacies)
+- Actual facility locations from Palestinian Ministry of Health registries
 - Simulated operational status reflecting realistic scenarios
-  (30% facilities damaged, 50% at reduced capacity, 20% fully operational)
-- Incident patterns from the 2020 Beirut explosion and 2024-2025 conflict
+  (40% facilities damaged in areas near separation wall/checkpoints,
+   30% at reduced capacity, 30% fully operational)
+- Incident patterns reflecting checkpoint closures, settler violence,
+  military operations, and infrastructure damage
 """
 
 import random
@@ -14,46 +16,57 @@ import json
 from datetime import datetime, timedelta
 
 
-# ---- Lebanon Geographic Data ----
+# ---- Palestine West Bank Geographic Data ----
 
 GOVERNORATES = {
-    "Beirut": {"center": (33.8938, 35.5018), "districts": ["Achrafieh", "Hamra", "Ras Beirut", "Verdun", "Gemmayze", "Mar Mikhael", "Badaro", "Ain El Mreisseh"]},
-    "Mount Lebanon": {"center": (33.8500, 35.5500), "districts": ["Jounieh", "Byblos", "Baabda", "Aley", "Chouf", "Keserwan", "Metn"]},
-    "North Lebanon": {"center": (34.4400, 35.8300), "districts": ["Tripoli", "Zgharta", "Koura", "Batroun", "Bcharre", "Minieh-Danniyeh"]},
-    "South Lebanon": {"center": (33.2700, 35.2000), "districts": ["Sidon", "Jezzine", "Tyre", "Bint Jbeil", "Marjayoun", "Hasbaya", "Nabatieh"]},
-    "Bekaa": {"center": (33.8500, 36.0800), "districts": ["Zahle", "Baalbek", "Hermel", "West Bekaa", "Rashaya"]},
-    "Akkar": {"center": (34.5500, 36.0800), "districts": ["Halba", "Qobayat", "Bebnine"]},
+    "Ramallah and Al-Bireh": {"center": (31.9038, 35.2034), "districts": ["Ramallah", "Al-Bireh", "Birzeit", "Beit Rima", "Silwad", "Deir Dibwan", "Bani Zeid"]},
+    "Nablus": {"center": (32.2211, 35.2544), "districts": ["Nablus City", "Balata", "Huwwara", "Beit Furik", "Asira", "Tell", "Aqraba"]},
+    "Hebron": {"center": (31.5326, 35.0998), "districts": ["Hebron City", "Dura", "Yatta", "Halhul", "Beit Ummar", "Sa'ir", "Taffouh"]},
+    "Bethlehem": {"center": (31.7054, 35.2024), "districts": ["Bethlehem City", "Beit Jala", "Beit Sahour", "Al-Khader", "Tuqu'", "Za'tara"]},
+    "Jenin": {"center": (32.4610, 35.2998), "districts": ["Jenin City", "Jenin Camp", "Qabatiya", "Arraba", "Ya'bad", "Burqin"]},
+    "Tulkarm": {"center": (32.3104, 35.0286), "districts": ["Tulkarm City", "Tulkarm Camp", "Anabta", "Bal'a", "Illar", "Deir al-Ghusun"]},
+    "Qalqilya": {"center": (32.1892, 34.9706), "districts": ["Qalqilya City", "Azzun", "Jayous", "Kafr Thulth", "Habla"]},
+    "Salfit": {"center": (32.0833, 35.1833), "districts": ["Salfit City", "Deir Istiya", "Kafr ad-Dik", "Bruqin", "Kifl Haris"]},
+    "Tubas": {"center": (32.3208, 35.3694), "districts": ["Tubas City", "Tammun", "Tayasir", "Aqaba", "Bardala"]},
+    "Jericho": {"center": (31.8667, 35.4500), "districts": ["Jericho City", "Al-Auja", "Aqabat Jabr Camp", "Ein al-Sultan Camp"]},
+    "Jerusalem": {"center": (31.7683, 35.2137), "districts": ["Old City", "Shu'fat", "Al-Ram", "Abu Dis", "Al-Eizariya", "Anata", "Qalandiya"]},
 }
 
-# Real hospital data inspired by actual Lebanon facilities
+# Real hospital data based on actual West Bank facilities
 HOSPITAL_NAMES = [
-    # Beirut
-    {"name": "American University of Beirut Medical Center", "name_ar": "مركز الجامعة الأميركية في بيروت الطبي", "gov": "Beirut", "lat": 33.9000, "lon": 35.4790, "type": "hospital", "beds": 350},
-    {"name": "Hotel-Dieu de France Hospital", "name_ar": "مستشفى أوتيل ديو دو فرانس", "gov": "Beirut", "lat": 33.8958, "lon": 35.5127, "type": "hospital", "beds": 550},
-    {"name": "Saint George Hospital University Medical Center", "name_ar": "مستشفى القديس جاورجيوس الجامعي", "gov": "Beirut", "lat": 33.9050, "lon": 35.5190, "type": "hospital", "beds": 300},
-    {"name": "Rafik Hariri University Hospital", "name_ar": "مستشفى رفيق الحريري الجامعي", "gov": "Beirut", "lat": 33.8300, "lon": 35.4900, "type": "hospital", "beds": 400},
-    {"name": "Clemenceau Medical Center", "name_ar": "مركز كليمنصو الطبي", "gov": "Beirut", "lat": 33.8900, "lon": 35.4850, "type": "hospital", "beds": 150},
-    {"name": "Geitaoui Hospital", "name_ar": "مستشفى الجعيتاوي", "gov": "Beirut", "lat": 33.8900, "lon": 35.5200, "type": "hospital", "beds": 200},
-    {"name": "Makassed General Hospital", "name_ar": "مستشفى المقاصد العام", "gov": "Beirut", "lat": 33.8800, "lon": 35.5100, "type": "hospital", "beds": 250},
-    # Mount Lebanon
-    {"name": "Mount Lebanon Hospital", "name_ar": "مستشفى جبل لبنان", "gov": "Mount Lebanon", "lat": 33.8100, "lon": 35.5300, "type": "hospital", "beds": 200},
-    {"name": "Keserwan Medical Center", "name_ar": "مركز كسروان الطبي", "gov": "Mount Lebanon", "lat": 33.9800, "lon": 35.6200, "type": "hospital", "beds": 150},
-    {"name": "Bellevue Medical Center", "name_ar": "مركز بلفيو الطبي", "gov": "Mount Lebanon", "lat": 33.9700, "lon": 35.5900, "type": "hospital", "beds": 220},
-    {"name": "Hammoud Hospital", "name_ar": "مستشفى حمود", "gov": "Mount Lebanon", "lat": 33.8600, "lon": 35.4600, "type": "hospital", "beds": 180},
-    # North
-    {"name": "Nini Hospital", "name_ar": "مستشفى نيني", "gov": "North Lebanon", "lat": 34.4400, "lon": 35.8200, "type": "hospital", "beds": 180},
-    {"name": "Tripoli Governmental Hospital", "name_ar": "مستشفى طرابلس الحكومي", "gov": "North Lebanon", "lat": 34.4300, "lon": 35.8400, "type": "hospital", "beds": 250},
-    {"name": "Al Monla Hospital", "name_ar": "مستشفى المنلا", "gov": "North Lebanon", "lat": 34.4350, "lon": 35.8350, "type": "hospital", "beds": 120},
-    # South
-    {"name": "Hammoud Hospital Sidon", "name_ar": "مستشفى حمود صيدا", "gov": "South Lebanon", "lat": 33.5600, "lon": 35.3700, "type": "hospital", "beds": 200},
-    {"name": "Labib Medical Center", "name_ar": "مركز لبيب الطبي", "gov": "South Lebanon", "lat": 33.5700, "lon": 35.3800, "type": "hospital", "beds": 100},
-    {"name": "Jabal Amel Hospital", "name_ar": "مستشفى جبل عامل", "gov": "South Lebanon", "lat": 33.2700, "lon": 35.2000, "type": "hospital", "beds": 170},
-    {"name": "Tyre Governmental Hospital", "name_ar": "مستشفى صور الحكومي", "gov": "South Lebanon", "lat": 33.2750, "lon": 35.1950, "type": "hospital", "beds": 150},
-    {"name": "Nabatieh Governmental Hospital", "name_ar": "مستشفى النبطية الحكومي", "gov": "South Lebanon", "lat": 33.3800, "lon": 35.4800, "type": "hospital", "beds": 130},
-    # Bekaa
-    {"name": "Bekaa Hospital", "name_ar": "مستشفى البقاع", "gov": "Bekaa", "lat": 33.8500, "lon": 35.9000, "type": "hospital", "beds": 150},
-    {"name": "Tel Chiha Hospital", "name_ar": "مستشفى تل شيحا", "gov": "Bekaa", "lat": 33.8400, "lon": 35.8800, "type": "hospital", "beds": 120},
-    {"name": "Baalbek Governmental Hospital", "name_ar": "مستشفى بعلبك الحكومي", "gov": "Bekaa", "lat": 34.0000, "lon": 36.2100, "type": "hospital", "beds": 100},
+    # Ramallah
+    {"name": "Palestine Medical Complex", "name_ar": "مجمع فلسطين الطبي", "gov": "Ramallah and Al-Bireh", "lat": 31.9060, "lon": 35.2030, "type": "hospital", "beds": 256},
+    {"name": "Al-Istishari Arab Hospital", "name_ar": "المستشفى الاستشاري العربي", "gov": "Ramallah and Al-Bireh", "lat": 31.9120, "lon": 35.2100, "type": "hospital", "beds": 120},
+    {"name": "Red Crescent Hospital Ramallah", "name_ar": "مستشفى الهلال الأحمر رام الله", "gov": "Ramallah and Al-Bireh", "lat": 31.8990, "lon": 35.2050, "type": "hospital", "beds": 70},
+    # Nablus
+    {"name": "Rafidia Surgical Hospital", "name_ar": "مستشفى رفيديا الجراحي", "gov": "Nablus", "lat": 32.2280, "lon": 35.2410, "type": "hospital", "beds": 179},
+    {"name": "Al-Watani Hospital Nablus", "name_ar": "المستشفى الوطني نابلس", "gov": "Nablus", "lat": 32.2220, "lon": 35.2600, "type": "hospital", "beds": 100},
+    {"name": "Al-Najah National University Hospital", "name_ar": "مستشفى جامعة النجاح الوطنية", "gov": "Nablus", "lat": 32.2300, "lon": 35.2500, "type": "hospital", "beds": 120},
+    # Hebron
+    {"name": "Alia Governmental Hospital", "name_ar": "مستشفى عالية الحكومي", "gov": "Hebron", "lat": 31.5350, "lon": 35.0950, "type": "hospital", "beds": 200},
+    {"name": "Al-Ahli Hospital Hebron", "name_ar": "مستشفى الأهلي الخليل", "gov": "Hebron", "lat": 31.5300, "lon": 35.1050, "type": "hospital", "beds": 150},
+    {"name": "Abu Al-Hasan Al-Qasim Hospital", "name_ar": "مستشفى أبو الحسن القاسم", "gov": "Hebron", "lat": 31.4200, "lon": 35.0800, "type": "hospital", "beds": 80},
+    # Bethlehem
+    {"name": "Al-Hussein Hospital Beit Jala", "name_ar": "مستشفى الحسين بيت جالا", "gov": "Bethlehem", "lat": 31.7150, "lon": 35.1900, "type": "hospital", "beds": 168},
+    {"name": "Holy Family Hospital", "name_ar": "مستشفى العائلة المقدسة", "gov": "Bethlehem", "lat": 31.7040, "lon": 35.2000, "type": "hospital", "beds": 80},
+    {"name": "Caritas Baby Hospital", "name_ar": "مستشفى كاريتاس للأطفال", "gov": "Bethlehem", "lat": 31.7100, "lon": 35.1950, "type": "hospital", "beds": 82},
+    # Jenin
+    {"name": "Khalil Suleiman Hospital Jenin", "name_ar": "مستشفى خليل سليمان جنين", "gov": "Jenin", "lat": 32.4620, "lon": 35.2970, "type": "hospital", "beds": 110},
+    {"name": "Al-Razi Hospital Jenin", "name_ar": "مستشفى الرازي جنين", "gov": "Jenin", "lat": 32.4600, "lon": 35.3020, "type": "hospital", "beds": 60},
+    # Tulkarm
+    {"name": "Thabet Thabet Hospital", "name_ar": "مستشفى ثابت ثابت", "gov": "Tulkarm", "lat": 32.3110, "lon": 35.0280, "type": "hospital", "beds": 134},
+    # Qalqilya
+    {"name": "Darwish Nazzal Hospital", "name_ar": "مستشفى درويش نزال", "gov": "Qalqilya", "lat": 32.1900, "lon": 34.9700, "type": "hospital", "beds": 62},
+    # Salfit
+    {"name": "Yasser Arafat Hospital Salfit", "name_ar": "مستشفى ياسر عرفات سلفيت", "gov": "Salfit", "lat": 32.0840, "lon": 35.1840, "type": "hospital", "beds": 50},
+    # Tubas
+    {"name": "Tubas Turkish Hospital", "name_ar": "مستشفى طوباس التركي", "gov": "Tubas", "lat": 32.3210, "lon": 35.3700, "type": "hospital", "beds": 50},
+    # Jericho
+    {"name": "Jericho Governmental Hospital", "name_ar": "مستشفى أريحا الحكومي", "gov": "Jericho", "lat": 31.8670, "lon": 35.4490, "type": "hospital", "beds": 54},
+    # Jerusalem
+    {"name": "Augusta Victoria Hospital", "name_ar": "مستشفى المطلع (أوغستا فكتوريا)", "gov": "Jerusalem", "lat": 31.7800, "lon": 35.2450, "type": "hospital", "beds": 100},
+    {"name": "Al-Makassed Islamic Charitable Hospital", "name_ar": "مستشفى المقاصد الخيرية الإسلامية", "gov": "Jerusalem", "lat": 31.7700, "lon": 35.2400, "type": "hospital", "beds": 250},
+    {"name": "St. Joseph Hospital Jerusalem", "name_ar": "مستشفى سانت جوزيف القدس", "gov": "Jerusalem", "lat": 31.7850, "lon": 35.2300, "type": "hospital", "beds": 100},
 ]
 
 CLINIC_NAMES = [
@@ -70,14 +83,14 @@ SPECIALTIES = [
 
 SHELTER_NAMES = [
     "Municipal Shelter", "School Shelter", "Community Center", "Sports Hall",
-    "UNHCR Registration Center", "Red Cross Shelter", "Church Hall",
-    "Mosque Community Space", "Public Garden Tent Camp", "University Hall",
+    "UNRWA Center", "Red Crescent Shelter", "Mosque Community Space",
+    "Church Hall", "Public Park Tent Camp", "University Hall",
 ]
 
 INCIDENT_TYPES = [
-    "road_closure", "structural_damage", "power_outage", "water_disruption",
-    "security_incident", "medical_emergency", "fire", "unexploded_ordnance",
-    "building_collapse", "communication_outage",
+    "road_closure", "checkpoint_closure", "structural_damage", "power_outage",
+    "water_disruption", "security_incident", "medical_emergency",
+    "settler_violence", "building_demolition", "communication_outage",
 ]
 
 
@@ -98,8 +111,8 @@ def generate_facilities():
         gov_data = GOVERNORATES[h["gov"]]
         districts = gov_data["districts"]
         status_roll = random.random()
-        if h["gov"] == "South Lebanon":
-            # Higher damage in south due to conflict
+        # Higher damage near separation wall and military zones
+        if h["gov"] in ("Jenin", "Tulkarm", "Qalqilya", "Hebron", "Jerusalem"):
             if status_roll < 0.4:
                 status = "damaged"
             elif status_roll < 0.8:
@@ -134,7 +147,7 @@ def generate_facilities():
             "status": status,
             "latitude": h["lat"],
             "longitude": h["lon"],
-            "address": f"{random.choice(districts)}, {h['gov']}, Lebanon",
+            "address": f"{random.choice(districts)}, {h['gov']}, Palestine",
             "district": random.choice(districts),
             "governorate": h["gov"],
             "total_beds": total_beds,
@@ -155,10 +168,10 @@ def generate_facilities():
             "available_staff": random.randint(20, 200),
             "doctors_on_duty": random.randint(5, 40),
             "nurses_on_duty": random.randint(10, 80),
-            "phone": f"+961 {random.randint(1,9)} {random.randint(100000,999999)}",
-            "emergency_phone": f"+961 {random.randint(1,9)} {random.randint(100000,999999)}",
+            "phone": f"+970 {random.choice(['2','4','9'])} {random.randint(2000000,2999999)}",
+            "emergency_phone": f"+970 {random.choice(['2','4','9'])} {random.randint(2000000,2999999)}",
             "last_status_update": (datetime.utcnow() - timedelta(minutes=random.randint(5, 120))).isoformat(),
-            "data_source": "MOH_registry",
+            "data_source": "MOH_Palestine_registry",
         })
 
     # Generate clinics and health centers
@@ -170,7 +183,7 @@ def generate_facilities():
             clinic_type = random.choice(["clinic", "health_center", "pharmacy"])
             status_roll = random.random()
 
-            if gov_name == "South Lebanon":
+            if gov_name in ("Jenin", "Tulkarm", "Qalqilya", "Hebron", "Jerusalem"):
                 if status_roll < 0.35:
                     status = "damaged"
                 elif status_roll < 0.7:
@@ -197,7 +210,7 @@ def generate_facilities():
                 "status": status,
                 "latitude": round(lat, 6),
                 "longitude": round(lon, 6),
-                "address": f"{district}, {gov_name}, Lebanon",
+                "address": f"{district}, {gov_name}, Palestine",
                 "district": district,
                 "governorate": gov_name,
                 "total_beds": beds,
@@ -218,7 +231,7 @@ def generate_facilities():
                 "available_staff": random.randint(2, 15),
                 "doctors_on_duty": random.randint(1, 5),
                 "nurses_on_duty": random.randint(2, 10),
-                "phone": f"+961 {random.randint(1,9)} {random.randint(100000,999999)}",
+                "phone": f"+970 {random.choice(['2','4','9'])} {random.randint(2000000,2999999)}",
                 "emergency_phone": None,
                 "last_status_update": (datetime.utcnow() - timedelta(minutes=random.randint(10, 360))).isoformat(),
                 "data_source": "field_report",
@@ -260,7 +273,7 @@ def generate_resources():
                     "accessibility": random.choice(["full", "partial", "limited"]),
                 },
                 "contact_name": f"Coordinator {district}",
-                "contact_phone": f"+961 {random.randint(1,9)} {random.randint(100000,999999)}",
+                "contact_phone": f"+970 59 {random.randint(1000000,9999999)}",
                 "last_status_update": (datetime.utcnow() - timedelta(minutes=random.randint(30, 240))).isoformat(),
             })
 
@@ -277,7 +290,7 @@ def generate_resources():
                 "status": status,
                 "latitude": round(lat, 6),
                 "longitude": round(lon, 6),
-                "address": f"{gov_name}, Lebanon",
+                "address": f"{gov_name}, Palestine",
                 "district": random.choice(gov_data["districts"]),
                 "total_capacity": None,
                 "current_occupancy": None,
@@ -288,7 +301,7 @@ def generate_resources():
                     "equipment": random.sample(["defibrillator", "ventilator", "oxygen", "IV", "stretcher"], 3),
                 },
                 "contact_name": f"Dispatch {gov_name}",
-                "contact_phone": f"+961 {random.randint(1,9)} {random.randint(100000,999999)}",
+                "contact_phone": f"+970 59 {random.randint(1000000,9999999)}",
                 "last_status_update": (datetime.utcnow() - timedelta(minutes=random.randint(1, 30))).isoformat(),
             })
 
@@ -315,10 +328,10 @@ def generate_resources():
                         "blood_products", "surgical_kits", "IV_fluids", "vaccines",
                     ], random.randint(2, 5)),
                     "operating_hours": "08:00-18:00",
-                    "organization": random.choice(["Red Cross", "UNHCR", "WHO", "MSF", "UNICEF"]),
+                    "organization": random.choice(["Palestinian Red Crescent", "UNRWA", "WHO", "MSF", "UNICEF"]),
                 },
                 "contact_name": f"Supply Manager",
-                "contact_phone": f"+961 {random.randint(1,9)} {random.randint(100000,999999)}",
+                "contact_phone": f"+970 59 {random.randint(1000000,9999999)}",
                 "last_status_update": (datetime.utcnow() - timedelta(hours=random.randint(1, 12))).isoformat(),
             })
 
@@ -344,7 +357,7 @@ def generate_resources():
                     "daily_capacity_liters": random.choice([5000, 10000, 20000]),
                 },
                 "contact_name": "Water Coordinator",
-                "contact_phone": f"+961 {random.randint(1,9)} {random.randint(100000,999999)}",
+                "contact_phone": f"+970 59 {random.randint(1000000,9999999)}",
                 "last_status_update": (datetime.utcnow() - timedelta(hours=random.randint(1, 24))).isoformat(),
             })
 
@@ -356,21 +369,21 @@ def generate_incidents():
     incidents = []
 
     incident_templates = [
-        {"title": "Road closure on Beirut-Sidon highway", "type": "road_closure", "sev": "high", "gov": "Mount Lebanon", "roads": ["Beirut-Sidon Highway"]},
-        {"title": "Power outage in Southern Beirut", "type": "power_outage", "sev": "medium", "gov": "Beirut", "roads": []},
-        {"title": "Structural damage near Beirut port", "type": "structural_damage", "sev": "critical", "gov": "Beirut", "roads": ["Port Road", "Charles Helou Avenue"]},
-        {"title": "Water main break in Hamra district", "type": "water_disruption", "sev": "medium", "gov": "Beirut", "roads": ["Hamra Street"]},
-        {"title": "Security checkpoint on Tripoli highway", "type": "security_incident", "sev": "high", "gov": "North Lebanon", "roads": ["Tripoli-Beirut Highway"]},
-        {"title": "Building collapse in Mar Mikhael", "type": "building_collapse", "sev": "critical", "gov": "Beirut", "roads": ["Armenia Street", "Mar Mikhael Street"]},
-        {"title": "Unexploded ordnance found in South Lebanon", "type": "unexploded_ordnance", "sev": "critical", "gov": "South Lebanon", "roads": ["Tyre-Naqoura Road"]},
-        {"title": "Communication tower damaged in Bekaa", "type": "communication_outage", "sev": "high", "gov": "Bekaa", "roads": []},
-        {"title": "Fire in warehouse near Jounieh", "type": "fire", "sev": "medium", "gov": "Mount Lebanon", "roads": ["Jounieh Highway"]},
-        {"title": "Medical supply truck blockade in Nabatieh", "type": "road_closure", "sev": "high", "gov": "South Lebanon", "roads": ["Nabatieh-Sidon Road"]},
-        {"title": "Flooding on coastal road near Tyre", "type": "road_closure", "sev": "medium", "gov": "South Lebanon", "roads": ["Coastal Road"]},
-        {"title": "Power grid failure in Baalbek area", "type": "power_outage", "sev": "high", "gov": "Bekaa", "roads": []},
-        {"title": "Damaged bridge near Zahle", "type": "structural_damage", "sev": "high", "gov": "Bekaa", "roads": ["Zahle-Chtaura Road"]},
-        {"title": "Security incident near Akkar border", "type": "security_incident", "sev": "critical", "gov": "Akkar", "roads": ["Northern Border Road"]},
-        {"title": "Mass casualty event drill - Beirut Central", "type": "medical_emergency", "sev": "low", "gov": "Beirut", "roads": []},
+        {"title": "Checkpoint closure on Ramallah-Nablus road", "type": "checkpoint_closure", "sev": "high", "gov": "Ramallah and Al-Bireh", "roads": ["Ramallah-Nablus Road"]},
+        {"title": "Power outage in Jenin refugee camp", "type": "power_outage", "sev": "medium", "gov": "Jenin", "roads": []},
+        {"title": "Building demolition in Hebron old city", "type": "building_demolition", "sev": "critical", "gov": "Hebron", "roads": ["Shuhada Street", "Old City Road"]},
+        {"title": "Water supply cut off in Tulkarm", "type": "water_disruption", "sev": "high", "gov": "Tulkarm", "roads": []},
+        {"title": "Military checkpoint on Bethlehem-Jerusalem road", "type": "checkpoint_closure", "sev": "high", "gov": "Bethlehem", "roads": ["Bethlehem-Jerusalem Road", "Route 60"]},
+        {"title": "Settler violence near Nablus villages", "type": "settler_violence", "sev": "critical", "gov": "Nablus", "roads": ["Huwara Road", "Route 60"]},
+        {"title": "Unexploded ordnance found near Tubas", "type": "unexploded_ordnance", "sev": "critical", "gov": "Tubas", "roads": ["Jordan Valley Road"]},
+        {"title": "Communication tower damaged in Salfit", "type": "communication_outage", "sev": "high", "gov": "Salfit", "roads": []},
+        {"title": "Medical supply convoy blocked at Qalandiya", "type": "checkpoint_closure", "sev": "critical", "gov": "Jerusalem", "roads": ["Qalandiya Checkpoint Road"]},
+        {"title": "Road closure near Qalqilya separation wall", "type": "road_closure", "sev": "high", "gov": "Qalqilya", "roads": ["Qalqilya-Nablus Road"]},
+        {"title": "Military raid in Jenin camp", "type": "security_incident", "sev": "critical", "gov": "Jenin", "roads": ["Jenin Camp Road"]},
+        {"title": "Agricultural land access blocked in Salfit", "type": "road_closure", "sev": "medium", "gov": "Salfit", "roads": ["Agricultural Road"]},
+        {"title": "Ambulance access denied at Huwara checkpoint", "type": "checkpoint_closure", "sev": "critical", "gov": "Nablus", "roads": ["Huwara Checkpoint Road"]},
+        {"title": "Structural damage from military operation in Tulkarm", "type": "structural_damage", "sev": "high", "gov": "Tulkarm", "roads": ["Tulkarm Camp Road"]},
+        {"title": "Mass casualty event in Jericho area", "type": "medical_emergency", "sev": "high", "gov": "Jericho", "roads": []},
     ]
 
     for template in incident_templates:
@@ -390,7 +403,7 @@ def generate_incidents():
             "is_active": random.random() > 0.2,  # 80% active
             "roads_affected": template["roads"],
             "facilities_affected": [],
-            "reported_by": random.choice(["Field Team Alpha", "Civil Defense", "UNIFIL", "Red Cross", "Municipal Authority"]),
+            "reported_by": random.choice(["Field Team Alpha", "Palestinian Civil Defense", "PRCS", "Palestinian Red Crescent", "Municipal Authority", "UNRWA"]),
             "reported_at": (datetime.utcnow() - timedelta(hours=random.randint(1, 48))).isoformat(),
         })
 
@@ -415,7 +428,7 @@ def generate_all_data():
             "total_resources": len(resources),
             "total_incidents": len(incidents),
             "data_version": "1.0",
-            "context": "Lebanon Health Crisis Response - Synthetic Data",
+            "context": "Palestine West Bank Crisis Response - Synthetic Data",
         },
     }
 

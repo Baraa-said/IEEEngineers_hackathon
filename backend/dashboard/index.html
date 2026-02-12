@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>غرفة العمليات — لوحة التحكم</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f172a;--card:#1e293b;--border:#334155;
+  --txt:#e2e8f0;--muted:#94a3b8;
+  --green:#22c55e;--red:#ef4444;--amber:#f59e0b;--blue:#3b82f6;--purple:#a855f7;--cyan:#06b6d4;
+  --palestine-green:#009736;--palestine-red:#ce1126;--palestine-black:#000;--palestine-white:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+
+/* Header */
+.header{
+  background:linear-gradient(135deg,var(--palestine-black) 0%,#1a1a2e 50%,var(--palestine-green) 100%);
+  padding:16px 32px;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:3px solid var(--palestine-red);
+}
+.header h1{font-size:24px;font-weight:900}
+.header .sub{color:var(--muted);font-size:13px}
+.header .flag{display:flex;gap:3px;align-items:center}
+.header .flag span{width:32px;height:8px;display:block;border-radius:2px}
+.header .status-dot{width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block;margin-inline-end:6px}
+
+/* Layout */
+.container{max-width:1440px;margin:0 auto;padding:20px}
+
+/* KPI Row */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:20px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;position:relative;overflow:hidden}
+.kpi .label{font-size:13px;color:var(--muted);margin-bottom:4px}
+.kpi .value{font-size:32px;font-weight:900}
+.kpi .sub-val{font-size:12px;color:var(--muted)}
+.kpi::before{content:'';position:absolute;top:0;right:0;left:0;height:3px}
+.kpi.green::before{background:var(--green)}.kpi.red::before{background:var(--red)}
+.kpi.amber::before{background:var(--amber)}.kpi.blue::before{background:var(--blue)}
+.kpi.purple::before{background:var(--purple)}.kpi.cyan::before{background:var(--cyan)}
+
+/* Charts Grid */
+.charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px;margin-bottom:20px}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
+.chart-card h3{font-size:15px;margin-bottom:12px;color:var(--txt);display:flex;align-items:center;gap:8px}
+.chart-card h3 .icon{font-size:18px}
+
+/* Tables */
+.table-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.table-card h3{font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px 14px;text-align:right;border-bottom:1px solid var(--border);font-size:13px}
+th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase}
+td{color:var(--txt)}
+.badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block}
+.badge-green{background:rgba(34,197,94,.15);color:var(--green)}
+.badge-red{background:rgba(239,68,68,.15);color:var(--red)}
+.badge-amber{background:rgba(245,158,11,.15);color:var(--amber)}
+.badge-blue{background:rgba(59,130,246,.15);color:var(--blue)}
+
+/* Loading */
+.loading{display:flex;justify-content:center;align-items:center;height:400px;font-size:18px;color:var(--muted)}
+.spinner{border:4px solid var(--border);border-top:4px solid var(--green);border-radius:50%;width:40px;height:40px;animation:spin .8s linear infinite;margin-inline-end:12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Responsive */
+@media(max-width:768px){
+  .charts-grid{grid-template-columns:1fr}
+  .kpi-row{grid-template-columns:repeat(2,1fr)}
+  .header{flex-direction:column;text-align:center;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>🏥 غرفة العمليات — لوحة التحكم الإدارية</h1>
+    <div class="sub"><span class="status-dot"></span>نظام إدارة الأزمات — الضفة الغربية، فلسطين</div>
+  </div>
+  <div class="flag">
+    <span style="background:var(--palestine-black)"></span>
+    <span style="background:var(--palestine-white);border:1px solid #666"></span>
+    <span style="background:var(--palestine-green)"></span>
+    <span style="background:var(--palestine-red)"></span>
+  </div>
+</div>
+
+<div class="container">
+  <div id="loading" class="loading"><div class="spinner"></div>جاري تحميل البيانات...</div>
+  <div id="content" style="display:none">
+
+    <!-- KPI Cards -->
+    <div class="kpi-row" id="kpi-row"></div>
+
+    <!-- Charts -->
+    <div class="charts-grid">
+      <div class="chart-card"><h3><span class="icon">🏥</span>المرافق حسب الحالة</h3><canvas id="chartFacStatus"></canvas></div>
+      <div class="chart-card"><h3><span class="icon">📊</span>المرافق حسب النوع</h3><canvas id="chartFacType"></canvas></div>
+      <div class="chart-card"><h3><span class="icon">🛏️</span>الأسرّة: المتوفرة مقابل المشغولة</h3><canvas id="chartBeds"></canvas></div>
+      <div class="chart-card"><h3><span class="icon">🚑</span>الموارد حسب النوع</h3><canvas id="chartResType"></canvas></div>
+      <div class="chart-card"><h3><span class="icon">⚠️</span>الحوادث حسب الخطورة</h3><canvas id="chartIncSev"></canvas></div>
+      <div class="chart-card"><h3><span class="icon">📍</span>الحوادث حسب المحافظة</h3><canvas id="chartIncDistrict"></canvas></div>
+      <div class="chart-card"><h3><span class="icon">🏛️</span>المرافق حسب المحافظة</h3><canvas id="chartFacGov"></canvas></div>
+      <div class="chart-card"><h3><span class="icon">📦</span>الموارد حسب الحالة</h3><canvas id="chartResStatus"></canvas></div>
+    </div>
+
+    <!-- Tables -->
+    <div class="charts-grid">
+      <div class="table-card">
+        <h3><span class="icon">🚨</span>الحوادث النشطة</h3>
+        <table><thead><tr><th>العنوان</th><th>النوع</th><th>الخطورة</th><th>المنطقة</th></tr></thead><tbody id="incidentsTable"></tbody></table>
+      </div>
+      <div class="table-card">
+        <h3><span class="icon">🏥</span>المرافق المتضررة</h3>
+        <table><thead><tr><th>الاسم</th><th>النوع</th><th>الحالة</th><th>الأسرّة المتوفرة</th></tr></thead><tbody id="facilityTable"></tbody></table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const API = window.location.origin;
+
+const COLORS = {
+  green:'#22c55e',red:'#ef4444',amber:'#f59e0b',blue:'#3b82f6',
+  purple:'#a855f7',cyan:'#06b6d4',pink:'#ec4899',emerald:'#10b981',
+  orange:'#f97316',indigo:'#6366f1',teal:'#14b8a6',rose:'#f43f5e'
+};
+const PALETTE = Object.values(COLORS);
+
+const STATUS_AR = {operational:'عامل',reduced_capacity:'طاقة مخفضة',damaged:'متضرر',offline:'غير متصل'};
+const TYPE_AR = {hospital:'مستشفى',clinic:'عيادة',pharmacy:'صيدلية',field_hospital:'مستشفى ميداني',health_center:'مركز صحي'};
+const RES_AR = {ambulance:'إسعاف',shelter:'مأوى',medical_supply:'مستلزمات طبية',distribution_point:'نقطة توزيع',water_point:'نقطة مياه'};
+const SEV_AR = {critical:'حرج',high:'عالي',medium:'متوسط',low:'منخفض'};
+const RES_STATUS_AR = {available:'متوفر',in_use:'قيد الاستخدام',depleted:'نفذ',maintenance:'صيانة'};
+const INC_TYPE_AR = {
+  checkpoint_closure:'إغلاق حاجز',road_closure:'إغلاق طريق',structural_damage:'أضرار هيكلية',
+  power_outage:'انقطاع كهرباء',water_disruption:'انقطاع مياه',settler_violence:'عنف مستوطنين',
+  building_demolition:'هدم مبنى',communication_outage:'انقطاع اتصالات',security_incident:'حادث أمني',
+  medical_emergency:'طوارئ طبية',unexploded_ordnance:'ذخائر غير منفجرة'
+};
+
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.borderColor = '#334155';
+
+async function fetchJSON(path){
+  const r = await fetch(API+path,{headers:{'ngrok-skip-browser-warning':'true'}});
+  return r.json();
+}
+
+function sevBadge(s){
+  const cl = s==='critical'||s==='high'?'badge-red':s==='medium'?'badge-amber':'badge-green';
+  return `<span class="badge ${cl}">${SEV_AR[s]||s}</span>`;
+}
+function statusBadge(s){
+  const cl = s==='operational'?'badge-green':s==='damaged'||s==='offline'?'badge-red':'badge-amber';
+  return `<span class="badge ${cl}">${STATUS_AR[s]||s}</span>`;
+}
+
+function makeKPI(label,value,sub,cls){
+  return `<div class="kpi ${cls}"><div class="label">${label}</div><div class="value">${value}</div>${sub?`<div class="sub-val">${sub}</div>`:''}</div>`;
+}
+
+function doughnut(id,labels,data,colors){
+  new Chart(document.getElementById(id),{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:colors||PALETTE.slice(0,labels.length),borderWidth:0}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{padding:12,font:{family:'Cairo'}}}}}});
+}
+function hbar(id,labels,data,colors){
+  new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets:[{data,backgroundColor:colors||PALETTE.slice(0,labels.length),borderRadius:6,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{display:false}}}}});
+}
+function bar(id,labels,datasets){
+  new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets},options:{responsive:true,plugins:{legend:{position:'top',labels:{font:{family:'Cairo'}}}},scales:{x:{grid:{display:false}},y:{grid:{color:'#1e293b'}}}}});
+}
+
+async function init(){
+  try{
+    const [stats,incidents,facilities] = await Promise.all([
+      fetchJSON('/api/v1/dashboard/stats'),
+      fetchJSON('/api/v1/incidents?is_active=true&limit=20'),
+      fetchJSON('/api/v1/facilities?limit=200'),
+    ]);
+
+    const d = stats;
+
+    // KPIs
+    const bedPct = d.facilities.total_beds ? Math.round(d.facilities.available_beds/d.facilities.total_beds*100) : 0;
+    const shelterPct = d.resources.shelter_capacity ? Math.round(d.resources.shelter_occupancy/d.resources.shelter_capacity*100) : 0;
+    document.getElementById('kpi-row').innerHTML = [
+      makeKPI('إجمالي المرافق', d.facilities.total, `${d.facilities.by_status?.operational||0} عامل`, 'green'),
+      makeKPI('الأسرّة المتوفرة', `${d.facilities.available_beds}/${d.facilities.total_beds}`, `${bedPct}% إشغال`, 'blue'),
+      makeKPI('أسرّة العناية المركزة', `${d.facilities.available_icu}/${d.facilities.total_icu}`, '', 'purple'),
+      makeKPI('إجمالي الموارد', d.resources.total, `${d.resources.by_status?.available||0} متوفر`, 'cyan'),
+      makeKPI('الحوادث النشطة', d.incidents.active, `من ${d.incidents.total} إجمالي`, 'red'),
+      makeKPI('سعة الملاجئ', d.resources.shelter_capacity, `${shelterPct}% إشغال`, 'amber'),
+      makeKPI('كهرباء متوفرة', d.facilities.with_power, `من ${d.facilities.total} مرفق`, 'green'),
+      makeKPI('أكسجين متوفر', d.facilities.with_oxygen, `من ${d.facilities.total} مرفق`, 'blue'),
+    ].join('');
+
+    // Charts
+    // Facility status
+    const fStatus = d.facilities.by_status;
+    doughnut('chartFacStatus',
+      Object.keys(fStatus).map(k=>STATUS_AR[k]||k),
+      Object.values(fStatus),
+      [COLORS.green,COLORS.amber,COLORS.red,COLORS.purple]
+    );
+
+    // Facility type
+    const fType = d.facilities.by_type;
+    doughnut('chartFacType',
+      Object.keys(fType).map(k=>TYPE_AR[k]||k),
+      Object.values(fType),
+      [COLORS.blue,COLORS.cyan,COLORS.teal,COLORS.indigo,COLORS.purple]
+    );
+
+    // Beds
+    bar('chartBeds',['أسرّة عامة','عناية مركزة'],[
+      {label:'إجمالي',data:[d.facilities.total_beds,d.facilities.total_icu],backgroundColor:COLORS.blue,borderRadius:6},
+      {label:'متوفر',data:[d.facilities.available_beds,d.facilities.available_icu],backgroundColor:COLORS.green,borderRadius:6},
+    ]);
+
+    // Resources by type
+    const rType = d.resources.by_type;
+    doughnut('chartResType',
+      Object.keys(rType).map(k=>RES_AR[k]||k),
+      Object.values(rType)
+    );
+
+    // Resources by status
+    const rStatus = d.resources.by_status;
+    doughnut('chartResStatus',
+      Object.keys(rStatus).map(k=>RES_STATUS_AR[k]||k),
+      Object.values(rStatus),
+      [COLORS.green,COLORS.blue,COLORS.red,COLORS.amber]
+    );
+
+    // Incidents by severity
+    const iSev = d.incidents.by_severity;
+    doughnut('chartIncSev',
+      Object.keys(iSev).map(k=>SEV_AR[k]||k),
+      Object.values(iSev),
+      [COLORS.red,COLORS.orange,COLORS.amber,COLORS.green]
+    );
+
+    // Incidents by district
+    const iDist = d.incidents.by_district;
+    hbar('chartIncDistrict',
+      Object.keys(iDist),
+      Object.values(iDist)
+    );
+
+    // Facilities by governorate
+    const fGov = d.facilities.by_governorate;
+    hbar('chartFacGov',
+      Object.keys(fGov),
+      Object.values(fGov)
+    );
+
+    // Incidents table
+    const tbody = document.getElementById('incidentsTable');
+    (incidents||[]).slice(0,12).forEach(inc=>{
+      tbody.innerHTML += `<tr><td>${inc.title}</td><td>${INC_TYPE_AR[inc.incident_type]||inc.incident_type}</td><td>${sevBadge(inc.severity)}</td><td>${inc.district||'-'}</td></tr>`;
+    });
+    if(!incidents||incidents.length===0) tbody.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted)">لا توجد حوادث نشطة</td></tr>';
+
+    // Damaged facilities table
+    const ftbody = document.getElementById('facilityTable');
+    const damaged = (facilities||[]).filter(f=>f.status!=='operational').slice(0,12);
+    damaged.forEach(f=>{
+      ftbody.innerHTML += `<tr><td>${f.name}</td><td>${TYPE_AR[f.facility_type]||f.facility_type}</td><td>${statusBadge(f.status)}</td><td>${f.available_beds||0}</td></tr>`;
+    });
+    if(damaged.length===0) ftbody.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted)">جميع المرافق عاملة</td></tr>';
+
+    document.getElementById('loading').style.display='none';
+    document.getElementById('content').style.display='block';
+
+  }catch(e){
+    document.getElementById('loading').innerHTML='<span style="color:var(--red)">❌ خطأ في تحميل البيانات: '+e.message+'</span>';
+    console.error(e);
+  }
+}
+
+init();
+// Auto-refresh every 30 seconds
+setInterval(()=>location.reload(),30000);
+</script>
+</body>
+</html>

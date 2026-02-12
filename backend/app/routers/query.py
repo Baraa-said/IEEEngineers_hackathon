@@ -31,7 +31,7 @@ async def submit_query(
 
     Example queries:
     - "Where is the nearest functional hospital with available trauma beds?"
-    - "Show me all shelters within 5km of Beirut with capacity for 100+ people"
+    - "Show me all shelters within 5km of Ramallah with capacity for 100+ people"
     - "Which medical facilities still have power and oxygen supply?"
     """
     user_id = str(user.id) if user else None

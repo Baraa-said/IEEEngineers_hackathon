@@ -22,8 +22,8 @@ class Settings(BaseSettings):
     PINECONE_INDEX_NAME: str = "situation-room"
 
     # Database
-    DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/situation_room"
-    DATABASE_URL_SYNC: str = "postgresql://postgres:postgres@localhost:5432/situation_room"
+    DATABASE_URL: str = "sqlite+aiosqlite:///./situation_room.db"
+    DATABASE_URL_SYNC: str = "sqlite:///./situation_room.db"
 
     # Redis
     REDIS_URL: str = "redis://localhost:6379/0"
@@ -37,8 +37,8 @@ class Settings(BaseSettings):
     CORS_ORIGINS: str = '["http://localhost:3000","http://localhost:8080"]'
 
     # Rate Limiting
-    RATE_LIMIT_AUTHENTICATED: int = 100
-    RATE_LIMIT_UNAUTHENTICATED: int = 10
+    RATE_LIMIT_AUTHENTICATED: int = 200
+    RATE_LIMIT_UNAUTHENTICATED: int = 60
 
     @property
     def cors_origins_list(self) -> List[str]:

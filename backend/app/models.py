@@ -6,7 +6,6 @@ from sqlalchemy import (
     Column, String, Float, Integer, Boolean, DateTime, Text,
     ForeignKey, Enum as SQLEnum, JSON
 )
-from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from app.database import Base
 import enum
@@ -63,7 +62,7 @@ class UserRole(str, enum.Enum):
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     email = Column(String(255), unique=True, nullable=False, index=True)
     hashed_password = Column(String(255), nullable=False)
     full_name = Column(String(255), nullable=False)
@@ -79,7 +78,7 @@ class User(Base):
 class HealthFacility(Base):
     __tablename__ = "health_facilities"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     name = Column(String(255), nullable=False, index=True)
     name_ar = Column(String(255))  # Arabic name
     facility_type = Column(SQLEnum(FacilityType), nullable=False, index=True)
@@ -132,7 +131,7 @@ class HealthFacility(Base):
 class Resource(Base):
     __tablename__ = "resources"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     name = Column(String(255), nullable=False)
     resource_type = Column(SQLEnum(ResourceType), nullable=False, index=True)
     status = Column(SQLEnum(ResourceStatus), default=ResourceStatus.AVAILABLE, index=True)
@@ -164,7 +163,7 @@ class Resource(Base):
 class Incident(Base):
     __tablename__ = "incidents"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     title = Column(String(500), nullable=False)
     description = Column(Text)
     incident_type = Column(String(100), nullable=False, index=True)
@@ -194,8 +193,8 @@ class Incident(Base):
 class QueryLog(Base):
     __tablename__ = "query_logs"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True)
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id = Column(String(36), ForeignKey("users.id"), nullable=True)
     query_text = Column(Text, nullable=False)
     query_type = Column(String(50))  # geographic, facility, resource, routing, statistical
     intent = Column(String(100))

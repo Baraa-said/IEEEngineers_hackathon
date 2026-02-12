@@ -41,25 +41,25 @@ async def seed_database():
         # Create demo users
         demo_users = [
             User(
-                email="admin@situationroom.lb",
+                email="admin@situationroom.ps",
                 hashed_password=hash_password("admin123!"),
                 full_name="Admin User",
                 role=UserRole.ADMIN,
-                organization="Ministry of Health",
+                organization="Palestinian Ministry of Health",
             ),
             User(
-                email="responder@situationroom.lb",
+                email="responder@situationroom.ps",
                 hashed_password=hash_password("responder123!"),
                 full_name="Field Responder",
                 role=UserRole.EMERGENCY_RESPONDER,
-                organization="Lebanese Red Cross",
+                organization="Palestinian Red Crescent",
             ),
             User(
-                email="official@situationroom.lb",
+                email="official@situationroom.ps",
                 hashed_password=hash_password("official123!"),
                 full_name="Health Official",
                 role=UserRole.HEALTH_OFFICIAL,
-                organization="WHO Lebanon",
+                organization="WHO Palestine",
             ),
         ]
         for u in demo_users:
@@ -73,7 +73,7 @@ async def seed_database():
         # Seed facilities
         for f_data in data["facilities"]:
             facility = HealthFacility(
-                id=uuid.UUID(f_data["id"]),
+                id=f_data["id"],
                 name=f_data["name"],
                 name_ar=f_data.get("name_ar"),
                 facility_type=FacilityType(f_data["facility_type"]),
@@ -112,7 +112,7 @@ async def seed_database():
         # Seed resources
         for r_data in data["resources"]:
             resource = Resource(
-                id=uuid.UUID(r_data["id"]),
+                id=r_data["id"],
                 name=r_data["name"],
                 resource_type=ResourceType(r_data["resource_type"]),
                 status=ResourceStatus(r_data["status"]),
@@ -134,7 +134,7 @@ async def seed_database():
         # Seed incidents
         for i_data in data["incidents"]:
             incident = Incident(
-                id=uuid.UUID(i_data["id"]),
+                id=i_data["id"],
                 title=i_data["title"],
                 description=i_data.get("description"),
                 incident_type=i_data["incident_type"],
@@ -154,7 +154,7 @@ async def seed_database():
 
         await session.commit()
         print("\n🎉 Database seeding complete!")
-        print(f"   Demo login: admin@situationroom.lb / admin123!")
+        print(f"   Demo login: admin@situationroom.ps / admin123!")
 
     await engine.dispose()
 

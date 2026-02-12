@@ -44,8 +44,8 @@ class TestEntityExtraction:
         assert entities.get("facility_type") == "hospital"
 
     def test_extract_district(self):
-        entities = extract_entities("Hospitals in Beirut area")
-        assert entities.get("district") == "Beirut"
+        entities = extract_entities("Hospitals in Ramallah area")
+        assert entities.get("district") == "Ramallah"
 
 
 # ---- API Integration Tests ----
@@ -94,8 +94,8 @@ class TestDataGenerator:
         for f in data["facilities"]:
             assert "latitude" in f
             assert "longitude" in f
-            assert 33.0 < f["latitude"] < 35.0  # Lebanon latitude range
-            assert 35.0 < f["longitude"] < 37.0  # Lebanon longitude range
+            assert 31.0 < f["latitude"] < 33.0  # West Bank latitude range
+            assert 34.0 < f["longitude"] < 36.0  # West Bank longitude range
 
     def test_facilities_have_status(self):
         from app.data_generator import generate_all_data
