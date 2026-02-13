@@ -7,10 +7,16 @@ import '../core/theme.dart';
 import '../providers/auth_provider.dart';
 import '../services/api_service.dart';
 import '../models/facility.dart';
+import '../providers/language_provider.dart';
 
 final facilitiesMapProvider = FutureProvider<List<Facility>>((ref) async {
   final api = ref.watch(apiServiceProvider);
   return api.getFacilities();
+});
+
+final ambulanceMapProvider = FutureProvider<List<Map<String, dynamic>>>((ref) async {
+  final api = ref.watch(apiServiceProvider);
+  return api.getResources(resourceType: 'ambulance');
 });
 
 class MapScreen extends ConsumerStatefulWidget {
@@ -24,24 +30,58 @@ class _MapScreenState extends ConsumerState<MapScreen> {
   final MapController _mapController = MapController();
   String _selectedFilter = 'all';
   Facility? _selectedFacility;
+  double? _focusLat;
+  double? _focusLon;
+  String? _focusFacilityName;
+  double? _userLat;
+  double? _userLon;
+  bool _didFocus = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)?.settings.arguments;
+
+    if (args is String && _selectedFilter == 'all') {
+      // Legacy: simple string filter
+      setState(() => _selectedFilter = args);
+    } else if (args is Map<String, dynamic>) {
+      // New: coming from "Find Nearest Hospital"
+      if (!_didFocus) {
+        final filter = args['filter'] as String?;
+        if (filter != null) _selectedFilter = filter;
+        _focusLat = (args['focusLat'] as num?)?.toDouble();
+        _focusLon = (args['focusLon'] as num?)?.toDouble();
+        _focusFacilityName = args['facilityName'] as String?;
+        _userLat = (args['userLat'] as num?)?.toDouble();
+        _userLon = (args['userLon'] as num?)?.toDouble();
+        setState(() {});
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final facilitiesAsync = ref.watch(facilitiesMapProvider);
+    final ambulancesAsync = ref.watch(ambulanceMapProvider);
+    final lang = ref.watch(languageProvider);
+    final tr = (String key) => S.t(key, lang);
 
-    return Scaffold(
+    return Directionality(
+      textDirection: lang == 'ar' ? TextDirection.rtl : TextDirection.ltr,
+      child: Scaffold(
       appBar: AppBar(
-        title: const Text('Crisis Map'),
+        title: Text(tr('crisis_map')),
         actions: [
           PopupMenuButton<String>(
             icon: const Icon(Icons.filter_list),
             onSelected: (value) => setState(() => _selectedFilter = value),
             itemBuilder: (context) => [
-              const PopupMenuItem(value: 'all', child: Text('All Facilities')),
-              const PopupMenuItem(value: 'hospital', child: Text('Hospitals')),
-              const PopupMenuItem(value: 'clinic', child: Text('Clinics')),
-              const PopupMenuItem(value: 'operational', child: Text('Operational Only')),
-              const PopupMenuItem(value: 'damaged', child: Text('Damaged')),
+              PopupMenuItem(value: 'all', child: Text(tr('all'))),
+              PopupMenuItem(value: 'hospital', child: Text(tr('hospital'))),
+              PopupMenuItem(value: 'clinic', child: Text(tr('clinic'))),
+              PopupMenuItem(value: 'operational', child: Text(tr('operational'))),
+              PopupMenuItem(value: 'damaged', child: Text(tr('damaged'))),
             ],
           ),
           IconButton(
@@ -70,13 +110,96 @@ class _MapScreenState extends ConsumerState<MapScreen> {
             children: [
               TileLayer(
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'lb.situationroom.app',
+                userAgentPackageName: 'ps.situationroom.app',
               ),
               facilitiesAsync.when(
                 data: (facilities) {
                   final filtered = _filterFacilities(facilities);
+
+                  // Auto-focus on nearest hospital if coming from SOS
+                  if (!_didFocus && _focusLat != null && _focusLon != null) {
+                    _didFocus = true;
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      _mapController.move(LatLng(_focusLat!, _focusLon!), 14);
+                      // Auto-select the target facility
+                      if (_focusFacilityName != null) {
+                        final target = filtered.where((f) => f.name == _focusFacilityName).toList();
+                        if (target.isNotEmpty) {
+                          setState(() => _selectedFacility = target.first);
+                        }
+                      }
+                    });
+                  }
+
                   return MarkerLayer(
-                    markers: filtered.map((f) => _buildMarker(f)).toList(),
+                    markers: [
+                      ...filtered.map((f) => _buildMarker(f)),
+                      // User location blue dot
+                      if (_userLat != null && _userLon != null)
+                        Marker(
+                          point: LatLng(_userLat!, _userLon!),
+                          width: 30,
+                          height: 30,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white, width: 3),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.blue.withOpacity(0.4),
+                                  blurRadius: 10,
+                                  spreadRadius: 3,
+                                ),
+                              ],
+                            ),
+                            child: const Icon(Icons.person, color: Colors.white, size: 16),
+                          ),
+                        ),
+                      // Ambulance markers
+                      ...ambulancesAsync.when(
+                        data: (ambulances) => ambulances
+                            .where((a) => a['latitude'] != null && a['longitude'] != null)
+                            .map((a) => Marker(
+                                  point: LatLng(
+                                    (a['latitude'] as num).toDouble(),
+                                    (a['longitude'] as num).toDouble(),
+                                  ),
+                                  width: 36,
+                                  height: 36,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text('🚑 ${a['name'] ?? 'Ambulance'} — ${a['status'] ?? ''}'),
+                                          duration: const Duration(seconds: 2),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: a['status'] == 'available' ? Colors.blue : Colors.orange,
+                                        shape: BoxShape.circle,
+                                        border: Border.all(color: Colors.white, width: 2.5),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.blue.withOpacity(0.35),
+                                            blurRadius: 8,
+                                            spreadRadius: 1,
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Center(
+                                        child: Text('🚑', style: TextStyle(fontSize: 16)),
+                                      ),
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        loading: () => <Marker>[],
+                        error: (_, __) => <Marker>[],
+                      ),
+                    ],
                   );
                 },
                 loading: () => const MarkerLayer(markers: []),
@@ -95,31 +218,31 @@ class _MapScreenState extends ConsumerState<MapScreen> {
               child: Row(
                 children: [
                   _FilterChip(
-                    label: 'All',
+                    label: tr('all'),
                     selected: _selectedFilter == 'all',
                     onTap: () => setState(() => _selectedFilter = 'all'),
                   ),
                   _FilterChip(
-                    label: 'Hospitals',
+                    label: tr('hospital'),
                     selected: _selectedFilter == 'hospital',
                     color: Colors.red,
                     onTap: () => setState(() => _selectedFilter = 'hospital'),
                   ),
                   _FilterChip(
-                    label: 'Clinics',
+                    label: tr('clinic'),
                     selected: _selectedFilter == 'clinic',
                     color: Colors.blue,
                     onTap: () => setState(() => _selectedFilter = 'clinic'),
                   ),
                   _FilterChip(
-                    label: 'Operational',
+                    label: tr('operational'),
                     selected: _selectedFilter == 'operational',
                     color: Colors.green,
                     onTap: () =>
                         setState(() => _selectedFilter = 'operational'),
                   ),
                   _FilterChip(
-                    label: 'Damaged',
+                    label: tr('damaged'),
                     selected: _selectedFilter == 'damaged',
                     color: Colors.orange,
                     onTap: () => setState(() => _selectedFilter = 'damaged'),
@@ -140,10 +263,11 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    _LegendItem(color: AppTheme.operational, label: 'Operational'),
-                    _LegendItem(color: AppTheme.reducedCapacity, label: 'Reduced'),
-                    _LegendItem(color: AppTheme.damaged, label: 'Damaged'),
+                    _LegendItem(color: AppTheme.operational, label: tr('operational')),
+                    _LegendItem(color: AppTheme.reducedCapacity, label: tr('reduced')),
+                    _LegendItem(color: AppTheme.damaged, label: tr('damaged')),
                     _LegendItem(color: AppTheme.offline, label: 'Offline'),
+                    _LegendItem(color: Colors.blue, label: tr('ambulance')),
                   ],
                 ),
               ),
@@ -172,10 +296,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
             ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, '/query'),
-        child: const Icon(Icons.chat),
-      ),
+    ),
     );
   }
 

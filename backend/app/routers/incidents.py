@@ -91,7 +91,7 @@ async def recent_sos(
             "title": a.title,
             "latitude": a.latitude,
             "longitude": a.longitude,
-            "reported_at": a.reported_at.isoformat() if a.reported_at else None,
+            "reported_at": (a.reported_at.isoformat() + "Z") if a.reported_at else None,
             "reported_by": a.reported_by,
             "description": a.description,
             "is_active": a.is_active,

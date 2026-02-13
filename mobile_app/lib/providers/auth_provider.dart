@@ -59,9 +59,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
         userRole: data['user']?['role'],
       );
     } catch (e) {
+      print('Login error: $e');
       state = state.copyWith(
         isLoading: false,
-        error: 'Login failed. Please check your credentials.',
+        error: 'Login failed: ${e.toString().length > 100 ? e.toString().substring(0, 100) : e.toString()}',
       );
     }
   }
@@ -90,13 +91,25 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = const AuthState();
   }
 
-  /// Skip auth for demo
-  void skipAuth() {
-    state = const AuthState(
-      isAuthenticated: true,
-      userName: 'Demo User',
-      userRole: 'viewer',
-    );
+  /// Skip auth for demo — auto-login with demo credentials
+  Future<void> skipAuth() async {
+    state = state.copyWith(isLoading: true, error: null);
+    try {
+      final data = await _api.login('admin@situationroom.ps', 'admin123!');
+      state = AuthState(
+        isAuthenticated: true,
+        token: data['access_token'],
+        userName: data['user']?['full_name'] ?? 'Demo User',
+        userRole: data['user']?['role'] ?? 'viewer',
+      );
+    } catch (e) {
+      // Fallback to unauthenticated demo mode
+      state = const AuthState(
+        isAuthenticated: true,
+        userName: 'Demo User',
+        userRole: 'viewer',
+      );
+    }
   }
 }
 

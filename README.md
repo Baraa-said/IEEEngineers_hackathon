@@ -1,6 +1,6 @@
 # 🏥 Natural Language Situation Room Agent
 
-### AI4Purpose Hackathon — Lebanon Health Crisis Response
+### AI4Purpose Hackathon — Palestine West Bank Crisis Response
 
 > An AI-powered crisis management platform that enables health officials and emergency responders to query complex, multi-source data using natural language — combining LLM/RAG intelligence, GIS mapping, and a mobile-first Flutter interface.
 
@@ -23,13 +23,13 @@
 
 ## Overview
 
-During the Lebanon health crisis, decision-makers face fragmented data across multiple systems (hospital capacity, medical supplies, displacement patterns, infrastructure damage). This tool unifies that data behind a **natural language interface** — ask questions in plain English or Arabic and get instant, actionable answers with map visualizations.
+During the Palestine West Bank crisis, decision-makers face fragmented data across multiple systems (hospital capacity, medical supplies, displacement patterns, infrastructure damage). This tool unifies that data behind a **natural language interface** — ask questions in plain English or Arabic and get instant, actionable answers with map visualizations.
 
 ### Problem Statement
 
-- Health officials need real-time facility status across regions
-- Emergency responders need optimal routing avoiding conflict zones
-- Resource managers need supply chain visibility across 6 governorates
+- Health officials need real-time facility status across governorates
+- Emergency responders need optimal routing avoiding checkpoints and conflict zones
+- Resource managers need supply chain visibility across 11 governorates
 - All stakeholders need a single source of truth accessible on mobile devices
 
 ### Our Solution
@@ -37,7 +37,7 @@ During the Lebanon health crisis, decision-makers face fragmented data across mu
 A three-tier architecture:
 
 1. **RAG Intelligence Layer** — Classifies queries, extracts entities, retrieves relevant data, and generates contextual LLM responses
-2. **Geospatial Data Platform** — PostgreSQL-backed facility/resource/incident tracking with coordinate-aware queries
+2. **Geospatial Data Platform** — SQLite-backed facility/resource/incident tracking with coordinate-aware queries
 3. **Mobile-First Interface** — Flutter app with interactive maps, voice input, offline caching, and emergency mode
 
 ---
@@ -97,7 +97,7 @@ A three-tier architecture:
 - Route visualization avoiding active incident zones
 
 ### Crisis Data Management
-- 22 real Lebanese hospitals + 60+ clinics across 6 governorates
+- 22 real West Bank hospitals + 60+ clinics across 11 governorates
 - Real-time resource tracking (ambulances, medical supplies, blood units)
 - Incident tracking with severity levels and affected area radius
 - Statistics dashboard with governorate-level breakdowns
@@ -113,11 +113,11 @@ A three-tier architecture:
 
 | Layer         | Technology                                    |
 |---------------|-----------------------------------------------|
-| **Backend**   | Python 3.11, FastAPI, SQLAlchemy (async)      |
+| **Backend**   | Python 3.14, FastAPI, SQLAlchemy (async)      |
 | **AI/LLM**   | LangChain, OpenAI GPT-4 Turbo, RAG pipeline  |
-| **Database**  | PostgreSQL 15, Redis 7                        |
+| **Database**  | SQLite (aiosqlite)                            |
 | **Mobile**    | Flutter 3.x, Riverpod, Dio, flutter_map      |
-| **Infra**     | Docker Compose                                |
+| **Infra**     | Direct venv setup (no Docker required)        |
 | **Auth**      | JWT (HS256), bcrypt                           |
 
 ---
@@ -126,8 +126,6 @@ A three-tier architecture:
 
 ### Prerequisites
 
-- Docker & Docker Compose
-- (Optional) OpenAI API key for LLM-powered responses
 - (Optional) Flutter SDK 3.x for mobile development
 
 ### 1. Clone & Configure
@@ -143,17 +141,22 @@ cp .env.example .env
 # OPENAI_API_KEY=sk-...
 ```
 
-### 2. Start Backend Services
+### 2. Start Backend
 
 ```bash
-docker-compose up --build
+cd backend
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python -m app.seed_db
+uvicorn app.main:app --host 0.0.0.0 --reload
 ```
 
 This will:
-- Start PostgreSQL on port 5432
-- Start Redis on port 6379
-- Build and start the FastAPI backend on port 8000
-- Automatically seed the database with synthetic Lebanon health data
+- Create a virtual environment
+- Install all Python dependencies
+- Seed the SQLite database with synthetic Palestine West Bank health data
+- Start the FastAPI backend on port 8000
 
 ### 3. Verify API
 
@@ -173,23 +176,15 @@ flutter pub get
 flutter run
 ```
 
-### 5. Run Without Docker
+### 5. Run on iPhone
 
 ```bash
-# Terminal 1: Start PostgreSQL and Redis locally
-
-# Terminal 2: Backend
-cd backend
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python -m app.seed_db
-uvicorn app.main:app --reload
-
-# Terminal 3: Mobile
 cd mobile_app
-flutter run
+flutter pub get
+flutter run --release
 ```
+
+Make sure to update the API URL in `mobile_app/lib/core/constants.dart` to your Mac's IP address.
 
 ---
 
@@ -221,7 +216,7 @@ Once the backend is running, visit **http://localhost:8000/docs** for the intera
 curl -X POST http://localhost:8000/api/v1/query/ \
   -H "Content-Type: application/json" \
   -d '{
-    "query": "Show me operational hospitals near Beirut with available ICU beds",
+    "query": "Show me operational hospitals near Ramallah with available ICU beds",
     "language": "en",
     "include_map": true
 
@@ -231,13 +226,13 @@ curl -X POST http://localhost:8000/api/v1/query/ \
 **Response:**
 ```json
 {
-  "answer": "Found 5 operational hospitals near Beirut with available ICU capacity...",
+  "answer": "Found 5 operational hospitals near Ramallah with available ICU capacity...",
   "confidence": 0.92,
   "query_type": "facility_search",
   "data_sources": ["health_facilities_db"],
   "map_markers": [...],
   "metadata": {
-    "entities_extracted": {"location": "Beirut", "facility_type": "hospital"},
+    "entities_extracted": {"location": "Ramallah", "facility_type": "hospital"},
     "processing_time_ms": 340
   }
 }
@@ -248,35 +243,35 @@ curl -X POST http://localhost:8000/api/v1/query/ \
 ## Demo Scenarios
 
 ### Scenario 1: Hospital Capacity Check
-> **Query:** "How many hospital beds are available in South Lebanon?"
+> **Query:** "How many hospital beds are available in Hebron?"
 >
-> Demonstrates: Entity extraction (location: South Lebanon), facility search, capacity aggregation
+> Demonstrates: Entity extraction (location: Hebron), facility search, capacity aggregation
 
 ### Scenario 2: Emergency Resource Location
-> **Query:** "Where are the nearest ambulances to Tyre?"
+> **Query:** "Where are the nearest ambulances to Nablus?"
 >
 > Demonstrates: Resource search with distance calculation, map markers
 
 ### Scenario 3: Safe Route Planning
-> **Query:** "Find a safe route from Beirut to Sidon avoiding conflict zones"
+> **Query:** "Find a safe route from Ramallah to Bethlehem avoiding checkpoints"
 >
 > Demonstrates: Route calculation with incident avoidance, waypoint generation
 
 ### Scenario 4: Crisis Statistics
-> **Query:** "Give me a summary of the health situation in Bekaa Valley"
+> **Query:** "Give me a summary of the health situation in Jenin"
 >
 > Demonstrates: Statistics aggregation, multi-metric response (facilities, resources, incidents)
 
 ### Scenario 5: Supply Chain Tracking
-> **Query:** "What medical supplies are running low across all regions?"
+> **Query:** "What medical supplies are running low across all governorates?"
 >
 > Demonstrates: Resource filtering by status, cross-regional aggregation
 
 ### Demo Credentials
 ```
-Admin:     admin@situation-room.lb / admin123
-Official:  health@situation-room.lb / health123
-Responder: responder@situation-room.lb / responder123
+Admin:     admin@situationroom.ps / admin123!
+Official:  official@situationroom.ps / official123!
+Responder: responder@situationroom.ps / responder123!
 ```
 
 ---
@@ -319,7 +314,7 @@ IEEEngineers_hackathon/
 │   │   ├── database.py          # Async SQLAlchemy setup
 │   │   ├── models.py            # Database models
 │   │   ├── schemas.py           # Pydantic request/response schemas
-│   │   ├── data_generator.py    # Synthetic Lebanon data generator
+│   │   ├── data_generator.py    # Synthetic Palestine West Bank data generator
 │   │   ├── seed_db.py           # Database seeder
 │   │   ├── middleware/
 │   │   │   └── rate_limiter.py  # Rate limiting middleware

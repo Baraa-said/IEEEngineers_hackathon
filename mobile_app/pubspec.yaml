@@ -1,5 +1,5 @@
 name: situation_room
-description: "Natural Language Situation Room Agent - Lebanon Health Crisis Response"
+description: "Natural Language Situation Room Agent - Palestine West Bank Crisis Response"
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -43,7 +43,7 @@ dependencies:
   permission_handler: ^11.1.0
 
   # Utilities
-  intl: ^0.19.0
+  intl: ^0.20.2
   uuid: ^4.2.0
   url_launcher: ^6.2.0
   share_plus: ^7.2.0
@@ -60,14 +60,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  
-  assets:
-    - assets/images/
-    - assets/icons/
-
-  fonts:
-    - family: NotoSansArabic
-      fonts:
-        - asset: assets/fonts/NotoSansArabic-Regular.ttf
-        - asset: assets/fonts/NotoSansArabic-Bold.ttf
-          weight: 700

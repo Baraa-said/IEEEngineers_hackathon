@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>غرفة العمليات — لوحة التحكم</title>
+<title>Aid NAV — Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -99,9 +99,133 @@ th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px}
 .spinner{border:4px solid var(--border);border-top:4px solid var(--green);border-radius:50%;width:36px;height:36px;animation:spin .8s linear infinite;margin-inline-end:10px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* ───── ANIMATIONS ───── */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInScale{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes borderGlow{0%,100%{border-color:var(--border)}50%{border-color:var(--blue)}}
+@keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ripple{0%{box-shadow:0 0 0 0 rgba(59,130,246,.3)}70%{box-shadow:0 0 0 12px rgba(59,130,246,0)}100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}}
+
+/* Animated entrance classes */
+.anim-fade-up{animation:fadeInUp .6s cubic-bezier(.22,1,.36,1) both}
+.anim-fade-down{animation:fadeInDown .5s cubic-bezier(.22,1,.36,1) both}
+.anim-fade-scale{animation:fadeInScale .5s cubic-bezier(.22,1,.36,1) both}
+.anim-slide-left{animation:slideInLeft .5s cubic-bezier(.22,1,.36,1) both}
+.anim-slide-right{animation:slideInRight .5s cubic-bezier(.22,1,.36,1) both}
+
+/* Header animated gradient */
+.header{background-size:200% 200%;animation:gradientShift 8s ease infinite}
+
+/* KPI card hover glow (no layout-shifting transforms) */
+.kpi{transition:box-shadow .3s ease, border-color .3s ease;will-change:box-shadow}
+.kpi:hover{box-shadow:0 8px 24px rgba(59,130,246,.12);border-color:var(--blue)}
+.kpi .value{transition:color .3s}
+
+/* Chart card hover (no transforms — prevents chart jitter) */
+.chart-card{transition:box-shadow .3s ease, border-color .3s ease;will-change:box-shadow}
+.chart-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.1);border-color:var(--blue)}
+
+/* Table row hover (no scale — prevents jitter) */
+tbody tr{transition:background .2s}tbody tr:hover{background:var(--card-hover)}
+
+/* Tab animated underline */
+.tab{position:relative;transition:all .3s}
+.tab::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:3px;background:var(--blue);transition:all .3s;transform:translateX(-50%);border-radius:3px}
+.tab.active::after{width:80%}
+.tab{border-bottom:3px solid transparent !important}
+
+/* Button ripple effect */
+.btn{transition:all .2s;position:relative;overflow:hidden}
+.btn:active{transform:scale(.95)}
+.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.2);opacity:0;transition:opacity .3s}
+.btn:hover::after{opacity:1}
+
+/* Badge pulse on status */
+.badge{transition:all .3s}
+.badge:hover{transform:scale(1.1)}
+
+/* Tab content transitions */
+.tab-content{opacity:0;transform:translateY(15px);transition:opacity .4s ease, transform .4s ease}
+.tab-content.active{opacity:1;transform:translateY(0)}
+
+/* Login screen animations */
+.login-box{animation:fadeInScale .7s cubic-bezier(.22,1,.36,1) both}
+.login-icon-anim{animation:float 3s ease-in-out infinite}
+.login-field{transition:all .3s;transform:translateX(0)}
+.login-field:focus{transform:translateX(2px);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+.login-btn{transition:all .3s;position:relative;overflow:hidden}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(59,130,246,.3)}
+.login-btn:active{transform:translateY(0)}
+
+/* Modal entrance */
+.modal-overlay.active .modal{animation:fadeInScale .35s cubic-bezier(.22,1,.36,1) both}
+
+/* Data card entrance */
+.data-card{transition:all .35s cubic-bezier(.22,1,.36,1)}
+.data-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.12)}
+
+/* Status dot pulse */
+.status-dot{animation:ripple 2s infinite}
+
+/* User badge hover */
+.user-badge{transition:all .3s}
+.user-badge:hover{background:rgba(255,255,255,.2);transform:scale(1.05)}
+
+/* Map chip transitions */
+.map-chip{transition:all .25s cubic-bezier(.22,1,.36,1)}
+.map-chip:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.map-chip:active{transform:scale(.95)}
+
+/* Header btn hover */
+.header-btn{transition:all .25s}
+.header-btn:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.header-btn:active{transform:scale(.95)}
+
 /* ───── Toast ───── */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;z-index:2000;opacity:0;transition:opacity .3s}
 .toast.show{opacity:1}.toast-success{background:var(--green);color:#fff}.toast-error{background:var(--red);color:#fff}
+
+/* ───── Table Controls ───── */
+.table-controls{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+.table-search{flex:1;min-width:180px;padding:9px 14px;background:var(--input-bg);border:1px solid var(--border);border-radius:10px;color:var(--txt);font-family:var(--font);font-size:13px;outline:none;transition:border .2s}
+.table-search:focus{border-color:var(--blue)}
+.table-filter{padding:9px 12px;background:var(--input-bg);border:1px solid var(--border);border-radius:10px;color:var(--txt);font-family:var(--font);font-size:13px;outline:none;cursor:pointer;transition:border .2s;min-width:120px}
+.table-filter:focus{border-color:var(--blue)}
+.sortable{cursor:pointer;user-select:none;white-space:nowrap;transition:color .2s}
+.sortable:hover{color:var(--blue)}
+.sort-icon{font-size:11px;opacity:.4;margin-left:2px}
+.sortable.asc .sort-icon{opacity:1;color:var(--blue)}
+.sortable.asc .sort-icon::after{content:'↑'}
+.sortable.desc .sort-icon{opacity:1;color:var(--blue)}
+.sortable.desc .sort-icon::after{content:'↓'}
+.sortable.asc .sort-icon,.sortable.desc .sort-icon{font-size:0}
+.sortable.asc .sort-icon::after,.sortable.desc .sort-icon::after{font-size:12px}
+.table-info{font-size:12px;color:var(--muted);margin-top:8px;padding:4px 0}
+
+/* ───── SOS Threshold Alert Overlay ───── */
+.sos-threshold-overlay{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;background:rgba(220,38,38,.85);backdrop-filter:blur(8px);animation:sosThreatPulse 1.5s infinite}
+@keyframes sosThreatPulse{0%,100%{background:rgba(220,38,38,.85)}50%{background:rgba(220,38,38,.95)}}
+.sos-threshold-box{background:#fff;border-radius:20px;padding:40px;max-width:560px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5);animation:fadeInScale .4s ease}
+.sos-threshold-box h1{font-size:28px;color:#dc2626;margin:12px 0 8px}
+.sos-threshold-box p{color:#475569;font-size:15px;margin:4px 0}
+.sos-threshold-box .sos-count-big{font-size:72px;font-weight:900;color:#dc2626;line-height:1}
+.sos-threshold-dismiss{margin-top:20px;padding:12px 36px;background:#dc2626;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.sos-threshold-dismiss:hover{background:#b91c1c}
+
+/* ───── SOS Settings Panel ───── */
+.sos-settings{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 22px;margin-bottom:16px}
+.sos-settings h4{margin:0 0 12px;font-size:15px;font-weight:700;color:var(--txt)}
+.sos-settings-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.sos-settings-row label{font-size:13px;color:var(--muted);font-weight:600}
+.sos-settings-row input,.sos-settings-row select{padding:6px 10px;background:var(--input-bg);border:1px solid var(--border);border-radius:8px;color:var(--txt);font-family:var(--font);font-size:13px;width:80px;outline:none}
+.sos-settings-row .sos-save-btn{padding:6px 18px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
 
 /* ───── Map ───── */
 #facilityMap{width:100%;height:550px;border-radius:12px;border:1px solid var(--border);z-index:1}
@@ -123,19 +247,60 @@ th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px}
   .form-row{grid-template-columns:1fr}
   #facilityMap{height:400px}
 }
+
+/* ───── Login Screen ───── */
+.login-overlay{position:fixed;inset:0;z-index:5000;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f172a 0%,#1a1a2e 40%,#009736 100%)}
+.login-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px 36px;width:90%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.5);text-align:center}
+.login-box h1{font-size:26px;font-weight:900;margin-bottom:4px;color:var(--txt)}
+.login-box .login-sub{font-size:13px;color:var(--muted);margin-bottom:28px}
+.login-box .login-icon{font-size:56px;margin-bottom:12px}
+.login-field{width:100%;padding:12px 14px;background:var(--input-bg);border:1px solid var(--border);border-radius:10px;color:var(--txt);font-family:var(--font);font-size:14px;margin-bottom:12px;outline:none;transition:border .2s}
+.login-field:focus{border-color:var(--blue)}
+.login-btn{width:100%;padding:13px;border:none;border-radius:10px;font-family:var(--font);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;background:var(--blue);color:#fff;margin-top:6px}
+.remember-me{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin:10px 0 2px;cursor:pointer;user-select:none}
+.remember-me input[type=checkbox]{width:16px;height:16px;accent-color:var(--blue);cursor:pointer}
+.login-btn:hover{opacity:.9}
+.login-btn:disabled{opacity:.5;cursor:not-allowed}
+.login-error{color:var(--red);font-size:12px;margin-top:8px;min-height:18px}
+.login-lang{position:absolute;top:20px;right:24px}
+
+/* ───── User badge in header ───── */
+.user-badge{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);padding:5px 14px;border-radius:20px;color:#fff;font-size:12px;font-weight:600}
+.user-badge .user-dot{width:8px;height:8px;border-radius:50%;background:#22c55e}
+.user-badge .user-role{opacity:.7;font-size:10px}
 </style>
 </head>
 <body>
 
+<!-- ═══════ LOGIN OVERLAY ═══════ -->
+<div class="login-overlay" id="loginOverlay">
+  <button class="header-btn login-lang" onclick="toggleLang();updateLoginText()" id="loginLangBtn">🌐 English</button>
+  <div class="login-box">
+    <div class="login-icon login-icon-anim" style="width:80px;height:80px;background:#009736;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 12px;box-shadow:0 8px 24px rgba(0,151,54,.3)"><span style="font-size:36px">🏥</span><span style="font-size:14px">📍</span></div>
+    <h1 id="loginTitle">Aid NAV</h1>
+    <div class="login-sub" id="loginSub">لوحة تحكم المسؤولين — الضفة الغربية، فلسطين</div>
+    <input class="login-field" type="email" id="loginEmail" placeholder="admin@situationroom.ps" autocomplete="email">
+    <input class="login-field" type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+    <label class="remember-me" id="rememberLabel"><input type="checkbox" id="rememberCheck"> تذكرني</label>
+    <button class="login-btn" id="loginBtn" onclick="doAdminLogin()">تسجيل الدخول</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<!-- ═══════ MAIN APP (hidden until login) ═══════ -->
+<div id="mainApp" style="display:none">
+
 <!-- Header -->
 <div class="header">
   <div>
-    <h1 id="headerTitle">🏥 غرفة العمليات — لوحة التحكم</h1>
+    <h1 id="headerTitle">🏥 Aid NAV — لوحة التحكم</h1>
     <div class="sub"><span class="status-dot"></span><span id="headerSub">نظام إدارة الأزمات — الضفة الغربية، فلسطين</span></div>
   </div>
   <div class="header-controls">
+    <div class="user-badge" id="userBadge"><span class="user-dot"></span><span id="userNameDisplay">Admin</span><span class="user-role" id="userRoleDisplay">admin</span></div>
     <button class="header-btn" onclick="toggleTheme()" id="themeBtn">🌙 <span id="themeLbl">فاتح</span></button>
     <button class="header-btn" onclick="toggleLang()" id="langBtn">🌐 English</button>
+    <button class="header-btn" onclick="doLogout()" id="logoutBtn">🚪 <span id="logoutLbl">خروج</span></button>
   </div>
 </div>
 
@@ -146,6 +311,7 @@ th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px}
   <div class="tab" data-tab="resources" onclick="switchTab('resources')"><span class="tab-text" data-i18n="tab_resources">🚑 الموارد</span></div>
   <div class="tab" data-tab="incidents" onclick="switchTab('incidents')"><span class="tab-text" data-i18n="tab_incidents">⚠️ الحوادث</span></div>
   <div class="tab" data-tab="map" onclick="switchTab('map');initMap()"><span class="tab-text" data-i18n="tab_map">🗺️ الخريطة</span></div>
+  <div class="tab" data-tab="users" onclick="switchTab('users');loadUsers()"><span class="tab-text" data-i18n="tab_users">👥 المستخدمون</span></div>
 </div>
 
 <!-- Dashboard Tab -->
@@ -170,6 +336,7 @@ th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px}
     <style>
       @keyframes sosPulse{0%,100%{box-shadow:0 4px 20px rgba(220,38,38,.35)}50%{box-shadow:0 4px 30px rgba(220,38,38,.6)}}
       @keyframes sosShake{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+      @keyframes ambPulse{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.4)}50%{box-shadow:0 0 0 8px rgba(59,130,246,0)}}
       .sos-card{background:rgba(255,255,255,.12);border-radius:10px;padding:12px 16px;color:#fff;display:flex;align-items:flex-start;gap:12px}
       .sos-card .sos-icon{font-size:22px;margin-top:2px}
       .sos-card .sos-info{flex:1}
@@ -180,6 +347,34 @@ th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px}
       .sos-card .sos-locate:hover{background:rgba(255,255,255,.35)}
     </style>
     <!-- END SOS ALERTS BANNER -->
+
+    <!-- SOS THRESHOLD SETTINGS -->
+    <div class="sos-settings" id="sosSettings" style="display:none">
+      <h4>⚙️ <span id="sosSettingsTitle">SOS Alert Threshold Settings</span></h4>
+      <div class="sos-settings-row">
+        <label id="sosThreshLbl">Alert when ≥</label>
+        <input type="number" id="sosThreshCount" min="1" max="100" value="3">
+        <label id="sosThreshCallsLbl">SOS calls in</label>
+        <select id="sosThreshArea">
+          <option value="any">Any area</option>
+          <option value="nablus">Nablus</option>
+          <option value="ramallah">Ramallah</option>
+          <option value="hebron">Hebron</option>
+          <option value="jenin">Jenin</option>
+          <option value="tulkarm">Tulkarm</option>
+          <option value="bethlehem">Bethlehem</option>
+          <option value="jericho">Jericho</option>
+          <option value="qalqilya">Qalqilya</option>
+          <option value="salfit">Salfit</option>
+          <option value="tubas">Tubas</option>
+        </select>
+        <label id="sosThreshTimeLbl">within</label>
+        <input type="number" id="sosThreshMinutes" min="1" max="1440" value="30">
+        <label>min</label>
+        <button class="sos-save-btn" onclick="saveSOSThreshold()">💾 <span id="sosThreshSaveBtn">Save</span></button>
+      </div>
+    </div>
+    <!-- END SOS THRESHOLD SETTINGS -->
 
     <div id="loading" class="loading"><div class="spinner"></div><span data-i18n="loading">جاري تحميل البيانات...</span></div>
     <div id="dashContent" style="display:none">
@@ -203,10 +398,21 @@ th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px}
   <div class="container">
     <div class="data-card">
       <h3><span>🏥 <span data-i18n="manage_fac">إدارة المرافق</span></span><button class="btn btn-primary" onclick="openModal('facility')">+ <span data-i18n="add_new">إضافة جديد</span></button></h3>
+      <div class="table-controls">
+        <input type="text" class="table-search" id="facSearch" placeholder="🔍 Search..." oninput="renderFilteredFacilities()">
+        <select class="table-filter" id="facTypeFilter" onchange="renderFilteredFacilities()"><option value="">All Types</option></select>
+        <select class="table-filter" id="facStatusFilter" onchange="renderFilteredFacilities()"><option value="">All Status</option></select>
+        <select class="table-filter" id="facGovFilter" onchange="renderFilteredFacilities()"><option value="">All Governorates</option></select>
+      </div>
       <table><thead><tr>
-        <th data-i18n="name">الاسم</th><th data-i18n="type">النوع</th><th data-i18n="status">الحالة</th>
-        <th data-i18n="governorate">المحافظة</th><th data-i18n="beds">أسرّة</th><th data-i18n="power">كهرباء</th><th data-i18n="actions">إجراءات</th>
+        <th class="sortable" onclick="sortTable('fac','name')" data-i18n="name">الاسم <span class="sort-icon">⇅</span></th>
+        <th class="sortable" onclick="sortTable('fac','facility_type')" data-i18n="type">النوع <span class="sort-icon">⇅</span></th>
+        <th class="sortable" onclick="sortTable('fac','status')" data-i18n="status">الحالة <span class="sort-icon">⇅</span></th>
+        <th class="sortable" onclick="sortTable('fac','governorate')" data-i18n="governorate">المحافظة <span class="sort-icon">⇅</span></th>
+        <th class="sortable" onclick="sortTable('fac','available_beds')" data-i18n="beds">أسرّة <span class="sort-icon">⇅</span></th>
+        <th data-i18n="power">كهرباء</th><th data-i18n="actions">إجراءات</th>
       </tr></thead><tbody id="facTable"></tbody></table>
+      <div class="table-info" id="facInfo"></div>
     </div>
   </div>
 </div>
@@ -216,10 +422,20 @@ th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px}
   <div class="container">
     <div class="data-card">
       <h3><span>🚑 <span data-i18n="manage_res">إدارة الموارد</span></span><button class="btn btn-primary" onclick="openModal('resource')">+ <span data-i18n="add_new">إضافة جديد</span></button></h3>
+      <div class="table-controls">
+        <input type="text" class="table-search" id="resSearch" placeholder="🔍 Search..." oninput="renderFilteredResources()">
+        <select class="table-filter" id="resTypeFilter" onchange="renderFilteredResources()"><option value="">All Types</option></select>
+        <select class="table-filter" id="resStatusFilter" onchange="renderFilteredResources()"><option value="">All Status</option></select>
+      </div>
       <table><thead><tr>
-        <th data-i18n="name">الاسم</th><th data-i18n="type">النوع</th><th data-i18n="status">الحالة</th>
-        <th data-i18n="district">المنطقة</th><th data-i18n="capacity">السعة</th><th data-i18n="actions">إجراءات</th>
+        <th class="sortable" onclick="sortTable('res','name')" data-i18n="name">الاسم <span class="sort-icon">⇅</span></th>
+        <th class="sortable" onclick="sortTable('res','resource_type')" data-i18n="type">النوع <span class="sort-icon">⇅</span></th>
+        <th class="sortable" onclick="sortTable('res','status')" data-i18n="status">الحالة <span class="sort-icon">⇅</span></th>
+        <th class="sortable" onclick="sortTable('res','district')" data-i18n="district">المنطقة <span class="sort-icon">⇅</span></th>
+        <th class="sortable" onclick="sortTable('res','total_capacity')" data-i18n="capacity">السعة <span class="sort-icon">⇅</span></th>
+        <th data-i18n="actions">إجراءات</th>
       </tr></thead><tbody id="resTable"></tbody></table>
+      <div class="table-info" id="resInfo"></div>
     </div>
   </div>
 </div>
@@ -229,10 +445,19 @@ th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px}
   <div class="container">
     <div class="data-card">
       <h3><span>⚠️ <span data-i18n="manage_inc">إدارة الحوادث</span></span><button class="btn btn-primary" onclick="openModal('incident')">+ <span data-i18n="add_new">إضافة جديد</span></button></h3>
+      <div class="table-controls">
+        <input type="text" class="table-search" id="incSearch" placeholder="🔍 Search..." oninput="renderFilteredIncidents()">
+        <select class="table-filter" id="incTypeFilter" onchange="renderFilteredIncidents()"><option value="">All Types</option></select>
+        <select class="table-filter" id="incSevFilter" onchange="renderFilteredIncidents()"><option value="">All Severity</option></select>
+      </div>
       <table><thead><tr>
-        <th data-i18n="title">العنوان</th><th data-i18n="type">النوع</th><th data-i18n="severity">الخطورة</th>
-        <th data-i18n="district">المنطقة</th><th data-i18n="active">نشط</th><th data-i18n="actions">إجراءات</th>
+        <th class="sortable" onclick="sortTable('inc','title')" data-i18n="title">العنوان <span class="sort-icon">⇅</span></th>
+        <th class="sortable" onclick="sortTable('inc','incident_type')" data-i18n="type">النوع <span class="sort-icon">⇅</span></th>
+        <th class="sortable" onclick="sortTable('inc','severity')" data-i18n="severity">الخطورة <span class="sort-icon">⇅</span></th>
+        <th class="sortable" onclick="sortTable('inc','district')" data-i18n="district">المنطقة <span class="sort-icon">⇅</span></th>
+        <th data-i18n="active">نشط</th><th data-i18n="actions">إجراءات</th>
       </tr></thead><tbody id="incTable"></tbody></table>
+      <div class="table-info" id="incInfo"></div>
     </div>
   </div>
 </div>
@@ -249,6 +474,42 @@ th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px}
   </div>
 </div>
 
+<!-- Users Tab -->
+<div class="tab-content" id="tab-users">
+  <div class="container">
+    <div class="data-card">
+      <h3><span>👥 <span data-i18n="manage_users">إدارة المستخدمين</span></span></h3>
+      <div class="kpi-row" id="userKpis" style="margin-bottom:16px"></div>
+      <div class="table-controls">
+        <input type="text" class="table-search" id="userSearch" placeholder="🔍 Search..." oninput="renderFilteredUsers()">
+        <select class="table-filter" id="userRoleFilter" onchange="renderFilteredUsers()"><option value="">All Roles</option></select>
+      </div>
+      <table><thead><tr>
+        <th class="sortable" onclick="sortTable('user','full_name')" data-i18n="name">الاسم <span class="sort-icon">⇅</span></th>
+        <th class="sortable" onclick="sortTable('user','email')" data-i18n="email_lbl">البريد <span class="sort-icon">⇅</span></th>
+        <th class="sortable" onclick="sortTable('user','role')" data-i18n="role">الدور <span class="sort-icon">⇅</span></th>
+        <th data-i18n="org">المنظمة</th><th data-i18n="status">الحالة</th>
+        <th class="sortable" onclick="sortTable('user','created_at')" data-i18n="joined">انضم <span class="sort-icon">⇅</span></th>
+      </tr></thead><tbody id="usersTable"></tbody></table>
+      <div class="table-info" id="userInfo"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SOS Threshold Full-Screen Alert -->
+<div class="sos-threshold-overlay" id="sosThresholdOverlay" style="display:none">
+  <div class="sos-threshold-box">
+    <div style="font-size:72px">🚨</div>
+    <h1 id="sosThresholdTitle">CRITICAL SOS ALERT</h1>
+    <div class="sos-count-big" id="sosThresholdCount">0</div>
+    <p id="sosThresholdMsg">SOS calls detected in area</p>
+    <p style="font-weight:700;color:#dc2626" id="sosThresholdArea"></p>
+    <button class="sos-threshold-dismiss" onclick="dismissSOSThreshold()">✕ Dismiss</button>
+  </div>
+</div>
+
+</div><!-- end #mainApp -->
+
 <!-- Modal -->
 <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
   <div class="modal" id="modalContent"></div>
@@ -260,7 +521,14 @@ th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px}
 <script>
 /* ═══════ CONFIG ═══════ */
 const API = window.location.origin;
-const H = {'Content-Type':'application/json','ngrok-skip-browser-warning':'true'};
+let AUTH_TOKEN = localStorage.getItem('admin_token') || null;
+let AUTH_USER = JSON.parse(localStorage.getItem('admin_user') || 'null');
+const H_BASE = {'Content-Type':'application/json','ngrok-skip-browser-warning':'true'};
+function getHeaders(){
+  const h = {...H_BASE};
+  if(AUTH_TOKEN) h['Authorization'] = 'Bearer ' + AUTH_TOKEN;
+  return h;
+}
 let LANG = localStorage.getItem('lang')||'ar';
 let THEME = localStorage.getItem('theme')||'dark';
 let chartInstances = {};
@@ -288,11 +556,18 @@ const I18N = {
     has_power:'كهرباء',has_oxygen:'أكسجين',phone:'الهاتف',description:'الوصف',
     contact_name:'اسم جهة الاتصال',contact_phone:'هاتف جهة الاتصال',total_capacity:'السعة الإجمالية',
     current_occ:'الإشغال الحالي',reported_by:'الإبلاغ بواسطة',is_active:'نشط',
-    header_title:'🏥 غرفة العمليات — لوحة التحكم',header_sub:'نظام إدارة الأزمات — الضفة الغربية، فلسطين',
+    header_title:'🏥 Aid NAV — لوحة التحكم',header_sub:'نظام إدارة الأزمات — الضفة الغربية، فلسطين',
     theme_light:'فاتح',theme_dark:'داكن',
     created:'تم الإنشاء بنجاح',updated:'تم التحديث بنجاح',deleted:'تم الحذف بنجاح',error_op:'حدث خطأ',
     total:'إجمالي',avail:'متوفر',general_beds:'أسرّة عامة',icu_label:'عناية مركزة',
     tab_map:'🗺️ الخريطة',crisis_map:'خريطة الأزمات — المرافق الصحية',
+    tab_users:'👥 المستخدمون',manage_users:'إدارة المستخدمين',
+    login_title:'Aid NAV',login_sub:'لوحة تحكم المسؤولين — الضفة الغربية، فلسطين',
+    login_btn:'تسجيل الدخول',login_error_invalid:'بيانات الدخول غير صحيحة',login_error_denied:'مسموح فقط لحسابات المسؤولين',
+    remember_me:'تذكرني',
+    logout:'خروج',email_lbl:'البريد',role:'الدور',org:'المنظمة',joined:'انضم',
+    role_admin:'مسؤول',role_viewer:'مشاهد',role_health_official:'مسؤول صحي',role_emergency_responder:'مستجيب طوارئ',
+    total_users:'إجمالي المستخدمين',mobile_users:'مستخدمو الهاتف',admin_users:'المسؤولون',
   },
   en:{
     tab_dashboard:'📊 Dashboard',tab_facilities:'🏥 Facilities',tab_resources:'🚑 Resources',tab_incidents:'⚠️ Incidents',
@@ -315,11 +590,18 @@ const I18N = {
     has_power:'Power',has_oxygen:'Oxygen',phone:'Phone',description:'Description',
     contact_name:'Contact Name',contact_phone:'Contact Phone',total_capacity:'Total Capacity',
     current_occ:'Current Occupancy',reported_by:'Reported By',is_active:'Active',
-    header_title:'🏥 Situation Room — Admin Dashboard',header_sub:'Crisis Management — West Bank, Palestine',
+    header_title:'🏥 Aid NAV — Admin Dashboard',header_sub:'Crisis Management — West Bank, Palestine',
     theme_light:'Light',theme_dark:'Dark',
     created:'Created successfully',updated:'Updated successfully',deleted:'Deleted successfully',error_op:'An error occurred',
     total:'Total',avail:'Available',general_beds:'General Beds',icu_label:'ICU',
     tab_map:'🗺️ Map',crisis_map:'Crisis Map — Health Facilities',
+    tab_users:'👥 Users',manage_users:'Manage Users',
+    login_title:'Aid NAV',login_sub:'Admin Dashboard — West Bank, Palestine',
+    login_btn:'Login',login_error_invalid:'Invalid email or password',login_error_denied:'Admin accounts only. Access denied.',
+    remember_me:'Remember me',
+    logout:'Logout',email_lbl:'Email',role:'Role',org:'Organization',joined:'Joined',
+    role_admin:'Admin',role_viewer:'Viewer',role_health_official:'Health Official',role_emergency_responder:'Responder',
+    total_users:'Total Users',mobile_users:'Mobile Users',admin_users:'Admin Users',
   }
 };
 const t = k => I18N[LANG]?.[k] || I18N['en']?.[k] || k;
@@ -340,7 +622,7 @@ const PALETTE = ['#3b82f6','#22c55e','#f59e0b','#ef4444','#a855f7','#06b6d4','#e
 
 /* ═══════ Helpers ═══════ */
 async function api(path,method='GET',body=null){
-  const opts={method,headers:H};
+  const opts={method,headers:getHeaders()};
   if(body) opts.body=JSON.stringify(body);
   const r=await fetch(API+path,opts);
   if(!r.ok) throw new Error(`${r.status}`);
@@ -387,13 +669,13 @@ function switchTab(name){
 function destroyCharts(){Object.values(chartInstances).forEach(c=>c.destroy());chartInstances={};}
 
 function doughnut(id,labels,data,colors){
-  chartInstances[id]=new Chart(document.getElementById(id),{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:colors||PALETTE.slice(0,labels.length),borderWidth:0}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{padding:10,font:{family:LANG==='ar'?'Cairo':'Inter',size:11}}}}}});
+  chartInstances[id]=new Chart(document.getElementById(id),{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:colors||PALETTE.slice(0,labels.length),borderWidth:0}]},options:{responsive:true,animation:{duration:800,easing:'easeOutQuart'},plugins:{legend:{position:'bottom',labels:{padding:10,font:{family:LANG==='ar'?'Cairo':'Inter',size:11}}}}}});
 }
 function hbar(id,labels,data,colors){
-  chartInstances[id]=new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets:[{data,backgroundColor:colors||PALETTE.slice(0,labels.length),borderRadius:5,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{display:false}}}}});
+  chartInstances[id]=new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets:[{data,backgroundColor:colors||PALETTE.slice(0,labels.length),borderRadius:5,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,animation:{duration:800,easing:'easeOutQuart'},plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{display:false}}}}});
 }
 function bar(id,labels,datasets){
-  chartInstances[id]=new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets},options:{responsive:true,plugins:{legend:{position:'top',labels:{font:{family:LANG==='ar'?'Cairo':'Inter'}}}},scales:{x:{grid:{display:false}},y:{grid:{color:THEME==='dark'?'#1e293b':'#e2e8f0'}}}}});
+  chartInstances[id]=new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets},options:{responsive:true,animation:{duration:800,easing:'easeOutQuart'},plugins:{legend:{position:'top',labels:{font:{family:LANG==='ar'?'Cairo':'Inter'}}}},scales:{x:{grid:{display:false}},y:{grid:{color:THEME==='dark'?'#1e293b':'#e2e8f0'}}}}});
 }
 
 /* ═══════ Dashboard ═══════ */
@@ -428,41 +710,197 @@ async function loadDashboard(){
 
     document.getElementById('loading').style.display='none';
     document.getElementById('dashContent').style.display='block';
+    // Animate KPI cards entrance with stagger
+    animateEntrance('#kpi-row .kpi', 'anim-fade-up', 80);
+    // Animate KPI counters
+    document.querySelectorAll('#kpi-row .kpi .value').forEach(el => animateCounter(el));
   }catch(e){document.getElementById('loading').innerHTML=`<span style="color:var(--red)">❌ ${e.message}</span>`;}
 }
 
 /* ═══════ CRUD Tables ═══════ */
 let allFacilities=[],allResources=[],allIncidents=[];
+let sortState = {fac:{key:null,dir:'asc'}, res:{key:null,dir:'asc'}, inc:{key:null,dir:'asc'}, user:{key:null,dir:'asc'}};
 
-async function loadFacilities(){
-  allFacilities=await api('/api/v1/facilities?limit=200');
-  const tb=document.getElementById('facTable');
-  tb.innerHTML=allFacilities.map(f=>`<tr>
+function sortTable(table, key) {
+  const s = sortState[table];
+  if (s.key === key) { s.dir = s.dir === 'asc' ? 'desc' : 'asc'; }
+  else { s.key = key; s.dir = 'asc'; }
+  // Update header icons
+  const prefix = table === 'user' ? '#tab-users' : `#tab-${table === 'fac' ? 'facilities' : table === 'res' ? 'resources' : 'incidents'}`;
+  document.querySelectorAll(`${prefix} th.sortable`).forEach(th => {
+    th.classList.remove('asc', 'desc');
+    if (th.getAttribute('onclick')?.includes(`'${key}'`)) {
+      th.classList.add(s.dir);
+    }
+  });
+  // Re-render
+  if (table === 'fac') renderFilteredFacilities();
+  else if (table === 'res') renderFilteredResources();
+  else if (table === 'inc') renderFilteredIncidents();
+  else if (table === 'user') renderFilteredUsers();
+}
+
+function applySorting(arr, table) {
+  const s = sortState[table];
+  if (!s.key) return arr;
+  const sorted = [...arr];
+  sorted.sort((a, b) => {
+    let va = a[s.key], vb = b[s.key];
+    if (va == null) va = '';
+    if (vb == null) vb = '';
+    if (typeof va === 'number' && typeof vb === 'number') return s.dir === 'asc' ? va - vb : vb - va;
+    return s.dir === 'asc' ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
+  });
+  return sorted;
+}
+
+function populateFilterDropdowns() {
+  // Facilities
+  const facTypes = [...new Set(allFacilities.map(f => f.facility_type).filter(Boolean))];
+  const facStatuses = [...new Set(allFacilities.map(f => f.status).filter(Boolean))];
+  const facGovs = [...new Set(allFacilities.map(f => f.governorate).filter(Boolean))];
+  const facTypeEl = document.getElementById('facTypeFilter');
+  const facStatusEl = document.getElementById('facStatusFilter');
+  const facGovEl = document.getElementById('facGovFilter');
+  if (facTypeEl) { facTypeEl.innerHTML = `<option value="">${LANG==='ar'?'جميع الأنواع':'All Types'}</option>` + facTypes.map(t => `<option value="${t}">${tLabel(t)}</option>`).join(''); }
+  if (facStatusEl) { facStatusEl.innerHTML = `<option value="">${LANG==='ar'?'جميع الحالات':'All Status'}</option>` + facStatuses.map(s => `<option value="${s}">${sLabel(s)}</option>`).join(''); }
+  if (facGovEl) { facGovEl.innerHTML = `<option value="">${LANG==='ar'?'جميع المحافظات':'All Governorates'}</option>` + facGovs.map(g => `<option value="${g}">${g}</option>`).join(''); }
+
+  // Resources
+  const resTypes = [...new Set(allResources.map(r => r.resource_type).filter(Boolean))];
+  const resStatuses = [...new Set(allResources.map(r => r.status).filter(Boolean))];
+  const resTypeEl = document.getElementById('resTypeFilter');
+  const resStatusEl = document.getElementById('resStatusFilter');
+  if (resTypeEl) { resTypeEl.innerHTML = `<option value="">${LANG==='ar'?'جميع الأنواع':'All Types'}</option>` + resTypes.map(t => `<option value="${t}">${rLabel(t)}</option>`).join(''); }
+  if (resStatusEl) { resStatusEl.innerHTML = `<option value="">${LANG==='ar'?'جميع الحالات':'All Status'}</option>` + resStatuses.map(s => `<option value="${s}">${rsLabel(s)}</option>`).join(''); }
+
+  // Incidents
+  const incTypes = [...new Set(allIncidents.map(i => i.incident_type).filter(Boolean))];
+  const incSevs = [...new Set(allIncidents.map(i => i.severity).filter(Boolean))];
+  const incTypeEl = document.getElementById('incTypeFilter');
+  const incSevEl = document.getElementById('incSevFilter');
+  if (incTypeEl) { incTypeEl.innerHTML = `<option value="">${LANG==='ar'?'جميع الأنواع':'All Types'}</option>` + incTypes.map(t => `<option value="${t}">${t}</option>`).join(''); }
+  if (incSevEl) { incSevEl.innerHTML = `<option value="">${LANG==='ar'?'جميع الخطورة':'All Severity'}</option>` + incSevs.map(s => `<option value="${s}">${sevLabel(s)}</option>`).join(''); }
+
+  // Users
+  const userRoles = [...new Set(allUsers.map(u => u.role).filter(Boolean))];
+  const userRoleEl = document.getElementById('userRoleFilter');
+  if (userRoleEl) { userRoleEl.innerHTML = `<option value="">${LANG==='ar'?'جميع الأدوار':'All Roles'}</option>` + userRoles.map(r => `<option value="${r}">${roleLabel(r)}</option>`).join(''); }
+
+  // Update search placeholders
+  document.querySelectorAll('.table-search').forEach(el => {
+    el.placeholder = LANG === 'ar' ? '🔍 بحث...' : '🔍 Search...';
+  });
+}
+
+function renderFilteredFacilities() {
+  const search = (document.getElementById('facSearch')?.value || '').toLowerCase();
+  const typeF = document.getElementById('facTypeFilter')?.value || '';
+  const statusF = document.getElementById('facStatusFilter')?.value || '';
+  const govF = document.getElementById('facGovFilter')?.value || '';
+  let list = allFacilities.filter(f => {
+    if (search && !f.name.toLowerCase().includes(search) && !(f.name_ar||'').toLowerCase().includes(search) && !(f.governorate||'').toLowerCase().includes(search)) return false;
+    if (typeF && f.facility_type !== typeF) return false;
+    if (statusF && f.status !== statusF) return false;
+    if (govF && f.governorate !== govF) return false;
+    return true;
+  });
+  list = applySorting(list, 'fac');
+  const tb = document.getElementById('facTable');
+  tb.innerHTML = list.map(f => `<tr>
     <td>${f.name}</td><td>${tLabel(f.facility_type)}</td><td>${statusBadge(f.status)}</td>
     <td>${f.governorate||'-'}</td><td>${f.available_beds}/${f.total_beds}</td>
     <td>${f.has_power?'✅':'❌'}</td>
     <td><button class="btn btn-sm btn-primary" onclick="editFacility('${f.id}')">${t('edit')}</button> <button class="btn btn-sm btn-danger" onclick="deleteItem('facilities','${f.id}')">${t('delete')}</button></td>
   </tr>`).join('');
+  const info = document.getElementById('facInfo');
+  if (info) info.textContent = `${LANG==='ar'?'عرض':'Showing'} ${list.length} ${LANG==='ar'?'من':'of'} ${allFacilities.length}`;
 }
 
-async function loadResources(){
-  allResources=await api('/api/v1/resources?limit=200');
-  const tb=document.getElementById('resTable');
-  tb.innerHTML=allResources.map(r=>`<tr>
+function renderFilteredResources() {
+  const search = (document.getElementById('resSearch')?.value || '').toLowerCase();
+  const typeF = document.getElementById('resTypeFilter')?.value || '';
+  const statusF = document.getElementById('resStatusFilter')?.value || '';
+  let list = allResources.filter(r => {
+    if (search && !r.name.toLowerCase().includes(search) && !(r.district||'').toLowerCase().includes(search)) return false;
+    if (typeF && r.resource_type !== typeF) return false;
+    if (statusF && r.status !== statusF) return false;
+    return true;
+  });
+  list = applySorting(list, 'res');
+  const tb = document.getElementById('resTable');
+  tb.innerHTML = list.map(r => `<tr>
     <td>${r.name}</td><td>${rLabel(r.resource_type)}</td><td><span class="badge badge-blue">${rsLabel(r.status)}</span></td>
     <td>${r.district||'-'}</td><td>${r.total_capacity||0}</td>
     <td><button class="btn btn-sm btn-primary" onclick="editResource('${r.id}')">${t('edit')}</button> <button class="btn btn-sm btn-danger" onclick="deleteItem('resources','${r.id}')">${t('delete')}</button></td>
   </tr>`).join('');
+  const info = document.getElementById('resInfo');
+  if (info) info.textContent = `${LANG==='ar'?'عرض':'Showing'} ${list.length} ${LANG==='ar'?'من':'of'} ${allResources.length}`;
 }
 
-async function loadIncidents(){
-  allIncidents=await api('/api/v1/incidents?limit=200');
-  const tb=document.getElementById('incTable');
-  tb.innerHTML=allIncidents.map(i=>`<tr>
+function renderFilteredIncidents() {
+  const search = (document.getElementById('incSearch')?.value || '').toLowerCase();
+  const typeF = document.getElementById('incTypeFilter')?.value || '';
+  const sevF = document.getElementById('incSevFilter')?.value || '';
+  let list = allIncidents.filter(i => {
+    if (search && !i.title.toLowerCase().includes(search) && !(i.district||'').toLowerCase().includes(search)) return false;
+    if (typeF && i.incident_type !== typeF) return false;
+    if (sevF && i.severity !== sevF) return false;
+    return true;
+  });
+  list = applySorting(list, 'inc');
+  const tb = document.getElementById('incTable');
+  tb.innerHTML = list.map(i => `<tr>
     <td>${i.title}</td><td>${i.incident_type}</td><td>${sevBadge(i.severity)}</td>
     <td>${i.district||'-'}</td><td>${i.is_active?'✅':'❌'}</td>
     <td><button class="btn btn-sm btn-primary" onclick="editIncident('${i.id}')">${t('edit')}</button> <button class="btn btn-sm btn-danger" onclick="deleteItem('incidents','${i.id}')">${t('delete')}</button></td>
   </tr>`).join('');
+  const info = document.getElementById('incInfo');
+  if (info) info.textContent = `${LANG==='ar'?'عرض':'Showing'} ${list.length} ${LANG==='ar'?'من':'of'} ${allIncidents.length}`;
+}
+
+function renderFilteredUsers() {
+  const search = (document.getElementById('userSearch')?.value || '').toLowerCase();
+  const roleF = document.getElementById('userRoleFilter')?.value || '';
+  let list = allUsers.filter(u => {
+    if (search && !u.full_name.toLowerCase().includes(search) && !u.email.toLowerCase().includes(search) && !(u.organization||'').toLowerCase().includes(search)) return false;
+    if (roleF && u.role !== roleF) return false;
+    return true;
+  });
+  list = applySorting(list, 'user');
+  const tb = document.getElementById('usersTable');
+  tb.innerHTML = list.map(u => {
+    const roleBg = u.role==='admin'?'badge-red':u.role==='viewer'?'badge-green':'badge-blue';
+    const date = u.created_at ? new Date(u.created_at).toLocaleDateString() : '-';
+    return `<tr>
+      <td>${u.full_name}</td>
+      <td>${u.email}</td>
+      <td><span class="badge ${roleBg}">${roleLabel(u.role)}</span></td>
+      <td>${u.organization||'-'}</td>
+      <td>${u.is_active?'✅':'❌'}</td>
+      <td>${date}</td>
+    </tr>`;
+  }).join('');
+  const info = document.getElementById('userInfo');
+  if (info) info.textContent = `${LANG==='ar'?'عرض':'Showing'} ${list.length} ${LANG==='ar'?'من':'of'} ${allUsers.length}`;
+}
+
+async function loadFacilities(){
+  allFacilities=await api('/api/v1/facilities?limit=200');
+  renderFilteredFacilities();
+  populateFilterDropdowns();
+}
+
+async function loadResources(){
+  allResources=await api('/api/v1/resources?limit=200');
+  renderFilteredResources();
+  populateFilterDropdowns();
+}
+
+async function loadIncidents(){
+  allIncidents=await api('/api/v1/incidents?limit=200');
+  renderFilteredIncidents();
+  populateFilterDropdowns();
 }
 
 async function deleteItem(entity,id){
@@ -571,8 +1009,9 @@ function buildMapLegend(){
     {color:'#f59e0b',label:LANG==='ar'?'طاقة مخفضة':'Reduced'},
     {color:'#ef4444',label:LANG==='ar'?'متضرر':'Damaged'},
     {color:'#a855f7',label:LANG==='ar'?'غير متصل':'Offline'},
+    {color:'#3b82f6',label:LANG==='ar'?'إسعاف':'Ambulance',icon:'🚑'},
   ];
-  document.getElementById('mapLegend').innerHTML=items.map(i=>`<div class="map-legend-item"><div class="map-legend-dot" style="background:${i.color}"></div>${i.label}</div>`).join('');
+  document.getElementById('mapLegend').innerHTML=items.map(i=>`<div class="map-legend-item"><div class="map-legend-dot" style="background:${i.color}">${i.icon||''}</div>${i.label}</div>`).join('');
 }
 
 function buildMapFilters(){
@@ -582,6 +1021,7 @@ function buildMapFilters(){
     {key:'clinic',label:LANG==='ar'?'عيادة':'Clinic'},
     {key:'operational',label:LANG==='ar'?'عامل':'Operational'},
     {key:'damaged',label:LANG==='ar'?'متضرر':'Damaged'},
+    {key:'ambulance',label:LANG==='ar'?'إسعاف':'Ambulance'},
   ];
   document.getElementById('mapFilters').innerHTML=filters.map(f=>`<button class="map-chip ${mapFilter===f.key?'active':''}" onclick="setMapFilter('${f.key}')">${f.label}</button>`).join('');
 }
@@ -590,41 +1030,195 @@ function setMapFilter(f){mapFilter=f;buildMapFilters();renderMapMarkers();}
 
 function renderMapMarkers(){
   mapMarkers.forEach(m=>map.removeLayer(m));mapMarkers=[];
-  let fList=allFacilities;
-  if(mapFilter==='hospital'||mapFilter==='clinic'||mapFilter==='pharmacy'||mapFilter==='health_center'||mapFilter==='field_hospital'){
-    fList=fList.filter(f=>f.facility_type===mapFilter);
-  }else if(mapFilter==='operational'||mapFilter==='damaged'||mapFilter==='reduced_capacity'||mapFilter==='offline'){
-    fList=fList.filter(f=>f.status===mapFilter);
-  }
-  fList.forEach(f=>{
-    if(!f.latitude||!f.longitude)return;
-    const color=MAP_COLORS[f.status]||'#94a3b8';
-    const icon=L.divIcon({
-      className:'',
-      html:`<div style="background:${color};width:28px;height:28px;border-radius:50%;border:3px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer">${MAP_TYPE_ICONS[f.facility_type]||'🏥'}</div>`,
-      iconSize:[28,28],iconAnchor:[14,14]
+
+  // Render facility markers (unless ambulance-only filter)
+  if (mapFilter !== 'ambulance') {
+    let fList=allFacilities;
+    if(mapFilter==='hospital'||mapFilter==='clinic'||mapFilter==='pharmacy'||mapFilter==='health_center'||mapFilter==='field_hospital'){
+      fList=fList.filter(f=>f.facility_type===mapFilter);
+    }else if(mapFilter==='operational'||mapFilter==='damaged'||mapFilter==='reduced_capacity'||mapFilter==='offline'){
+      fList=fList.filter(f=>f.status===mapFilter);
+    }
+    fList.forEach(f=>{
+      if(!f.latitude||!f.longitude)return;
+      const color=MAP_COLORS[f.status]||'#94a3b8';
+      const icon=L.divIcon({
+        className:'',
+        html:`<div style="background:${color};width:28px;height:28px;border-radius:50%;border:3px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer">${MAP_TYPE_ICONS[f.facility_type]||'🏥'}</div>`,
+        iconSize:[28,28],iconAnchor:[14,14]
+      });
+      const powerBg=f.has_power?'#dcfce7':'#fee2e2', powerClr=f.has_power?'#16a34a':'#dc2626';
+      const oxyBg=f.has_oxygen?'#dbeafe':'#fee2e2', oxyClr=f.has_oxygen?'#2563eb':'#dc2626';
+      const statusBg=f.status==='operational'?'#dcfce7':f.status==='damaged'?'#fee2e2':'#fef9c3';
+      const statusClr=f.status==='operational'?'#16a34a':f.status==='damaged'?'#dc2626':'#ca8a04';
+      const popup=`<div class="map-popup" style="min-width:200px">
+        <h4>${MAP_TYPE_ICONS[f.facility_type]||''} ${f.name}</h4>
+        ${f.name_ar?`<div class="mp-row" style="font-family:Cairo">${f.name_ar}</div>`:''}
+        <div class="mp-row"><span class="mp-badge" style="background:${statusBg};color:${statusClr}">${sLabel(f.status)}</span> · ${tLabel(f.facility_type)}</div>
+        <div class="mp-row">📍 ${f.governorate||f.district||'-'}</div>
+        <div class="mp-row">🛏️ ${LANG==='ar'?'أسرّة':'Beds'}: ${f.available_beds}/${f.total_beds}  |  ICU: ${f.icu_available||0}/${f.icu_beds||0}</div>
+        <div class="mp-row"><span class="mp-badge" style="background:${powerBg};color:${powerClr}">${f.has_power?'⚡':'❌'} ${LANG==='ar'?'كهرباء':'Power'}</span> <span class="mp-badge" style="background:${oxyBg};color:${oxyClr}">${f.has_oxygen?'💨':'❌'} ${LANG==='ar'?'أكسجين':'O₂'}</span></div>
+        ${f.phone?`<div class="mp-row">📞 ${f.phone}</div>`:''}
+      </div>`;
+      const marker=L.marker([f.latitude,f.longitude],{icon}).bindPopup(popup,{maxWidth:280});
+      marker.addTo(map);
+      mapMarkers.push(marker);
     });
-    const powerBg=f.has_power?'#dcfce7':'#fee2e2', powerClr=f.has_power?'#16a34a':'#dc2626';
-    const oxyBg=f.has_oxygen?'#dbeafe':'#fee2e2', oxyClr=f.has_oxygen?'#2563eb':'#dc2626';
-    const statusBg=f.status==='operational'?'#dcfce7':f.status==='damaged'?'#fee2e2':'#fef9c3';
-    const statusClr=f.status==='operational'?'#16a34a':f.status==='damaged'?'#dc2626':'#ca8a04';
-    const popup=`<div class="map-popup" style="min-width:200px">
-      <h4>${MAP_TYPE_ICONS[f.facility_type]||''} ${f.name}</h4>
-      ${f.name_ar?`<div class="mp-row" style="font-family:Cairo">${f.name_ar}</div>`:''}
-      <div class="mp-row"><span class="mp-badge" style="background:${statusBg};color:${statusClr}">${sLabel(f.status)}</span> · ${tLabel(f.facility_type)}</div>
-      <div class="mp-row">📍 ${f.governorate||f.district||'-'}</div>
-      <div class="mp-row">🛏️ ${LANG==='ar'?'أسرّة':'Beds'}: ${f.available_beds}/${f.total_beds}  |  ICU: ${f.icu_available||0}/${f.icu_beds||0}</div>
-      <div class="mp-row"><span class="mp-badge" style="background:${powerBg};color:${powerClr}">${f.has_power?'⚡':'❌'} ${LANG==='ar'?'كهرباء':'Power'}</span> <span class="mp-badge" style="background:${oxyBg};color:${oxyClr}">${f.has_oxygen?'💨':'❌'} ${LANG==='ar'?'أكسجين':'O₂'}</span></div>
-      ${f.phone?`<div class="mp-row">📞 ${f.phone}</div>`:''}
-    </div>`;
-    const marker=L.marker([f.latitude,f.longitude],{icon}).bindPopup(popup,{maxWidth:280});
-    marker.addTo(map);
-    mapMarkers.push(marker);
-  });
+  }
+
+  // Render ambulance markers from resources
+  if (mapFilter === 'all' || mapFilter === 'ambulance') {
+    const ambulances = allResources.filter(r => r.resource_type === 'ambulance' && r.latitude && r.longitude);
+    ambulances.forEach(a => {
+      const ambColor = a.status === 'available' ? '#3b82f6' : a.status === 'in_use' ? '#f59e0b' : '#94a3b8';
+      const icon = L.divIcon({
+        className: '',
+        html: `<div style="background:${ambColor};width:32px;height:32px;border-radius:50%;border:3px solid rgba(255,255,255,.8);display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 2px 10px rgba(0,0,0,.35);cursor:pointer;animation:ambPulse 2s infinite">🚑</div>`,
+        iconSize: [32, 32], iconAnchor: [16, 16]
+      });
+      const popup = `<div class="map-popup" style="min-width:180px">
+        <h4>🚑 ${a.name}</h4>
+        <div class="mp-row"><span class="mp-badge" style="background:#dbeafe;color:#2563eb">${rsLabel(a.status)}</span></div>
+        <div class="mp-row">📍 ${a.district || '-'}</div>
+        ${a.contact_phone ? `<div class="mp-row">📞 ${a.contact_phone}</div>` : ''}
+      </div>`;
+      const marker = L.marker([a.latitude, a.longitude], {icon}).bindPopup(popup, {maxWidth: 250});
+      marker.addTo(map);
+      mapMarkers.push(marker);
+    });
+  }
+}
+
+/* ═══════ AUTH — Login / Logout ═══════ */
+const ROLE_LABELS = {
+  ar:{admin:'مسؤول',viewer:'مشاهد',health_official:'مسؤول صحي',emergency_responder:'مستجيب طوارئ'},
+  en:{admin:'Admin',viewer:'Viewer',health_official:'Health Official',emergency_responder:'Responder'}
+};
+const roleLabel = r => ROLE_LABELS[LANG]?.[r] || r;
+
+function updateLoginText(){
+  document.getElementById('loginTitle').textContent = t('login_title');
+  document.getElementById('loginSub').textContent = t('login_sub');
+  document.getElementById('loginBtn').textContent = t('login_btn');
+  document.getElementById('loginEmail').placeholder = 'admin@situationroom.ps';
+  document.getElementById('loginPassword').placeholder = '••••••••';
+  document.getElementById('rememberLabel').lastChild.textContent = ' ' + t('remember_me');
+  document.getElementById('loginLangBtn').textContent = LANG==='ar'?'🌐 English':'🌐 العربية';
+  // Pre-fill remembered credentials
+  const remembered = JSON.parse(localStorage.getItem('remembered_login') || 'null');
+  if (remembered) {
+    document.getElementById('loginEmail').value = remembered.email || '';
+    document.getElementById('loginPassword').value = remembered.password || '';
+    document.getElementById('rememberCheck').checked = true;
+  }
+}
+
+async function doAdminLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const errEl = document.getElementById('loginError');
+  const btn = document.getElementById('loginBtn');
+
+  if (!email || !password) { errEl.textContent = t('login_error_invalid'); return; }
+
+  btn.disabled = true;
+  errEl.textContent = '';
+
+  try {
+    const opts = { method:'POST', headers:H_BASE, body:JSON.stringify({email,password}) };
+    const r = await fetch(API+'/api/v1/auth/admin/login', opts);
+    if (r.status === 401) { errEl.textContent = t('login_error_invalid'); btn.disabled=false; return; }
+    if (r.status === 403) { errEl.textContent = t('login_error_denied'); btn.disabled=false; return; }
+    if (!r.ok) throw new Error(r.status);
+    const data = await r.json();
+    AUTH_TOKEN = data.access_token;
+    AUTH_USER = data.user;
+    localStorage.setItem('admin_token', AUTH_TOKEN);
+    localStorage.setItem('admin_user', JSON.stringify(AUTH_USER));
+    // Remember me
+    if (document.getElementById('rememberCheck').checked) {
+      localStorage.setItem('remembered_login', JSON.stringify({email, password}));
+    } else {
+      localStorage.removeItem('remembered_login');
+    }
+    showMainApp();
+  } catch(e) {
+    errEl.textContent = t('login_error_invalid');
+    btn.disabled = false;
+  }
+}
+
+function doLogout() {
+  AUTH_TOKEN = null;
+  AUTH_USER = null;
+  localStorage.removeItem('admin_token');
+  localStorage.removeItem('admin_user');
+  document.getElementById('mainApp').style.display = 'none';
+  document.getElementById('loginOverlay').style.display = 'flex';
+  document.getElementById('loginEmail').value = '';
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('loginError').textContent = '';
+  document.getElementById('loginBtn').disabled = false;
+  updateLoginText();
+}
+
+function showMainApp() {
+  document.getElementById('loginOverlay').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  // Update user badge
+  document.getElementById('userNameDisplay').textContent = AUTH_USER?.full_name || 'Admin';
+  document.getElementById('userRoleDisplay').textContent = roleLabel(AUTH_USER?.role || 'admin');
+  document.getElementById('logoutLbl').textContent = t('logout');
+  loadAll();
+  startSOSPolling();
+  loadSOSThresholdSettings();
+}
+
+async function checkExistingSession() {
+  if (!AUTH_TOKEN) { updateLoginText(); return; }
+  try {
+    const r = await fetch(API+'/api/v1/auth/me', {headers:getHeaders()});
+    if (r.ok) {
+      AUTH_USER = await r.json();
+      localStorage.setItem('admin_user', JSON.stringify(AUTH_USER));
+      // check role
+      if (AUTH_USER.role === 'viewer') { doLogout(); return; }
+      showMainApp();
+    } else {
+      doLogout();
+    }
+  } catch(e) { doLogout(); }
+}
+
+/* ═══════ Users Tab ═══════ */
+let allUsers = [];
+
+async function loadUsers() {
+  try {
+    const stats = await api('/api/v1/auth/users/stats');
+    const kpis = document.getElementById('userKpis');
+    const total = stats.total_users || 0;
+    const viewers = stats.by_role?.viewer || 0;
+    const admins = total - viewers;
+    kpis.innerHTML = [
+      makeKPI(t('total_users'), total, '', 'blue'),
+      makeKPI(t('mobile_users'), viewers, t('role_viewer'), 'green'),
+      makeKPI(t('admin_users'), admins, '', 'purple'),
+    ].join('');
+  } catch(e) {}
+
+  try {
+    allUsers = await api('/api/v1/auth/users');
+    renderFilteredUsers();
+    populateFilterDropdowns();
+  } catch(e) {
+    document.getElementById('usersTable').innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--muted)">${t('error_op')}</td></tr>`;
+  }
 }
 
 /* ═══════ SOS Alerts Polling ═══════ */
 let sosPollingInterval = null;
+let sosThresholdDismissed = false;
 const SOS_I18N = {
   ar: {
     sos_title: '🚨 تنبيهات نجدة',
@@ -633,6 +1227,14 @@ const SOS_I18N = {
     sos_ago: 'منذ',
     sos_min: 'دقيقة',
     sos_just: 'الآن',
+    sos_threshold_title: 'تنبيه نجدة حرج',
+    sos_threshold_msg: 'بلاغات نجدة مكتشفة',
+    sos_settings_title: '⚙️ إعدادات عتبة تنبيه الطوارئ',
+    sos_thresh_lbl: 'تنبيه عند ≥',
+    sos_thresh_calls: 'بلاغات نجدة في',
+    sos_thresh_time: 'خلال',
+    sos_thresh_save: 'حفظ',
+    sos_dismiss: 'إغلاق',
   },
   en: {
     sos_title: '🚨 SOS ALERTS',
@@ -641,6 +1243,14 @@ const SOS_I18N = {
     sos_ago: '',
     sos_min: 'min ago',
     sos_just: 'Just now',
+    sos_threshold_title: 'CRITICAL SOS ALERT',
+    sos_threshold_msg: 'SOS calls detected',
+    sos_settings_title: '⚙️ SOS Alert Threshold Settings',
+    sos_thresh_lbl: 'Alert when ≥',
+    sos_thresh_calls: 'SOS calls in',
+    sos_thresh_time: 'within',
+    sos_thresh_save: 'Save',
+    sos_dismiss: 'Dismiss',
   },
 };
 const st = k => SOS_I18N[LANG]?.[k] || SOS_I18N['en']?.[k] || k;
@@ -652,9 +1262,92 @@ const SOS_ICONS = {
   'nearest_hospital': '📍',
 };
 
+// SOS Threshold settings (stored in localStorage)
+function getSOSThreshold() {
+  try {
+    return JSON.parse(localStorage.getItem('sos_threshold') || 'null') || {count: 3, area: 'any', minutes: 30};
+  } catch(e) { return {count: 3, area: 'any', minutes: 30}; }
+}
+
+function saveSOSThreshold() {
+  const thresh = {
+    count: parseInt(document.getElementById('sosThreshCount').value) || 3,
+    area: document.getElementById('sosThreshArea').value || 'any',
+    minutes: parseInt(document.getElementById('sosThreshMinutes').value) || 30,
+  };
+  localStorage.setItem('sos_threshold', JSON.stringify(thresh));
+  toast(LANG === 'ar' ? 'تم حفظ الإعدادات' : 'Settings saved', 'success');
+}
+
+function loadSOSThresholdSettings() {
+  const thresh = getSOSThreshold();
+  document.getElementById('sosThreshCount').value = thresh.count;
+  document.getElementById('sosThreshArea').value = thresh.area;
+  document.getElementById('sosThreshMinutes').value = thresh.minutes;
+  // Show settings panel
+  document.getElementById('sosSettings').style.display = 'block';
+  // Localize
+  document.getElementById('sosSettingsTitle').textContent = st('sos_settings_title');
+  document.getElementById('sosThreshLbl').textContent = st('sos_thresh_lbl');
+  document.getElementById('sosThreshCallsLbl').textContent = st('sos_thresh_calls');
+  document.getElementById('sosThreshTimeLbl').textContent = st('sos_thresh_time');
+  document.getElementById('sosThreshSaveBtn').textContent = st('sos_thresh_save');
+}
+
+function dismissSOSThreshold() {
+  document.getElementById('sosThresholdOverlay').style.display = 'none';
+  sosThresholdDismissed = true;
+  // Re-enable after 2 minutes
+  setTimeout(() => { sosThresholdDismissed = false; }, 120000);
+}
+
+function checkSOSThreshold(alerts) {
+  if (sosThresholdDismissed || !alerts || alerts.length === 0) return;
+  const thresh = getSOSThreshold();
+  const cutoff = Date.now() - (thresh.minutes * 60000);
+
+  let filtered = alerts.filter(a => {
+    const t = new Date(a.reported_at).getTime();
+    return t >= cutoff;
+  });
+
+  // Filter by area if not "any"
+  if (thresh.area !== 'any') {
+    filtered = filtered.filter(a => {
+      const desc = (a.description || '').toLowerCase();
+      const title = (a.title || '').toLowerCase();
+      return desc.includes(thresh.area) || title.includes(thresh.area) ||
+             (a.district && a.district.toLowerCase().includes(thresh.area));
+    });
+  }
+
+  if (filtered.length >= thresh.count) {
+    // Show full-screen alert
+    const overlay = document.getElementById('sosThresholdOverlay');
+    document.getElementById('sosThresholdCount').textContent = filtered.length;
+    document.getElementById('sosThresholdTitle').textContent = st('sos_threshold_title');
+    document.getElementById('sosThresholdMsg').textContent = st('sos_threshold_msg');
+    document.getElementById('sosThresholdArea').textContent = thresh.area === 'any' ?
+      (LANG === 'ar' ? 'جميع المناطق' : 'All Areas') :
+      thresh.area.charAt(0).toUpperCase() + thresh.area.slice(1);
+    overlay.style.display = 'flex';
+    // Play alert sound (beep)
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = 880; osc.type = 'square';
+      gain.gain.value = 0.1;
+      osc.start(); setTimeout(() => osc.stop(), 500);
+    } catch(e) {}
+  }
+}
+
 function timeAgo(iso) {
   if (!iso) return '';
-  const diff = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
+  const utcIso = iso.endsWith('Z') ? iso : iso + 'Z';
+  const diff = Math.floor((Date.now() - new Date(utcIso).getTime()) / 60000);
   if (diff < 1) return st('sos_just');
   return `${st('sos_ago')} ${diff} ${st('sos_min')}`.trim();
 }
@@ -691,8 +1384,10 @@ async function pollSOS() {
       </div>`;
     }).join('');
 
+    // Check threshold
+    checkSOSThreshold(alerts);
+
   } catch (e) {
-    // Silent fail — don't break dashboard
     console.warn('SOS poll error:', e);
   }
 }
@@ -717,10 +1412,57 @@ function startSOSPolling() {
   sosPollingInterval = setInterval(pollSOS, 10000);
 }
 
+/* ═══════ Animation Helpers ═══════ */
+
+/** Staggered entrance animation for a set of elements */
+function animateEntrance(selector, animClass, staggerMs) {
+  document.querySelectorAll(selector).forEach((el, i) => {
+    el.style.opacity = '0';
+    setTimeout(() => {
+      el.style.opacity = '';
+      el.classList.add(animClass);
+    }, i * staggerMs);
+  });
+}
+
+/** Animate a number counting up from 0 */
+function animateCounter(el) {
+  const text = el.textContent.trim();
+  // Handle "123/456" format
+  const parts = text.split('/');
+  if (parts.length === 2) {
+    const a = parseInt(parts[0]) || 0;
+    const b = parseInt(parts[1]) || 0;
+    animateNumber(el, a, b, parts);
+    return;
+  }
+  const n = parseInt(text) || 0;
+  if (n === 0) return;
+  animateNumber(el, n, null, null);
+}
+
+function animateNumber(el, target, target2, parts) {
+  const duration = 1200;
+  const start = performance.now();
+  const step = (now) => {
+    const progress = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+    const current = Math.round(target * ease);
+    if (target2 !== null) {
+      const current2 = Math.round(target2 * ease);
+      el.textContent = `${current}/${current2}`;
+    } else {
+      el.textContent = current;
+    }
+    if (progress < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
 /* ═══════ Init ═══════ */
 async function loadAll(){await Promise.all([loadDashboard(),loadFacilities(),loadResources(),loadIncidents()]);}
 
-applyTheme();applyLang();loadAll();startSOSPolling();
+applyTheme();applyLang();checkExistingSession();
 </script>
 </body>
 </html>

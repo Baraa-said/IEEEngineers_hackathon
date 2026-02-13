@@ -6,10 +6,12 @@ Usage:
 """
 
 import asyncio
+import csv
 import json
 import os
 import uuid
 from datetime import datetime
+from pathlib import Path
 
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
@@ -23,6 +25,26 @@ from app.models import (
 )
 from app.services.auth_service import hash_password
 from app.data_generator import generate_all_data
+
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+
+
+def load_users_from_csv(csv_path: Path) -> list[User]:
+    """Read a CSV file and return a list of User model instances."""
+    users = []
+    with open(csv_path, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            users.append(
+                User(
+                    email=row["email"].strip(),
+                    hashed_password=hash_password(row["password"].strip()),
+                    full_name=row["full_name"].strip(),
+                    role=UserRole(row["role"].strip()),
+                    organization=row.get("organization", "").strip() or None,
+                )
+            )
+    return users
 
 
 async def seed_database():
@@ -38,34 +60,21 @@ async def seed_database():
     session_factory = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
     async with session_factory() as session:
-        # Create demo users
-        demo_users = [
-            User(
-                email="admin@situationroom.ps",
-                hashed_password=hash_password("admin123!"),
-                full_name="Admin User",
-                role=UserRole.ADMIN,
-                organization="Palestinian Ministry of Health",
-            ),
-            User(
-                email="responder@situationroom.ps",
-                hashed_password=hash_password("responder123!"),
-                full_name="Field Responder",
-                role=UserRole.EMERGENCY_RESPONDER,
-                organization="Palestinian Red Crescent",
-            ),
-            User(
-                email="official@situationroom.ps",
-                hashed_password=hash_password("official123!"),
-                full_name="Health Official",
-                role=UserRole.HEALTH_OFFICIAL,
-                organization="WHO Palestine",
-            ),
-        ]
-        for u in demo_users:
+        # Load admin / staff users from CSV
+        admins_csv = DATA_DIR / "admins.csv"
+        admin_users = load_users_from_csv(admins_csv)
+        for u in admin_users:
             session.add(u)
         await session.flush()
-        print(f"✅ Created {len(demo_users)} demo users")
+        print(f"✅ Loaded {len(admin_users)} admin/staff users from admins.csv")
+
+        # Load mobile / viewer users from CSV
+        users_csv = DATA_DIR / "users.csv"
+        mobile_users = load_users_from_csv(users_csv)
+        for u in mobile_users:
+            session.add(u)
+        await session.flush()
+        print(f"✅ Loaded {len(mobile_users)} mobile users from users.csv")
 
         # Generate synthetic data
         data = generate_all_data()

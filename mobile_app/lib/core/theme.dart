@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Brand colors
-  static const Color primaryColor = Color(0xFF1B5E20); // Dark green - Lebanon cedar
-  static const Color secondaryColor = Color(0xFFD32F2F); // Red - Lebanon flag
+  static const Color primaryColor = Color(0xFF1B5E20); // Dark green - Palestine flag
+  static const Color secondaryColor = Color(0xFFD32F2F); // Red - Palestine flag
   static const Color accentColor = Color(0xFF0288D1); // Blue - medical/trust
   static const Color emergencyColor = Color(0xFFF44336);
   static const Color warningColor = Color(0xFFFF9800);
@@ -54,7 +54,7 @@ class AppTheme {
             color: Colors.white,
           ),
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -120,7 +120,7 @@ class AppTheme {
             color: Colors.white,
           ),
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),

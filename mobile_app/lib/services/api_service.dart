@@ -17,6 +17,7 @@ class ApiService {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
       },
     ));
 
@@ -33,18 +34,30 @@ class ApiService {
       },
     ));
 
-    // Load saved token
-    final settings = Hive.box('settings');
-    _authToken = settings.get('auth_token');
+    // Load saved token safely
+    try {
+      if (Hive.isBoxOpen('settings')) {
+        final settings = Hive.box('settings');
+        _authToken = settings.get('auth_token');
+      }
+    } catch (e) {
+      print('Failed to load auth token from Hive: $e');
+    }
   }
 
   void setAuthToken(String? token) {
     _authToken = token;
-    final settings = Hive.box('settings');
-    if (token != null) {
-      settings.put('auth_token', token);
-    } else {
-      settings.delete('auth_token');
+    try {
+      if (Hive.isBoxOpen('settings')) {
+        final settings = Hive.box('settings');
+        if (token != null) {
+          settings.put('auth_token', token);
+        } else {
+          settings.delete('auth_token');
+        }
+      }
+    } catch (e) {
+      print('Failed to save auth token to Hive: $e');
     }
   }
 
@@ -196,5 +209,52 @@ class ApiService {
   Future<Map<String, dynamic>> getSystemStatus() async {
     final response = await _dio.get('/status');
     return response.data;
+  }
+
+  // --- SOS Report ---
+
+  /// Send an SOS emergency report with the user's GPS location.
+  Future<Map<String, dynamic>> sendSOSReport({
+    required String emergencyType,
+    required double latitude,
+    required double longitude,
+    String? description,
+    String? reportedBy,
+  }) async {
+    final response = await _dio.post('/sos', data: {
+      'emergency_type': emergencyType,
+      'latitude': latitude,
+      'longitude': longitude,
+      'description': description,
+      'reported_by': reportedBy,
+    });
+    return Map<String, dynamic>.from(response.data);
+  }
+
+  /// Get operational hospitals sorted by distance from given coordinates.
+  Future<Facility?> getNearestHospital({
+    required double latitude,
+    required double longitude,
+  }) async {
+    final hospitals = await getFacilities(
+      facilityType: 'hospital',
+      status: 'operational',
+      limit: 200,
+    );
+    if (hospitals.isEmpty) return null;
+
+    // Calculate distance using Haversine-like simple approximation
+    Facility? nearest;
+    double minDist = double.infinity;
+    for (final h in hospitals) {
+      final dLat = (h.latitude - latitude);
+      final dLon = (h.longitude - longitude);
+      final dist = dLat * dLat + dLon * dLon; // squared euclidean, sufficient for comparison
+      if (dist < minDist) {
+        minDist = dist;
+        nearest = h;
+      }
+    }
+    return nearest;
   }
 }
