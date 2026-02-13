@@ -1,0 +1,267 @@
+[
+  {
+    "id": "a9adfd47-13e6-4b27-83e8-e71f35a73015",
+    "title": "Checkpoint closure on Ramallah-Nablus road",
+    "description": "Active incident: Checkpoint closure on Ramallah-Nablus road. Reported by field team. Response in progress.",
+    "incident_type": "checkpoint_closure",
+    "severity": "high",
+    "latitude": 31.877989,
+    "longitude": 35.18501,
+    "district": "Beit Rima",
+    "affected_area_radius_km": 2.5279069019672074,
+    "is_active": true,
+    "roads_affected": [
+      "Ramallah-Nablus Road"
+    ],
+    "facilities_affected": [],
+    "reported_by": "PRCS",
+    "reported_at": "2026-02-11T12:46:08.746589"
+  },
+  {
+    "id": "109b3084-0ceb-421a-94ee-85ac7c8f98a1",
+    "title": "Power outage in Jenin refugee camp",
+    "description": "Active incident: Power outage in Jenin refugee camp. Reported by field team. Response in progress.",
+    "incident_type": "power_outage",
+    "severity": "medium",
+    "latitude": 32.46605,
+    "longitude": 35.303733,
+    "district": "Qabatiya",
+    "affected_area_radius_km": 4.1346489408872955,
+    "is_active": true,
+    "roads_affected": [],
+    "facilities_affected": [],
+    "reported_by": "Palestinian Civil Defense",
+    "reported_at": "2026-02-13T08:46:08.746599"
+  },
+  {
+    "id": "3027c38e-e30d-4b26-84db-a634085811b8",
+    "title": "Building demolition in Hebron old city",
+    "description": "Active incident: Building demolition in Hebron old city. Reported by field team. Response in progress.",
+    "incident_type": "building_demolition",
+    "severity": "critical",
+    "latitude": 31.521393,
+    "longitude": 35.11694,
+    "district": "Sa'ir",
+    "affected_area_radius_km": 3.8291729717237755,
+    "is_active": true,
+    "roads_affected": [
+      "Shuhada Street",
+      "Old City Road"
+    ],
+    "facilities_affected": [],
+    "reported_by": "PRCS",
+    "reported_at": "2026-02-13T00:46:08.746606"
+  },
+  {
+    "id": "c9535a9d-cf76-4451-bd14-0627671b8513",
+    "title": "Water supply cut off in Tulkarm",
+    "description": "Active incident: Water supply cut off in Tulkarm. Reported by field team. Response in progress.",
+    "incident_type": "water_disruption",
+    "severity": "high",
+    "latitude": 32.321175,
+    "longitude": 35.018494,
+    "district": "Bal'a",
+    "affected_area_radius_km": 2.582817692340246,
+    "is_active": true,
+    "roads_affected": [],
+    "facilities_affected": [],
+    "reported_by": "PRCS",
+    "reported_at": "2026-02-12T01:46:08.746613"
+  },
+  {
+    "id": "e89f5da6-eb6f-4e58-8a55-8063ff950f92",
+    "title": "Military checkpoint on Bethlehem-Jerusalem road",
+    "description": "Active incident: Military checkpoint on Bethlehem-Jerusalem road. Reported by field team. Response in progress.",
+    "incident_type": "checkpoint_closure",
+    "severity": "high",
+    "latitude": 31.7085,
+    "longitude": 35.182946,
+    "district": "Tuqu'",
+    "affected_area_radius_km": 0.868881618887696,
+    "is_active": true,
+    "roads_affected": [
+      "Bethlehem-Jerusalem Road",
+      "Route 60"
+    ],
+    "facilities_affected": [],
+    "reported_by": "Palestinian Civil Defense",
+    "reported_at": "2026-02-11T22:46:08.746620"
+  },
+  {
+    "id": "7ca87013-d46f-4108-a7ac-75b78ecaa2b8",
+    "title": "Settler violence near Nablus villages",
+    "description": "Active incident: Settler violence near Nablus villages. Reported by field team. Response in progress.",
+    "incident_type": "settler_violence",
+    "severity": "critical",
+    "latitude": 32.202886,
+    "longitude": 35.268413,
+    "district": "Tell",
+    "affected_area_radius_km": 0.8440807035074692,
+    "is_active": false,
+    "roads_affected": [
+      "Huwara Road",
+      "Route 60"
+    ],
+    "facilities_affected": [],
+    "reported_by": "Field Team Alpha",
+    "reported_at": "2026-02-12T00:46:08.746627"
+  },
+  {
+    "id": "ba81f2d3-0b16-482a-a297-2812b308ff9a",
+    "title": "Unexploded ordnance found near Tubas",
+    "description": "Active incident: Unexploded ordnance found near Tubas. Reported by field team. Response in progress.",
+    "incident_type": "unexploded_ordnance",
+    "severity": "critical",
+    "latitude": 32.328698,
+    "longitude": 35.388159,
+    "district": "Bardala",
+    "affected_area_radius_km": 2.323105103980013,
+    "is_active": true,
+    "roads_affected": [
+      "Jordan Valley Road"
+    ],
+    "facilities_affected": [],
+    "reported_by": "Field Team Alpha",
+    "reported_at": "2026-02-11T21:46:08.746634"
+  },
+  {
+    "id": "b2cf1232-e2ed-4618-a619-468c4cea9812",
+    "title": "Communication tower damaged in Salfit",
+    "description": "Active incident: Communication tower damaged in Salfit. Reported by field team. Response in progress.",
+    "incident_type": "communication_outage",
+    "severity": "high",
+    "latitude": 32.068937,
+    "longitude": 35.206939,
+    "district": "Kifl Haris",
+    "affected_area_radius_km": 2.6244677785231665,
+    "is_active": true,
+    "roads_affected": [],
+    "facilities_affected": [],
+    "reported_by": "PRCS",
+    "reported_at": "2026-02-12T07:46:08.746640"
+  },
+  {
+    "id": "5c7ae774-0634-4166-a8de-6f8b4fe3f055",
+    "title": "Medical supply convoy blocked at Qalandiya",
+    "description": "Active incident: Medical supply convoy blocked at Qalandiya. Reported by field team. Response in progress.",
+    "incident_type": "checkpoint_closure",
+    "severity": "critical",
+    "latitude": 31.751698,
+    "longitude": 35.230029,
+    "district": "Anata",
+    "affected_area_radius_km": 4.35723869360608,
+    "is_active": false,
+    "roads_affected": [
+      "Qalandiya Checkpoint Road"
+    ],
+    "facilities_affected": [],
+    "reported_by": "Municipal Authority",
+    "reported_at": "2026-02-12T00:46:08.746647"
+  },
+  {
+    "id": "d866c0d9-0165-4bf7-b407-695014bd7f77",
+    "title": "Road closure near Qalqilya separation wall",
+    "description": "Active incident: Road closure near Qalqilya separation wall. Reported by field team. Response in progress.",
+    "incident_type": "road_closure",
+    "severity": "high",
+    "latitude": 32.164633,
+    "longitude": 34.962432,
+    "district": "Qalqilya City",
+    "affected_area_radius_km": 3.482053202204135,
+    "is_active": true,
+    "roads_affected": [
+      "Qalqilya-Nablus Road"
+    ],
+    "facilities_affected": [],
+    "reported_by": "Municipal Authority",
+    "reported_at": "2026-02-11T13:46:08.746654"
+  },
+  {
+    "id": "8c0bf235-c973-4d26-adca-a6fd30e0ce73",
+    "title": "Military raid in Jenin camp",
+    "description": "Active incident: Military raid in Jenin camp. Reported by field team. Response in progress.",
+    "incident_type": "security_incident",
+    "severity": "critical",
+    "latitude": 32.440951,
+    "longitude": 35.300648,
+    "district": "Arraba",
+    "affected_area_radius_km": 1.216500880615065,
+    "is_active": true,
+    "roads_affected": [
+      "Jenin Camp Road"
+    ],
+    "facilities_affected": [],
+    "reported_by": "Municipal Authority",
+    "reported_at": "2026-02-11T14:46:08.746660"
+  },
+  {
+    "id": "e5f114de-1aaf-4e4b-b445-29bd73310906",
+    "title": "Agricultural land access blocked in Salfit",
+    "description": "Active incident: Agricultural land access blocked in Salfit. Reported by field team. Response in progress.",
+    "incident_type": "road_closure",
+    "severity": "medium",
+    "latitude": 32.105632,
+    "longitude": 35.162072,
+    "district": "Bruqin",
+    "affected_area_radius_km": 4.726288662214428,
+    "is_active": false,
+    "roads_affected": [
+      "Agricultural Road"
+    ],
+    "facilities_affected": [],
+    "reported_by": "Palestinian Red Crescent",
+    "reported_at": "2026-02-12T18:46:08.746667"
+  },
+  {
+    "id": "70e3fe0b-1981-4e04-a22c-7b388bcc5f95",
+    "title": "Ambulance access denied at Huwara checkpoint",
+    "description": "Active incident: Ambulance access denied at Huwara checkpoint. Reported by field team. Response in progress.",
+    "incident_type": "checkpoint_closure",
+    "severity": "critical",
+    "latitude": 32.194872,
+    "longitude": 35.246566,
+    "district": "Nablus City",
+    "affected_area_radius_km": 3.5086352000421535,
+    "is_active": true,
+    "roads_affected": [
+      "Huwara Checkpoint Road"
+    ],
+    "facilities_affected": [],
+    "reported_by": "PRCS",
+    "reported_at": "2026-02-12T08:46:08.746673"
+  },
+  {
+    "id": "f25b8433-6c88-4f28-9cff-0dfbaea5fd2e",
+    "title": "Structural damage from military operation in Tulkarm",
+    "description": "Active incident: Structural damage from military operation in Tulkarm. Reported by field team. Response in progress.",
+    "incident_type": "structural_damage",
+    "severity": "high",
+    "latitude": 32.30858,
+    "longitude": 35.025879,
+    "district": "Tulkarm City",
+    "affected_area_radius_km": 0.6795711436320394,
+    "is_active": true,
+    "roads_affected": [
+      "Tulkarm Camp Road"
+    ],
+    "facilities_affected": [],
+    "reported_by": "Field Team Alpha",
+    "reported_at": "2026-02-11T11:46:08.746680"
+  },
+  {
+    "id": "f3efdf6a-3313-47c1-8981-f47d34131051",
+    "title": "Mass casualty event in Jericho area",
+    "description": "Active incident: Mass casualty event in Jericho area. Reported by field team. Response in progress.",
+    "incident_type": "medical_emergency",
+    "severity": "high",
+    "latitude": 31.894806,
+    "longitude": 35.458014,
+    "district": "Aqabat Jabr Camp",
+    "affected_area_radius_km": 4.256925197978271,
+    "is_active": true,
+    "roads_affected": [],
+    "facilities_affected": [],
+    "reported_by": "Municipal Authority",
+    "reported_at": "2026-02-11T20:46:08.746688"
+  }
+]

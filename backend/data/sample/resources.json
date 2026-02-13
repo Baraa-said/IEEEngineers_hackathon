@@ -1,0 +1,4429 @@
+[
+  {
+    "id": "82d5ebc1-15d3-487b-bcd0-7eeb667ddec2",
+    "name": "Birzeit Sports Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.912524,
+    "longitude": 35.161382,
+    "address": "Birzeit, Ramallah and Al-Bireh",
+    "district": "Birzeit",
+    "total_capacity": 300,
+    "current_occupancy": 159,
+    "description": "Shelter facility in Birzeit with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": true,
+      "has_electricity": true,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Birzeit",
+    "contact_phone": "+970 59 8607331",
+    "last_status_update": "2026-02-13T08:43:08.744939"
+  },
+  {
+    "id": "a47753fe-8557-4acd-b607-895cb16e250b",
+    "name": "Ramallah UNRWA Center",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.90539,
+    "longitude": 35.198216,
+    "address": "Ramallah, Ramallah and Al-Bireh",
+    "district": "Ramallah",
+    "total_capacity": 300,
+    "current_occupancy": 164,
+    "description": "Shelter facility in Ramallah with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": true,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Ramallah",
+    "contact_phone": "+970 59 2225232",
+    "last_status_update": "2026-02-13T09:05:08.744953"
+  },
+  {
+    "id": "276d9a36-f8d8-4687-8d1c-eb8e0a6b968f",
+    "name": "Silwad School Shelter",
+    "resource_type": "shelter",
+    "status": "in_use",
+    "latitude": 31.894644,
+    "longitude": 35.227446,
+    "address": "Silwad, Ramallah and Al-Bireh",
+    "district": "Silwad",
+    "total_capacity": 50,
+    "current_occupancy": 45,
+    "description": "Shelter facility in Silwad with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Silwad",
+    "contact_phone": "+970 59 8052503",
+    "last_status_update": "2026-02-13T07:41:08.744962"
+  },
+  {
+    "id": "64239900-320d-4bf0-bfeb-e82df5cbc08a",
+    "name": "Bani Zeid Public Park Tent Camp",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.962943,
+    "longitude": 35.189298,
+    "address": "Bani Zeid, Ramallah and Al-Bireh",
+    "district": "Bani Zeid",
+    "total_capacity": 200,
+    "current_occupancy": 96,
+    "description": "Shelter facility in Bani Zeid with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Bani Zeid",
+    "contact_phone": "+970 59 9872505",
+    "last_status_update": "2026-02-13T08:44:08.744971"
+  },
+  {
+    "id": "488abaa9-0cb3-4623-be74-f3e9e6f47b2b",
+    "name": "Aqraba Church Hall",
+    "resource_type": "shelter",
+    "status": "in_use",
+    "latitude": 32.278547,
+    "longitude": 35.294579,
+    "address": "Aqraba, Nablus",
+    "district": "Aqraba",
+    "total_capacity": 50,
+    "current_occupancy": 46,
+    "description": "Shelter facility in Aqraba with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": true,
+      "has_electricity": true,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Aqraba",
+    "contact_phone": "+970 59 8728009",
+    "last_status_update": "2026-02-13T07:48:08.744979"
+  },
+  {
+    "id": "c2b24ee2-7581-4763-99fa-34f3b56d5f06",
+    "name": "Tell Mosque Community Space",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.179715,
+    "longitude": 35.217018,
+    "address": "Tell, Nablus",
+    "district": "Tell",
+    "total_capacity": 50,
+    "current_occupancy": 11,
+    "description": "Shelter facility in Tell with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": true,
+      "has_electricity": false,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Tell",
+    "contact_phone": "+970 59 2692765",
+    "last_status_update": "2026-02-13T06:44:08.744987"
+  },
+  {
+    "id": "f2deca29-bbd7-4474-9ed5-cb4cd228a8e8",
+    "name": "Tell Municipal Shelter",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.165129,
+    "longitude": 35.266134,
+    "address": "Tell, Nablus",
+    "district": "Tell",
+    "total_capacity": 50,
+    "current_occupancy": 19,
+    "description": "Shelter facility in Tell with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": false,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Tell",
+    "contact_phone": "+970 59 3351084",
+    "last_status_update": "2026-02-13T07:08:08.744995"
+  },
+  {
+    "id": "140b1bac-7cae-4884-b035-4dc448914b85",
+    "name": "Tell University Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.280318,
+    "longitude": 35.222499,
+    "address": "Tell, Nablus",
+    "district": "Tell",
+    "total_capacity": 300,
+    "current_occupancy": 131,
+    "description": "Shelter facility in Tell with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Tell",
+    "contact_phone": "+970 59 9745141",
+    "last_status_update": "2026-02-13T08:20:08.745003"
+  },
+  {
+    "id": "4da6b621-37fb-4fad-805d-1f192c47a82b",
+    "name": "Asira Community Center",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.210727,
+    "longitude": 35.227418,
+    "address": "Asira, Nablus",
+    "district": "Asira",
+    "total_capacity": 300,
+    "current_occupancy": 257,
+    "description": "Shelter facility in Asira with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Asira",
+    "contact_phone": "+970 59 7394713",
+    "last_status_update": "2026-02-13T05:55:08.745010"
+  },
+  {
+    "id": "226bd309-cd19-49a8-ab48-50785f636dd1",
+    "name": "Beit Furik Community Center",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.224036,
+    "longitude": 35.277957,
+    "address": "Beit Furik, Nablus",
+    "district": "Beit Furik",
+    "total_capacity": 100,
+    "current_occupancy": 42,
+    "description": "Shelter facility in Beit Furik with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": true,
+      "has_electricity": false,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Beit Furik",
+    "contact_phone": "+970 59 3421820",
+    "last_status_update": "2026-02-13T05:50:08.745018"
+  },
+  {
+    "id": "303cf99a-3176-4f16-a293-2fe0b17f7626",
+    "name": "Beit Furik Community Center",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.216663,
+    "longitude": 35.201315,
+    "address": "Beit Furik, Nablus",
+    "district": "Beit Furik",
+    "total_capacity": 200,
+    "current_occupancy": 123,
+    "description": "Shelter facility in Beit Furik with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": false,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Beit Furik",
+    "contact_phone": "+970 59 7225647",
+    "last_status_update": "2026-02-13T08:53:08.745026"
+  },
+  {
+    "id": "035ba0ad-da66-4298-885c-cc80eec7f53f",
+    "name": "Nablus City University Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.225376,
+    "longitude": 35.293929,
+    "address": "Nablus City, Nablus",
+    "district": "Nablus City",
+    "total_capacity": 150,
+    "current_occupancy": 72,
+    "description": "Shelter facility in Nablus City with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Nablus City",
+    "contact_phone": "+970 59 4640933",
+    "last_status_update": "2026-02-13T07:14:08.745033"
+  },
+  {
+    "id": "1b497e3e-41f5-445b-9b7d-b921943dae73",
+    "name": "Hebron City School Shelter",
+    "resource_type": "shelter",
+    "status": "in_use",
+    "latitude": 31.576937,
+    "longitude": 35.079756,
+    "address": "Hebron City, Hebron",
+    "district": "Hebron City",
+    "total_capacity": 100,
+    "current_occupancy": 90,
+    "description": "Shelter facility in Hebron City with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": true,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Hebron City",
+    "contact_phone": "+970 59 4431161",
+    "last_status_update": "2026-02-13T07:35:08.745041"
+  },
+  {
+    "id": "8277c267-a6db-4e6a-b12b-7a43f73eb75c",
+    "name": "Taffouh Public Park Tent Camp",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.582415,
+    "longitude": 35.10605,
+    "address": "Taffouh, Hebron",
+    "district": "Taffouh",
+    "total_capacity": 150,
+    "current_occupancy": 72,
+    "description": "Shelter facility in Taffouh with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Taffouh",
+    "contact_phone": "+970 59 2654371",
+    "last_status_update": "2026-02-13T05:51:08.745049"
+  },
+  {
+    "id": "9a6ace38-63a5-403d-9df4-8f098f335b65",
+    "name": "Taffouh Red Crescent Shelter",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.590358,
+    "longitude": 35.096139,
+    "address": "Taffouh, Hebron",
+    "district": "Taffouh",
+    "total_capacity": 150,
+    "current_occupancy": 132,
+    "description": "Shelter facility in Taffouh with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": false,
+      "has_medical": true,
+      "has_electricity": true,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Taffouh",
+    "contact_phone": "+970 59 5375063",
+    "last_status_update": "2026-02-13T06:55:08.745056"
+  },
+  {
+    "id": "c7868d3f-bdf9-4bd4-8af0-d25c8d727578",
+    "name": "Halhul Red Crescent Shelter",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.584771,
+    "longitude": 35.109297,
+    "address": "Halhul, Hebron",
+    "district": "Halhul",
+    "total_capacity": 150,
+    "current_occupancy": 47,
+    "description": "Shelter facility in Halhul with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Halhul",
+    "contact_phone": "+970 59 6663388",
+    "last_status_update": "2026-02-13T08:11:08.745063"
+  },
+  {
+    "id": "67d08dc6-3a5c-47df-883d-15bcfd80f010",
+    "name": "Al-Khader Red Crescent Shelter",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.761381,
+    "longitude": 35.219403,
+    "address": "Al-Khader, Bethlehem",
+    "district": "Al-Khader",
+    "total_capacity": 200,
+    "current_occupancy": 65,
+    "description": "Shelter facility in Al-Khader with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Al-Khader",
+    "contact_phone": "+970 59 1985360",
+    "last_status_update": "2026-02-13T07:02:08.745071"
+  },
+  {
+    "id": "4d0bd5e3-f1c7-4a2f-9373-7788363b4aa3",
+    "name": "Za'tara Mosque Community Space",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.649459,
+    "longitude": 35.244004,
+    "address": "Za'tara, Bethlehem",
+    "district": "Za'tara",
+    "total_capacity": 50,
+    "current_occupancy": 38,
+    "description": "Shelter facility in Za'tara with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Za'tara",
+    "contact_phone": "+970 59 9484790",
+    "last_status_update": "2026-02-13T07:20:08.745078"
+  },
+  {
+    "id": "413dc5eb-12e7-4c16-bf47-b9aea1d76e31",
+    "name": "Za'tara Church Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.690184,
+    "longitude": 35.21654,
+    "address": "Za'tara, Bethlehem",
+    "district": "Za'tara",
+    "total_capacity": 300,
+    "current_occupancy": 265,
+    "description": "Shelter facility in Za'tara with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Za'tara",
+    "contact_phone": "+970 59 5609384",
+    "last_status_update": "2026-02-13T06:59:08.745086"
+  },
+  {
+    "id": "ce8b36f4-04af-4d52-bb87-c8e3267e6c58",
+    "name": "Za'tara Community Center",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.762698,
+    "longitude": 35.144457,
+    "address": "Za'tara, Bethlehem",
+    "district": "Za'tara",
+    "total_capacity": 500,
+    "current_occupancy": 261,
+    "description": "Shelter facility in Za'tara with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": false,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Za'tara",
+    "contact_phone": "+970 59 5234874",
+    "last_status_update": "2026-02-13T05:48:08.745094"
+  },
+  {
+    "id": "ef1d91c9-304c-419c-841d-7f12e277cf26",
+    "name": "Bethlehem City Church Hall",
+    "resource_type": "shelter",
+    "status": "in_use",
+    "latitude": 31.687933,
+    "longitude": 35.237792,
+    "address": "Bethlehem City, Bethlehem",
+    "district": "Bethlehem City",
+    "total_capacity": 150,
+    "current_occupancy": 137,
+    "description": "Shelter facility in Bethlehem City with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Bethlehem City",
+    "contact_phone": "+970 59 1531577",
+    "last_status_update": "2026-02-13T08:53:08.745101"
+  },
+  {
+    "id": "8d8db60e-359a-418f-9dde-12fc10e3cd17",
+    "name": "Al-Khader Community Center",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.694033,
+    "longitude": 35.18766,
+    "address": "Al-Khader, Bethlehem",
+    "district": "Al-Khader",
+    "total_capacity": 50,
+    "current_occupancy": 33,
+    "description": "Shelter facility in Al-Khader with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": true,
+      "has_medical": true,
+      "has_electricity": false,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Al-Khader",
+    "contact_phone": "+970 59 9861040",
+    "last_status_update": "2026-02-13T09:06:08.745109"
+  },
+  {
+    "id": "77a3d800-f231-478e-9987-07ccac4b315f",
+    "name": "Ya'bad School Shelter",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.42637,
+    "longitude": 35.343974,
+    "address": "Ya'bad, Jenin",
+    "district": "Ya'bad",
+    "total_capacity": 200,
+    "current_occupancy": 80,
+    "description": "Shelter facility in Ya'bad with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": false,
+      "has_medical": true,
+      "has_electricity": true,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Ya'bad",
+    "contact_phone": "+970 59 6276177",
+    "last_status_update": "2026-02-13T09:12:08.745117"
+  },
+  {
+    "id": "a12db224-103f-40ec-be4b-ae5bd4614aab",
+    "name": "Burqin UNRWA Center",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.516376,
+    "longitude": 35.310244,
+    "address": "Burqin, Jenin",
+    "district": "Burqin",
+    "total_capacity": 200,
+    "current_occupancy": 179,
+    "description": "Shelter facility in Burqin with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": false,
+      "has_medical": true,
+      "has_electricity": false,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Burqin",
+    "contact_phone": "+970 59 6565503",
+    "last_status_update": "2026-02-13T07:38:08.745125"
+  },
+  {
+    "id": "928f3982-8a9f-49fd-9e1f-3fdd8fa1006c",
+    "name": "Burqin Red Crescent Shelter",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.491673,
+    "longitude": 35.256594,
+    "address": "Burqin, Jenin",
+    "district": "Burqin",
+    "total_capacity": 500,
+    "current_occupancy": 129,
+    "description": "Shelter facility in Burqin with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": true,
+      "has_medical": true,
+      "has_electricity": false,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Burqin",
+    "contact_phone": "+970 59 7655572",
+    "last_status_update": "2026-02-13T05:58:08.745132"
+  },
+  {
+    "id": "84f277a4-b926-4533-a497-56852de0b405",
+    "name": "Arraba Public Park Tent Camp",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.440165,
+    "longitude": 35.315895,
+    "address": "Arraba, Jenin",
+    "district": "Arraba",
+    "total_capacity": 200,
+    "current_occupancy": 74,
+    "description": "Shelter facility in Arraba with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": true,
+      "has_electricity": true,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Arraba",
+    "contact_phone": "+970 59 5955645",
+    "last_status_update": "2026-02-13T05:52:08.745140"
+  },
+  {
+    "id": "0c2d81f2-aa18-4bb8-ade6-859f365f73c0",
+    "name": "Tulkarm Camp Community Center",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.335973,
+    "longitude": 34.978445,
+    "address": "Tulkarm Camp, Tulkarm",
+    "district": "Tulkarm Camp",
+    "total_capacity": 200,
+    "current_occupancy": 146,
+    "description": "Shelter facility in Tulkarm Camp with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Tulkarm Camp",
+    "contact_phone": "+970 59 8461429",
+    "last_status_update": "2026-02-13T07:44:08.745148"
+  },
+  {
+    "id": "446e2349-18b3-4634-8ae1-672ac8646093",
+    "name": "Tulkarm City Public Park Tent Camp",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.341762,
+    "longitude": 34.980868,
+    "address": "Tulkarm City, Tulkarm",
+    "district": "Tulkarm City",
+    "total_capacity": 100,
+    "current_occupancy": 52,
+    "description": "Shelter facility in Tulkarm City with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Tulkarm City",
+    "contact_phone": "+970 59 6443037",
+    "last_status_update": "2026-02-13T07:38:08.745155"
+  },
+  {
+    "id": "9d54b5cc-cd6d-4c77-a0a8-068362feee57",
+    "name": "Tulkarm City Sports Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.251881,
+    "longitude": 35.018257,
+    "address": "Tulkarm City, Tulkarm",
+    "district": "Tulkarm City",
+    "total_capacity": 500,
+    "current_occupancy": 437,
+    "description": "Shelter facility in Tulkarm City with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": false,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Tulkarm City",
+    "contact_phone": "+970 59 5503118",
+    "last_status_update": "2026-02-13T07:10:08.745163"
+  },
+  {
+    "id": "b284d4dd-bbbd-4f34-b754-802e6178bb28",
+    "name": "Anabta School Shelter",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.267912,
+    "longitude": 34.988665,
+    "address": "Anabta, Tulkarm",
+    "district": "Anabta",
+    "total_capacity": 200,
+    "current_occupancy": 84,
+    "description": "Shelter facility in Anabta with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": true,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Anabta",
+    "contact_phone": "+970 59 4280754",
+    "last_status_update": "2026-02-13T07:19:08.745170"
+  },
+  {
+    "id": "6805fdcc-bc01-4e92-b4ec-afd4fd1f798a",
+    "name": "Kafr Thulth Mosque Community Space",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.145459,
+    "longitude": 34.911412,
+    "address": "Kafr Thulth, Qalqilya",
+    "district": "Kafr Thulth",
+    "total_capacity": 150,
+    "current_occupancy": 124,
+    "description": "Shelter facility in Kafr Thulth with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Kafr Thulth",
+    "contact_phone": "+970 59 3283789",
+    "last_status_update": "2026-02-13T08:00:08.745178"
+  },
+  {
+    "id": "cf5782cf-3e30-40e2-8d02-622969e0d2ef",
+    "name": "Azzun Mosque Community Space",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.16768,
+    "longitude": 35.024273,
+    "address": "Azzun, Qalqilya",
+    "district": "Azzun",
+    "total_capacity": 200,
+    "current_occupancy": 87,
+    "description": "Shelter facility in Azzun with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": false,
+      "has_medical": true,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Azzun",
+    "contact_phone": "+970 59 5067204",
+    "last_status_update": "2026-02-13T07:53:08.745185"
+  },
+  {
+    "id": "3d1f9bd2-dca3-4025-bf3f-35226c0bcdb0",
+    "name": "Kafr Thulth University Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.174327,
+    "longitude": 35.008579,
+    "address": "Kafr Thulth, Qalqilya",
+    "district": "Kafr Thulth",
+    "total_capacity": 150,
+    "current_occupancy": 42,
+    "description": "Shelter facility in Kafr Thulth with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Kafr Thulth",
+    "contact_phone": "+970 59 8744735",
+    "last_status_update": "2026-02-13T06:15:08.745192"
+  },
+  {
+    "id": "a2c6ff1e-4108-4e64-bda0-781f32da228c",
+    "name": "Salfit City Community Center",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.075915,
+    "longitude": 35.15826,
+    "address": "Salfit City, Salfit",
+    "district": "Salfit City",
+    "total_capacity": 200,
+    "current_occupancy": 140,
+    "description": "Shelter facility in Salfit City with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": false,
+      "has_medical": true,
+      "has_electricity": true,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Salfit City",
+    "contact_phone": "+970 59 2240929",
+    "last_status_update": "2026-02-13T07:22:08.745201"
+  },
+  {
+    "id": "0d5351f2-8662-47fd-b492-c8eda39b90f6",
+    "name": "Bruqin Mosque Community Space",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.142184,
+    "longitude": 35.180808,
+    "address": "Bruqin, Salfit",
+    "district": "Bruqin",
+    "total_capacity": 300,
+    "current_occupancy": 173,
+    "description": "Shelter facility in Bruqin with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Bruqin",
+    "contact_phone": "+970 59 2425760",
+    "last_status_update": "2026-02-13T08:49:08.745208"
+  },
+  {
+    "id": "75aa4ca9-8f81-47f5-aff3-4e2d0783409b",
+    "name": "Kafr ad-Dik Municipal Shelter",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.115574,
+    "longitude": 35.202212,
+    "address": "Kafr ad-Dik, Salfit",
+    "district": "Kafr ad-Dik",
+    "total_capacity": 100,
+    "current_occupancy": 68,
+    "description": "Shelter facility in Kafr ad-Dik with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": true,
+      "has_electricity": true,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Kafr ad-Dik",
+    "contact_phone": "+970 59 8221845",
+    "last_status_update": "2026-02-13T08:49:08.745215"
+  },
+  {
+    "id": "13b7cc6b-6958-41bf-a5be-c0c5562fb72e",
+    "name": "Kifl Haris University Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.024566,
+    "longitude": 35.154349,
+    "address": "Kifl Haris, Salfit",
+    "district": "Kifl Haris",
+    "total_capacity": 500,
+    "current_occupancy": 294,
+    "description": "Shelter facility in Kifl Haris with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": false,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Kifl Haris",
+    "contact_phone": "+970 59 9396422",
+    "last_status_update": "2026-02-13T08:38:08.745223"
+  },
+  {
+    "id": "6fa938a6-6b74-497a-8dbb-ce7fdad5dcfd",
+    "name": "Tayasir School Shelter",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.380524,
+    "longitude": 35.367333,
+    "address": "Tayasir, Tubas",
+    "district": "Tayasir",
+    "total_capacity": 200,
+    "current_occupancy": 178,
+    "description": "Shelter facility in Tayasir with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Tayasir",
+    "contact_phone": "+970 59 4470657",
+    "last_status_update": "2026-02-13T07:03:08.745230"
+  },
+  {
+    "id": "7e450032-6ff3-494c-b6da-68c35078933c",
+    "name": "Aqaba Red Crescent Shelter",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.318751,
+    "longitude": 35.36654,
+    "address": "Aqaba, Tubas",
+    "district": "Aqaba",
+    "total_capacity": 500,
+    "current_occupancy": 361,
+    "description": "Shelter facility in Aqaba with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": false,
+      "has_medical": true,
+      "has_electricity": false,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Aqaba",
+    "contact_phone": "+970 59 2834801",
+    "last_status_update": "2026-02-13T06:23:08.745243"
+  },
+  {
+    "id": "f8c3561c-3822-4903-94fc-e03657ae2afe",
+    "name": "Tammun Community Center",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.356806,
+    "longitude": 35.420991,
+    "address": "Tammun, Tubas",
+    "district": "Tammun",
+    "total_capacity": 300,
+    "current_occupancy": 99,
+    "description": "Shelter facility in Tammun with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Tammun",
+    "contact_phone": "+970 59 4094587",
+    "last_status_update": "2026-02-13T08:29:08.745251"
+  },
+  {
+    "id": "720b7f3f-b303-4d90-84d1-740d8591d138",
+    "name": "Tubas City Sports Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.337657,
+    "longitude": 35.361256,
+    "address": "Tubas City, Tubas",
+    "district": "Tubas City",
+    "total_capacity": 500,
+    "current_occupancy": 330,
+    "description": "Shelter facility in Tubas City with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Tubas City",
+    "contact_phone": "+970 59 2049645",
+    "last_status_update": "2026-02-13T06:49:08.745259"
+  },
+  {
+    "id": "d79ab4bc-c842-4390-bd91-92b527e488ba",
+    "name": "Tammun Church Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 32.27301,
+    "longitude": 35.414038,
+    "address": "Tammun, Tubas",
+    "district": "Tammun",
+    "total_capacity": 150,
+    "current_occupancy": 66,
+    "description": "Shelter facility in Tammun with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Tammun",
+    "contact_phone": "+970 59 7520284",
+    "last_status_update": "2026-02-13T06:40:08.745267"
+  },
+  {
+    "id": "6c5e5538-70a2-4867-b684-c11079108a5e",
+    "name": "Ein al-Sultan Camp UNRWA Center",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.877141,
+    "longitude": 35.431751,
+    "address": "Ein al-Sultan Camp, Jericho",
+    "district": "Ein al-Sultan Camp",
+    "total_capacity": 300,
+    "current_occupancy": 98,
+    "description": "Shelter facility in Ein al-Sultan Camp with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": true,
+      "has_electricity": false,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Ein al-Sultan Camp",
+    "contact_phone": "+970 59 6123426",
+    "last_status_update": "2026-02-13T08:47:08.745275"
+  },
+  {
+    "id": "779400df-37db-4696-8cbc-49a9975e513a",
+    "name": "Ein al-Sultan Camp University Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.828665,
+    "longitude": 35.473212,
+    "address": "Ein al-Sultan Camp, Jericho",
+    "district": "Ein al-Sultan Camp",
+    "total_capacity": 200,
+    "current_occupancy": 129,
+    "description": "Shelter facility in Ein al-Sultan Camp with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": false,
+      "has_medical": true,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Ein al-Sultan Camp",
+    "contact_phone": "+970 59 3906397",
+    "last_status_update": "2026-02-13T06:54:08.745282"
+  },
+  {
+    "id": "46ffd21c-aa20-4153-abcb-55199532982d",
+    "name": "Al-Auja University Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.826724,
+    "longitude": 35.42466,
+    "address": "Al-Auja, Jericho",
+    "district": "Al-Auja",
+    "total_capacity": 150,
+    "current_occupancy": 124,
+    "description": "Shelter facility in Al-Auja with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Al-Auja",
+    "contact_phone": "+970 59 9479842",
+    "last_status_update": "2026-02-13T06:29:08.745290"
+  },
+  {
+    "id": "fb07908b-1a69-4e39-b710-9da7eb559087",
+    "name": "Ein al-Sultan Camp Church Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.866096,
+    "longitude": 35.472164,
+    "address": "Ein al-Sultan Camp, Jericho",
+    "district": "Ein al-Sultan Camp",
+    "total_capacity": 500,
+    "current_occupancy": 414,
+    "description": "Shelter facility in Ein al-Sultan Camp with basic amenities",
+    "details": {
+      "has_water": false,
+      "has_food": true,
+      "has_medical": true,
+      "has_electricity": false,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Ein al-Sultan Camp",
+    "contact_phone": "+970 59 5611266",
+    "last_status_update": "2026-02-13T08:19:08.745297"
+  },
+  {
+    "id": "5e07856f-240c-47ca-8d23-2afd9558eef9",
+    "name": "Ein al-Sultan Camp Church Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.871213,
+    "longitude": 35.410185,
+    "address": "Ein al-Sultan Camp, Jericho",
+    "district": "Ein al-Sultan Camp",
+    "total_capacity": 300,
+    "current_occupancy": 227,
+    "description": "Shelter facility in Ein al-Sultan Camp with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": false,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Ein al-Sultan Camp",
+    "contact_phone": "+970 59 1698108",
+    "last_status_update": "2026-02-13T06:02:08.745305"
+  },
+  {
+    "id": "31be59ed-2925-472c-99d0-df6ea24189fb",
+    "name": "Ein al-Sultan Camp Sports Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.892978,
+    "longitude": 35.455562,
+    "address": "Ein al-Sultan Camp, Jericho",
+    "district": "Ein al-Sultan Camp",
+    "total_capacity": 50,
+    "current_occupancy": 37,
+    "description": "Shelter facility in Ein al-Sultan Camp with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Ein al-Sultan Camp",
+    "contact_phone": "+970 59 8366370",
+    "last_status_update": "2026-02-13T08:46:08.745312"
+  },
+  {
+    "id": "8fef328d-f713-471f-84a3-7aab907daf2e",
+    "name": "Anata University Hall",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.733485,
+    "longitude": 35.242214,
+    "address": "Anata, Jerusalem",
+    "district": "Anata",
+    "total_capacity": 150,
+    "current_occupancy": 126,
+    "description": "Shelter facility in Anata with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": false,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Anata",
+    "contact_phone": "+970 59 1995859",
+    "last_status_update": "2026-02-13T06:51:08.745320"
+  },
+  {
+    "id": "9e1fc854-fdc9-4eb4-8f07-2f96accbc98f",
+    "name": "Al-Eizariya UNRWA Center",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.750398,
+    "longitude": 35.18743,
+    "address": "Al-Eizariya, Jerusalem",
+    "district": "Al-Eizariya",
+    "total_capacity": 100,
+    "current_occupancy": 44,
+    "description": "Shelter facility in Al-Eizariya with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": false,
+      "has_medical": true,
+      "has_electricity": true,
+      "accessibility": "limited"
+    },
+    "contact_name": "Coordinator Al-Eizariya",
+    "contact_phone": "+970 59 2597613",
+    "last_status_update": "2026-02-13T08:42:08.745327"
+  },
+  {
+    "id": "130e0f16-6977-49d8-a3f7-2e9c7bfb4363",
+    "name": "Old City Community Center",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.823833,
+    "longitude": 35.247983,
+    "address": "Old City, Jerusalem",
+    "district": "Old City",
+    "total_capacity": 150,
+    "current_occupancy": 127,
+    "description": "Shelter facility in Old City with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": false,
+      "has_medical": false,
+      "has_electricity": false,
+      "accessibility": "full"
+    },
+    "contact_name": "Coordinator Old City",
+    "contact_phone": "+970 59 7588425",
+    "last_status_update": "2026-02-13T07:11:08.745335"
+  },
+  {
+    "id": "9a8d4457-842b-4628-bf61-935868a1add8",
+    "name": "Anata School Shelter",
+    "resource_type": "shelter",
+    "status": "available",
+    "latitude": 31.725361,
+    "longitude": 35.229588,
+    "address": "Anata, Jerusalem",
+    "district": "Anata",
+    "total_capacity": 200,
+    "current_occupancy": 96,
+    "description": "Shelter facility in Anata with basic amenities",
+    "details": {
+      "has_water": true,
+      "has_food": true,
+      "has_medical": false,
+      "has_electricity": true,
+      "accessibility": "partial"
+    },
+    "contact_name": "Coordinator Anata",
+    "contact_phone": "+970 59 7191986",
+    "last_status_update": "2026-02-13T07:20:08.745342"
+  },
+  {
+    "id": "f12beea2-ef60-463a-9e2e-ed48b6dc80b8",
+    "name": "Ambulance RAM-001",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 31.889983,
+    "longitude": 35.163598,
+    "address": "Ramallah and Al-Bireh, Palestine",
+    "district": "Deir Dibwan",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Ramallah and Al-Bireh",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 4,
+      "equipment": [
+        "oxygen",
+        "defibrillator",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Ramallah and Al-Bireh",
+    "contact_phone": "+970 59 7672565",
+    "last_status_update": "2026-02-13T09:39:08.745366"
+  },
+  {
+    "id": "595848be-9727-49bd-ab37-bb21b01bc81d",
+    "name": "Ambulance RAM-002",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 31.94125,
+    "longitude": 35.229388,
+    "address": "Ramallah and Al-Bireh, Palestine",
+    "district": "Birzeit",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Ramallah and Al-Bireh",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 3,
+      "equipment": [
+        "oxygen",
+        "ventilator",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Ramallah and Al-Bireh",
+    "contact_phone": "+970 59 9142618",
+    "last_status_update": "2026-02-13T09:20:08.745378"
+  },
+  {
+    "id": "ae2ee9c8-0388-423d-8c17-2b76fc3a4099",
+    "name": "Ambulance RAM-003",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 31.891299,
+    "longitude": 35.218004,
+    "address": "Ramallah and Al-Bireh, Palestine",
+    "district": "Ramallah",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Ramallah and Al-Bireh",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 4,
+      "equipment": [
+        "IV",
+        "defibrillator",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Ramallah and Al-Bireh",
+    "contact_phone": "+970 59 3650523",
+    "last_status_update": "2026-02-13T09:31:08.745388"
+  },
+  {
+    "id": "732e3edd-fc88-45a1-b807-069a95b7904a",
+    "name": "Ambulance RAM-004",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 31.900321,
+    "longitude": 35.242747,
+    "address": "Ramallah and Al-Bireh, Palestine",
+    "district": "Al-Bireh",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Ramallah and Al-Bireh",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 2,
+      "equipment": [
+        "oxygen",
+        "ventilator",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Ramallah and Al-Bireh",
+    "contact_phone": "+970 59 2565985",
+    "last_status_update": "2026-02-13T09:25:08.745398"
+  },
+  {
+    "id": "5feb6a83-f00c-4a08-af78-54e6792c953e",
+    "name": "Ambulance RAM-005",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.892635,
+    "longitude": 35.169994,
+    "address": "Ramallah and Al-Bireh, Palestine",
+    "district": "Ramallah",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Ramallah and Al-Bireh",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 4,
+      "equipment": [
+        "oxygen",
+        "ventilator",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Ramallah and Al-Bireh",
+    "contact_phone": "+970 59 2530068",
+    "last_status_update": "2026-02-13T09:23:08.745407"
+  },
+  {
+    "id": "da118ddb-9a21-4c2f-84f6-bfc2c6ee7787",
+    "name": "Ambulance RAM-006",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 31.871415,
+    "longitude": 35.180474,
+    "address": "Ramallah and Al-Bireh, Palestine",
+    "district": "Al-Bireh",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Ramallah and Al-Bireh",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 2,
+      "equipment": [
+        "stretcher",
+        "IV",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Ramallah and Al-Bireh",
+    "contact_phone": "+970 59 1135267",
+    "last_status_update": "2026-02-13T09:23:08.745416"
+  },
+  {
+    "id": "b19bcc89-a105-4d8a-aacd-d1efcb404262",
+    "name": "Ambulance RAM-007",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 31.891286,
+    "longitude": 35.173048,
+    "address": "Ramallah and Al-Bireh, Palestine",
+    "district": "Deir Dibwan",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Ramallah and Al-Bireh",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 3,
+      "equipment": [
+        "defibrillator",
+        "ventilator",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Ramallah and Al-Bireh",
+    "contact_phone": "+970 59 2498726",
+    "last_status_update": "2026-02-13T09:22:08.745425"
+  },
+  {
+    "id": "84edcd83-4029-4887-a574-d71ea5cacbba",
+    "name": "Ambulance RAM-008",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.928277,
+    "longitude": 35.171656,
+    "address": "Ramallah and Al-Bireh, Palestine",
+    "district": "Birzeit",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Ramallah and Al-Bireh",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 3,
+      "equipment": [
+        "ventilator",
+        "stretcher",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Ramallah and Al-Bireh",
+    "contact_phone": "+970 59 9900451",
+    "last_status_update": "2026-02-13T09:27:08.745434"
+  },
+  {
+    "id": "8df0b2e4-0669-4c0c-ae0b-7bf0dfb1c93c",
+    "name": "Ambulance RAM-009",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 31.864478,
+    "longitude": 35.215402,
+    "address": "Ramallah and Al-Bireh, Palestine",
+    "district": "Birzeit",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Ramallah and Al-Bireh",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 2,
+      "equipment": [
+        "ventilator",
+        "IV",
+        "oxygen"
+      ]
+    },
+    "contact_name": "Dispatch Ramallah and Al-Bireh",
+    "contact_phone": "+970 59 8421969",
+    "last_status_update": "2026-02-13T09:18:08.745442"
+  },
+  {
+    "id": "3cecc119-f29f-4381-8d14-918059fa5f81",
+    "name": "Ambulance RAM-010",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.88118,
+    "longitude": 35.235127,
+    "address": "Ramallah and Al-Bireh, Palestine",
+    "district": "Bani Zeid",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Ramallah and Al-Bireh",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 4,
+      "equipment": [
+        "IV",
+        "oxygen",
+        "ventilator"
+      ]
+    },
+    "contact_name": "Dispatch Ramallah and Al-Bireh",
+    "contact_phone": "+970 59 6276495",
+    "last_status_update": "2026-02-13T09:20:08.745451"
+  },
+  {
+    "id": "7169f0b8-8611-4eac-84dd-7a91102f332e",
+    "name": "Ambulance NAB-001",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.200923,
+    "longitude": 35.26597,
+    "address": "Nablus, Palestine",
+    "district": "Asira",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Nablus",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 4,
+      "equipment": [
+        "stretcher",
+        "oxygen",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Nablus",
+    "contact_phone": "+970 59 1450038",
+    "last_status_update": "2026-02-13T09:18:08.745460"
+  },
+  {
+    "id": "233a9b36-c5c1-40b5-ae5b-1736588c9e28",
+    "name": "Ambulance NAB-002",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.248866,
+    "longitude": 35.284466,
+    "address": "Nablus, Palestine",
+    "district": "Asira",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Nablus",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 4,
+      "equipment": [
+        "ventilator",
+        "IV",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Nablus",
+    "contact_phone": "+970 59 1915518",
+    "last_status_update": "2026-02-13T09:20:08.745468"
+  },
+  {
+    "id": "94b6ee4b-848b-4e85-a443-316c04093c2e",
+    "name": "Ambulance NAB-003",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 32.252933,
+    "longitude": 35.290774,
+    "address": "Nablus, Palestine",
+    "district": "Beit Furik",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Nablus",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 2,
+      "equipment": [
+        "IV",
+        "defibrillator",
+        "oxygen"
+      ]
+    },
+    "contact_name": "Dispatch Nablus",
+    "contact_phone": "+970 59 1202450",
+    "last_status_update": "2026-02-13T09:34:08.745477"
+  },
+  {
+    "id": "239074ae-a2c0-4328-be21-c4c01de2c03c",
+    "name": "Ambulance NAB-004",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 32.255814,
+    "longitude": 35.224959,
+    "address": "Nablus, Palestine",
+    "district": "Huwwara",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Nablus",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 4,
+      "equipment": [
+        "ventilator",
+        "IV",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Nablus",
+    "contact_phone": "+970 59 1280001",
+    "last_status_update": "2026-02-13T09:27:08.745485"
+  },
+  {
+    "id": "aa8f7759-fb29-4d59-a225-0294bf3b80f8",
+    "name": "Ambulance NAB-005",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 32.186503,
+    "longitude": 35.235375,
+    "address": "Nablus, Palestine",
+    "district": "Nablus City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Nablus",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 4,
+      "equipment": [
+        "oxygen",
+        "IV",
+        "ventilator"
+      ]
+    },
+    "contact_name": "Dispatch Nablus",
+    "contact_phone": "+970 59 7749095",
+    "last_status_update": "2026-02-13T09:43:08.745494"
+  },
+  {
+    "id": "c49a7767-7f68-4112-8c03-fc9c71d38428",
+    "name": "Ambulance HEB-001",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.514797,
+    "longitude": 35.084593,
+    "address": "Hebron, Palestine",
+    "district": "Taffouh",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Hebron",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 4,
+      "equipment": [
+        "oxygen",
+        "IV",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Hebron",
+    "contact_phone": "+970 59 2109227",
+    "last_status_update": "2026-02-13T09:36:08.745503"
+  },
+  {
+    "id": "3e2cb37e-e27d-4483-a726-35457cddccaf",
+    "name": "Ambulance HEB-002",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.548494,
+    "longitude": 35.118197,
+    "address": "Hebron, Palestine",
+    "district": "Hebron City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Hebron",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 2,
+      "equipment": [
+        "IV",
+        "defibrillator",
+        "ventilator"
+      ]
+    },
+    "contact_name": "Dispatch Hebron",
+    "contact_phone": "+970 59 1923227",
+    "last_status_update": "2026-02-13T09:36:08.745512"
+  },
+  {
+    "id": "b9f248eb-03fd-4de1-812b-684018368184",
+    "name": "Ambulance HEB-003",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.545886,
+    "longitude": 35.112444,
+    "address": "Hebron, Palestine",
+    "district": "Hebron City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Hebron",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 4,
+      "equipment": [
+        "ventilator",
+        "defibrillator",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Hebron",
+    "contact_phone": "+970 59 9328426",
+    "last_status_update": "2026-02-13T09:34:08.745520"
+  },
+  {
+    "id": "f485c249-c432-43d4-a3ba-8dd952ffe307",
+    "name": "Ambulance HEB-004",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.53444,
+    "longitude": 35.122439,
+    "address": "Hebron, Palestine",
+    "district": "Dura",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Hebron",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 2,
+      "equipment": [
+        "oxygen",
+        "defibrillator",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Hebron",
+    "contact_phone": "+970 59 6620552",
+    "last_status_update": "2026-02-13T09:20:08.745528"
+  },
+  {
+    "id": "91953d0e-2339-4beb-ab89-4616370d7d9b",
+    "name": "Ambulance HEB-005",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.526946,
+    "longitude": 35.101708,
+    "address": "Hebron, Palestine",
+    "district": "Sa'ir",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Hebron",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 4,
+      "equipment": [
+        "defibrillator",
+        "IV",
+        "ventilator"
+      ]
+    },
+    "contact_name": "Dispatch Hebron",
+    "contact_phone": "+970 59 9569497",
+    "last_status_update": "2026-02-13T09:34:08.745537"
+  },
+  {
+    "id": "719d9962-1137-4dc5-9da7-2adb69f72f08",
+    "name": "Ambulance BET-001",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.705369,
+    "longitude": 35.207751,
+    "address": "Bethlehem, Palestine",
+    "district": "Beit Jala",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Bethlehem",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 2,
+      "equipment": [
+        "stretcher",
+        "defibrillator",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Bethlehem",
+    "contact_phone": "+970 59 9536665",
+    "last_status_update": "2026-02-13T09:45:08.745547"
+  },
+  {
+    "id": "53399255-9606-40e8-8ca8-d18805d2ff32",
+    "name": "Ambulance BET-002",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.668923,
+    "longitude": 35.231434,
+    "address": "Bethlehem, Palestine",
+    "district": "Bethlehem City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Bethlehem",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 3,
+      "equipment": [
+        "IV",
+        "ventilator",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Bethlehem",
+    "contact_phone": "+970 59 1593302",
+    "last_status_update": "2026-02-13T09:28:08.745557"
+  },
+  {
+    "id": "d14485d4-4f91-420d-af3d-df31d47deda4",
+    "name": "Ambulance BET-003",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 31.729649,
+    "longitude": 35.219522,
+    "address": "Bethlehem, Palestine",
+    "district": "Beit Jala",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Bethlehem",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 2,
+      "equipment": [
+        "IV",
+        "oxygen",
+        "ventilator"
+      ]
+    },
+    "contact_name": "Dispatch Bethlehem",
+    "contact_phone": "+970 59 2306728",
+    "last_status_update": "2026-02-13T09:27:08.745566"
+  },
+  {
+    "id": "88d777a2-8c68-447e-9014-905b50b34164",
+    "name": "Ambulance JEN-001",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 32.430552,
+    "longitude": 35.313666,
+    "address": "Jenin, Palestine",
+    "district": "Jenin Camp",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jenin",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 4,
+      "equipment": [
+        "defibrillator",
+        "IV",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Jenin",
+    "contact_phone": "+970 59 8802985",
+    "last_status_update": "2026-02-13T09:18:08.745575"
+  },
+  {
+    "id": "ccbdbcec-13ce-46dc-8ef4-8ed7513ce83e",
+    "name": "Ambulance JEN-002",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.443585,
+    "longitude": 35.327388,
+    "address": "Jenin, Palestine",
+    "district": "Jenin City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jenin",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 3,
+      "equipment": [
+        "defibrillator",
+        "oxygen",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Jenin",
+    "contact_phone": "+970 59 5892153",
+    "last_status_update": "2026-02-13T09:27:08.745583"
+  },
+  {
+    "id": "dd45544c-cc22-4ac5-b42c-7f18bc5d3606",
+    "name": "Ambulance JEN-003",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.483761,
+    "longitude": 35.318966,
+    "address": "Jenin, Palestine",
+    "district": "Arraba",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jenin",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 4,
+      "equipment": [
+        "IV",
+        "ventilator",
+        "oxygen"
+      ]
+    },
+    "contact_name": "Dispatch Jenin",
+    "contact_phone": "+970 59 5112546",
+    "last_status_update": "2026-02-13T09:41:08.745592"
+  },
+  {
+    "id": "8fefb2e8-74e6-4053-93b6-5ab13171875b",
+    "name": "Ambulance JEN-004",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.42151,
+    "longitude": 35.292603,
+    "address": "Jenin, Palestine",
+    "district": "Ya'bad",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jenin",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 4,
+      "equipment": [
+        "defibrillator",
+        "oxygen",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Jenin",
+    "contact_phone": "+970 59 7312844",
+    "last_status_update": "2026-02-13T09:18:08.745601"
+  },
+  {
+    "id": "0a33375c-954d-4abf-b2b6-c4bb4811b42e",
+    "name": "Ambulance JEN-005",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.480047,
+    "longitude": 35.284401,
+    "address": "Jenin, Palestine",
+    "district": "Ya'bad",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jenin",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 3,
+      "equipment": [
+        "IV",
+        "defibrillator",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Jenin",
+    "contact_phone": "+970 59 5694689",
+    "last_status_update": "2026-02-13T09:43:08.745611"
+  },
+  {
+    "id": "0dcf0563-539c-45b2-bba7-63452098007b",
+    "name": "Ambulance JEN-006",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 32.424512,
+    "longitude": 35.278318,
+    "address": "Jenin, Palestine",
+    "district": "Burqin",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jenin",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 3,
+      "equipment": [
+        "defibrillator",
+        "stretcher",
+        "oxygen"
+      ]
+    },
+    "contact_name": "Dispatch Jenin",
+    "contact_phone": "+970 59 3239990",
+    "last_status_update": "2026-02-13T09:25:08.745619"
+  },
+  {
+    "id": "eebb4ca6-f830-4344-9094-5fa88ba37f23",
+    "name": "Ambulance JEN-007",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 32.486597,
+    "longitude": 35.265786,
+    "address": "Jenin, Palestine",
+    "district": "Arraba",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jenin",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 2,
+      "equipment": [
+        "ventilator",
+        "oxygen",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Jenin",
+    "contact_phone": "+970 59 6284972",
+    "last_status_update": "2026-02-13T09:16:08.745628"
+  },
+  {
+    "id": "ecb3ac62-3be0-4024-8500-8924adb7b502",
+    "name": "Ambulance JEN-008",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.485065,
+    "longitude": 35.315858,
+    "address": "Jenin, Palestine",
+    "district": "Qabatiya",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jenin",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 3,
+      "equipment": [
+        "ventilator",
+        "defibrillator",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Jenin",
+    "contact_phone": "+970 59 3283577",
+    "last_status_update": "2026-02-13T09:21:08.745637"
+  },
+  {
+    "id": "410aaaae-3a99-48bf-bc2e-485eefb7f5e2",
+    "name": "Ambulance TUL-001",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 32.282833,
+    "longitude": 35.00175,
+    "address": "Tulkarm, Palestine",
+    "district": "Anabta",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Tulkarm",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 2,
+      "equipment": [
+        "stretcher",
+        "oxygen",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Tulkarm",
+    "contact_phone": "+970 59 8581910",
+    "last_status_update": "2026-02-13T09:36:08.745646"
+  },
+  {
+    "id": "bbd60791-6ff1-44a5-9914-decf237bbde2",
+    "name": "Ambulance TUL-002",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 32.307468,
+    "longitude": 35.056799,
+    "address": "Tulkarm, Palestine",
+    "district": "Tulkarm Camp",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Tulkarm",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 3,
+      "equipment": [
+        "stretcher",
+        "defibrillator",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Tulkarm",
+    "contact_phone": "+970 59 6499465",
+    "last_status_update": "2026-02-13T09:41:08.745655"
+  },
+  {
+    "id": "495820ef-313a-4c6f-8794-f3caa5fd32d3",
+    "name": "Ambulance TUL-003",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.277697,
+    "longitude": 35.008458,
+    "address": "Tulkarm, Palestine",
+    "district": "Bal'a",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Tulkarm",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 2,
+      "equipment": [
+        "oxygen",
+        "stretcher",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Tulkarm",
+    "contact_phone": "+970 59 1521470",
+    "last_status_update": "2026-02-13T09:33:08.745663"
+  },
+  {
+    "id": "9bae6f8a-7b8b-4473-927d-7a1197375977",
+    "name": "Ambulance TUL-004",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.338768,
+    "longitude": 35.033076,
+    "address": "Tulkarm, Palestine",
+    "district": "Tulkarm City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Tulkarm",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 2,
+      "equipment": [
+        "ventilator",
+        "defibrillator",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Tulkarm",
+    "contact_phone": "+970 59 2034637",
+    "last_status_update": "2026-02-13T09:19:08.745672"
+  },
+  {
+    "id": "7fb1afd5-f270-4cff-8568-70c224c57b81",
+    "name": "Ambulance QAL-001",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.159657,
+    "longitude": 34.996494,
+    "address": "Qalqilya, Palestine",
+    "district": "Qalqilya City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Qalqilya",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 4,
+      "equipment": [
+        "oxygen",
+        "defibrillator",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Qalqilya",
+    "contact_phone": "+970 59 2081661",
+    "last_status_update": "2026-02-13T09:39:08.745681"
+  },
+  {
+    "id": "015ce9fb-f943-4b93-b9d6-58f6223fafc0",
+    "name": "Ambulance QAL-002",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.2214,
+    "longitude": 34.966075,
+    "address": "Qalqilya, Palestine",
+    "district": "Qalqilya City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Qalqilya",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 2,
+      "equipment": [
+        "defibrillator",
+        "IV",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Qalqilya",
+    "contact_phone": "+970 59 3818391",
+    "last_status_update": "2026-02-13T09:16:08.745689"
+  },
+  {
+    "id": "d017e9e7-bdbb-4ca5-a582-2fd9c7862eae",
+    "name": "Ambulance QAL-003",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 32.195111,
+    "longitude": 34.996335,
+    "address": "Qalqilya, Palestine",
+    "district": "Kafr Thulth",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Qalqilya",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 3,
+      "equipment": [
+        "IV",
+        "ventilator",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Qalqilya",
+    "contact_phone": "+970 59 4602338",
+    "last_status_update": "2026-02-13T09:16:08.745697"
+  },
+  {
+    "id": "95b9a0c7-cd5f-4543-ba66-9978f9e77dcc",
+    "name": "Ambulance QAL-004",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.164172,
+    "longitude": 34.952988,
+    "address": "Qalqilya, Palestine",
+    "district": "Qalqilya City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Qalqilya",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 4,
+      "equipment": [
+        "stretcher",
+        "ventilator",
+        "oxygen"
+      ]
+    },
+    "contact_name": "Dispatch Qalqilya",
+    "contact_phone": "+970 59 5951043",
+    "last_status_update": "2026-02-13T09:30:08.745706"
+  },
+  {
+    "id": "b41e64e6-91f9-4558-b1fd-0e248dfd655f",
+    "name": "Ambulance QAL-005",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 32.182159,
+    "longitude": 34.974655,
+    "address": "Qalqilya, Palestine",
+    "district": "Qalqilya City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Qalqilya",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 3,
+      "equipment": [
+        "ventilator",
+        "IV",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Qalqilya",
+    "contact_phone": "+970 59 9821696",
+    "last_status_update": "2026-02-13T09:38:08.745714"
+  },
+  {
+    "id": "bf0f44ef-0822-4439-8f35-99f5b980f04a",
+    "name": "Ambulance QAL-006",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 32.19966,
+    "longitude": 34.994773,
+    "address": "Qalqilya, Palestine",
+    "district": "Kafr Thulth",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Qalqilya",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 3,
+      "equipment": [
+        "IV",
+        "stretcher",
+        "ventilator"
+      ]
+    },
+    "contact_name": "Dispatch Qalqilya",
+    "contact_phone": "+970 59 9428760",
+    "last_status_update": "2026-02-13T09:35:08.745722"
+  },
+  {
+    "id": "b06d89dd-dde6-4214-843b-9c8f7deb89af",
+    "name": "Ambulance SAL-001",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.064935,
+    "longitude": 35.145385,
+    "address": "Salfit, Palestine",
+    "district": "Salfit City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Salfit",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 2,
+      "equipment": [
+        "IV",
+        "oxygen",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Salfit",
+    "contact_phone": "+970 59 4905100",
+    "last_status_update": "2026-02-13T09:40:08.745732"
+  },
+  {
+    "id": "318fa102-eed5-409a-ad40-ad77a14d7476",
+    "name": "Ambulance SAL-002",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.051311,
+    "longitude": 35.195849,
+    "address": "Salfit, Palestine",
+    "district": "Kifl Haris",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Salfit",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 2,
+      "equipment": [
+        "ventilator",
+        "IV",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Salfit",
+    "contact_phone": "+970 59 3914404",
+    "last_status_update": "2026-02-13T09:40:08.745741"
+  },
+  {
+    "id": "d7598bd4-0ebe-4572-bfdd-4acbbefef48b",
+    "name": "Ambulance SAL-003",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.062224,
+    "longitude": 35.16874,
+    "address": "Salfit, Palestine",
+    "district": "Kifl Haris",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Salfit",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 4,
+      "equipment": [
+        "oxygen",
+        "ventilator",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Salfit",
+    "contact_phone": "+970 59 4158036",
+    "last_status_update": "2026-02-13T09:19:08.745749"
+  },
+  {
+    "id": "14a24aa3-b37f-4d0c-a9df-c69ab21d3602",
+    "name": "Ambulance SAL-004",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 32.12234,
+    "longitude": 35.21383,
+    "address": "Salfit, Palestine",
+    "district": "Kifl Haris",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Salfit",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 2,
+      "equipment": [
+        "IV",
+        "defibrillator",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Salfit",
+    "contact_phone": "+970 59 1942342",
+    "last_status_update": "2026-02-13T09:38:08.745757"
+  },
+  {
+    "id": "e711ef5c-d17f-48cc-9c2a-bfd1b6f60fe9",
+    "name": "Ambulance SAL-005",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 32.091433,
+    "longitude": 35.144894,
+    "address": "Salfit, Palestine",
+    "district": "Salfit City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Salfit",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 4,
+      "equipment": [
+        "ventilator",
+        "stretcher",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Salfit",
+    "contact_phone": "+970 59 3977282",
+    "last_status_update": "2026-02-13T09:16:08.745766"
+  },
+  {
+    "id": "ce9d032d-00ee-4427-9d7d-36af3fa2ff99",
+    "name": "Ambulance SAL-006",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 32.107494,
+    "longitude": 35.212757,
+    "address": "Salfit, Palestine",
+    "district": "Salfit City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Salfit",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 4,
+      "equipment": [
+        "ventilator",
+        "defibrillator",
+        "oxygen"
+      ]
+    },
+    "contact_name": "Dispatch Salfit",
+    "contact_phone": "+970 59 7121835",
+    "last_status_update": "2026-02-13T09:43:08.745774"
+  },
+  {
+    "id": "9342103e-4a8d-4db6-a78c-9ac74a3d31a6",
+    "name": "Ambulance SAL-007",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 32.073187,
+    "longitude": 35.218654,
+    "address": "Salfit, Palestine",
+    "district": "Kifl Haris",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Salfit",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 3,
+      "equipment": [
+        "oxygen",
+        "stretcher",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Salfit",
+    "contact_phone": "+970 59 3642476",
+    "last_status_update": "2026-02-13T09:22:08.745782"
+  },
+  {
+    "id": "beaae1e0-b8d7-41c5-8a68-d2f49cac160b",
+    "name": "Ambulance SAL-008",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 32.119195,
+    "longitude": 35.206647,
+    "address": "Salfit, Palestine",
+    "district": "Kafr ad-Dik",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Salfit",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 4,
+      "equipment": [
+        "stretcher",
+        "oxygen",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Salfit",
+    "contact_phone": "+970 59 3941912",
+    "last_status_update": "2026-02-13T09:33:08.745791"
+  },
+  {
+    "id": "c1f64df8-af0e-4860-a2e1-e9b6a1382483",
+    "name": "Ambulance SAL-009",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.067846,
+    "longitude": 35.19838,
+    "address": "Salfit, Palestine",
+    "district": "Deir Istiya",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Salfit",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 2,
+      "equipment": [
+        "stretcher",
+        "IV",
+        "oxygen"
+      ]
+    },
+    "contact_name": "Dispatch Salfit",
+    "contact_phone": "+970 59 1543292",
+    "last_status_update": "2026-02-13T09:40:08.745799"
+  },
+  {
+    "id": "ccd9e36f-0c2a-4cd1-bdfa-0286d2312792",
+    "name": "Ambulance TUB-001",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.354483,
+    "longitude": 35.406803,
+    "address": "Tubas, Palestine",
+    "district": "Bardala",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Tubas",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 3,
+      "equipment": [
+        "ventilator",
+        "oxygen",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Tubas",
+    "contact_phone": "+970 59 2305378",
+    "last_status_update": "2026-02-13T09:38:08.745808"
+  },
+  {
+    "id": "8c564ca2-91a6-4e55-8f1a-0262a349f121",
+    "name": "Ambulance TUB-002",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 32.308545,
+    "longitude": 35.354961,
+    "address": "Tubas, Palestine",
+    "district": "Tayasir",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Tubas",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 2,
+      "equipment": [
+        "oxygen",
+        "ventilator",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Tubas",
+    "contact_phone": "+970 59 2137407",
+    "last_status_update": "2026-02-13T09:34:08.745816"
+  },
+  {
+    "id": "e514095e-4ebd-4e32-8a79-342db406e634",
+    "name": "Ambulance TUB-003",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 32.301333,
+    "longitude": 35.338043,
+    "address": "Tubas, Palestine",
+    "district": "Tubas City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Tubas",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 3,
+      "equipment": [
+        "IV",
+        "ventilator",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Tubas",
+    "contact_phone": "+970 59 9272543",
+    "last_status_update": "2026-02-13T09:17:08.745824"
+  },
+  {
+    "id": "71296027-473c-4ee6-b53b-f5172e4d2157",
+    "name": "Ambulance TUB-004",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 32.311097,
+    "longitude": 35.373082,
+    "address": "Tubas, Palestine",
+    "district": "Aqaba",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Tubas",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 4,
+      "equipment": [
+        "ventilator",
+        "stretcher",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Tubas",
+    "contact_phone": "+970 59 2236638",
+    "last_status_update": "2026-02-13T09:20:08.745833"
+  },
+  {
+    "id": "ef506092-fe98-4d4f-8862-da931eb5c0a6",
+    "name": "Ambulance TUB-005",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 32.348461,
+    "longitude": 35.352993,
+    "address": "Tubas, Palestine",
+    "district": "Tayasir",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Tubas",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 2,
+      "equipment": [
+        "oxygen",
+        "ventilator",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Tubas",
+    "contact_phone": "+970 59 3699529",
+    "last_status_update": "2026-02-13T09:22:08.745841"
+  },
+  {
+    "id": "daf906cf-48a5-44f9-be04-4b7e5229f411",
+    "name": "Ambulance TUB-006",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 32.2868,
+    "longitude": 35.404747,
+    "address": "Tubas, Palestine",
+    "district": "Tayasir",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Tubas",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 4,
+      "equipment": [
+        "IV",
+        "defibrillator",
+        "ventilator"
+      ]
+    },
+    "contact_name": "Dispatch Tubas",
+    "contact_phone": "+970 59 3768193",
+    "last_status_update": "2026-02-13T09:26:08.745849"
+  },
+  {
+    "id": "8042a893-6b00-4a46-9464-ec3629e59936",
+    "name": "Ambulance TUB-007",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 32.35198,
+    "longitude": 35.341968,
+    "address": "Tubas, Palestine",
+    "district": "Tayasir",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Tubas",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 2,
+      "equipment": [
+        "IV",
+        "oxygen",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Tubas",
+    "contact_phone": "+970 59 5723173",
+    "last_status_update": "2026-02-13T09:36:08.745858"
+  },
+  {
+    "id": "15b7e6c1-e5d3-4865-88aa-5e4a91f4d97c",
+    "name": "Ambulance TUB-008",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 32.299804,
+    "longitude": 35.333371,
+    "address": "Tubas, Palestine",
+    "district": "Tammun",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Tubas",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 3,
+      "equipment": [
+        "defibrillator",
+        "IV",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Tubas",
+    "contact_phone": "+970 59 5941719",
+    "last_status_update": "2026-02-13T09:19:08.745867"
+  },
+  {
+    "id": "c0574dce-4bca-42dd-9dbf-7d1cfec80bd4",
+    "name": "Ambulance JER-001",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.842674,
+    "longitude": 35.412059,
+    "address": "Jericho, Palestine",
+    "district": "Aqabat Jabr Camp",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jericho",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 3,
+      "equipment": [
+        "defibrillator",
+        "oxygen",
+        "ventilator"
+      ]
+    },
+    "contact_name": "Dispatch Jericho",
+    "contact_phone": "+970 59 8901136",
+    "last_status_update": "2026-02-13T09:30:08.745876"
+  },
+  {
+    "id": "aa79ae32-08ea-42e7-9192-54ba7d7473ff",
+    "name": "Ambulance JER-002",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 31.89829,
+    "longitude": 35.4312,
+    "address": "Jericho, Palestine",
+    "district": "Al-Auja",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jericho",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 3,
+      "equipment": [
+        "oxygen",
+        "ventilator",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Jericho",
+    "contact_phone": "+970 59 1748547",
+    "last_status_update": "2026-02-13T09:37:08.745884"
+  },
+  {
+    "id": "73e3447b-5fbd-4f27-a294-e074e46ff4dc",
+    "name": "Ambulance JER-003",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.861879,
+    "longitude": 35.431072,
+    "address": "Jericho, Palestine",
+    "district": "Jericho City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jericho",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 4,
+      "equipment": [
+        "defibrillator",
+        "stretcher",
+        "oxygen"
+      ]
+    },
+    "contact_name": "Dispatch Jericho",
+    "contact_phone": "+970 59 6767862",
+    "last_status_update": "2026-02-13T09:20:08.745892"
+  },
+  {
+    "id": "8b7fd2b0-fcad-422b-85b0-b0e49cc6039b",
+    "name": "Ambulance JER-004",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.870016,
+    "longitude": 35.487656,
+    "address": "Jericho, Palestine",
+    "district": "Jericho City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jericho",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 4,
+      "equipment": [
+        "IV",
+        "stretcher",
+        "oxygen"
+      ]
+    },
+    "contact_name": "Dispatch Jericho",
+    "contact_phone": "+970 59 4953417",
+    "last_status_update": "2026-02-13T09:30:08.745901"
+  },
+  {
+    "id": "70dc507f-15c6-4141-a74e-24d226cef563",
+    "name": "Ambulance JER-005",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 31.850608,
+    "longitude": 35.441584,
+    "address": "Jericho, Palestine",
+    "district": "Al-Auja",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jericho",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 3,
+      "equipment": [
+        "ventilator",
+        "stretcher",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Jericho",
+    "contact_phone": "+970 59 4233407",
+    "last_status_update": "2026-02-13T09:41:08.745910"
+  },
+  {
+    "id": "aee38767-6008-4662-a336-203fb0ffb8bd",
+    "name": "Ambulance JER-006",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 31.830114,
+    "longitude": 35.416269,
+    "address": "Jericho, Palestine",
+    "district": "Al-Auja",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jericho",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 2,
+      "equipment": [
+        "stretcher",
+        "oxygen",
+        "ventilator"
+      ]
+    },
+    "contact_name": "Dispatch Jericho",
+    "contact_phone": "+970 59 2124274",
+    "last_status_update": "2026-02-13T09:43:08.745918"
+  },
+  {
+    "id": "dae8abbd-ea68-4d0c-801e-5a2054602bc3",
+    "name": "Ambulance JER-007",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.857748,
+    "longitude": 35.441788,
+    "address": "Jericho, Palestine",
+    "district": "Aqabat Jabr Camp",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jericho",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 3,
+      "equipment": [
+        "defibrillator",
+        "IV",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Jericho",
+    "contact_phone": "+970 59 7953189",
+    "last_status_update": "2026-02-13T09:41:08.745927"
+  },
+  {
+    "id": "f6bcc380-3918-4bb5-a95f-efc929164c2c",
+    "name": "Ambulance JER-008",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 31.838556,
+    "longitude": 35.457035,
+    "address": "Jericho, Palestine",
+    "district": "Jericho City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jericho",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 2,
+      "equipment": [
+        "oxygen",
+        "stretcher",
+        "ventilator"
+      ]
+    },
+    "contact_name": "Dispatch Jericho",
+    "contact_phone": "+970 59 5431477",
+    "last_status_update": "2026-02-13T09:33:08.745936"
+  },
+  {
+    "id": "d17a5cc6-266a-4765-b3ea-be300992e661",
+    "name": "Ambulance JER-009",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 31.879083,
+    "longitude": 35.455762,
+    "address": "Jericho, Palestine",
+    "district": "Jericho City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jericho",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 3,
+      "equipment": [
+        "IV",
+        "ventilator",
+        "oxygen"
+      ]
+    },
+    "contact_name": "Dispatch Jericho",
+    "contact_phone": "+970 59 7739741",
+    "last_status_update": "2026-02-13T09:44:08.745945"
+  },
+  {
+    "id": "7c2dd717-516c-4f88-b318-e75ad35f543a",
+    "name": "Ambulance JER-010",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.858363,
+    "longitude": 35.480317,
+    "address": "Jericho, Palestine",
+    "district": "Jericho City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jericho",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 3,
+      "equipment": [
+        "oxygen",
+        "stretcher",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Jericho",
+    "contact_phone": "+970 59 6668452",
+    "last_status_update": "2026-02-13T09:19:08.745956"
+  },
+  {
+    "id": "049ddd87-6882-4b8f-be50-2ba65a4e9967",
+    "name": "Ambulance JER-001",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 31.753176,
+    "longitude": 35.241128,
+    "address": "Jerusalem, Palestine",
+    "district": "Qalandiya",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jerusalem",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 2,
+      "equipment": [
+        "oxygen",
+        "IV",
+        "ventilator"
+      ]
+    },
+    "contact_name": "Dispatch Jerusalem",
+    "contact_phone": "+970 59 5520117",
+    "last_status_update": "2026-02-13T09:22:08.745964"
+  },
+  {
+    "id": "8f65c582-e947-4f67-a597-0895e3ff4764",
+    "name": "Ambulance JER-002",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.761642,
+    "longitude": 35.225344,
+    "address": "Jerusalem, Palestine",
+    "district": "Abu Dis",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jerusalem",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 3,
+      "equipment": [
+        "IV",
+        "oxygen",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Jerusalem",
+    "contact_phone": "+970 59 9644791",
+    "last_status_update": "2026-02-13T09:20:08.745973"
+  },
+  {
+    "id": "157c8a2f-9010-4aba-879d-5eb8600d6417",
+    "name": "Ambulance JER-003",
+    "resource_type": "ambulance",
+    "status": "maintenance",
+    "latitude": 31.741018,
+    "longitude": 35.19859,
+    "address": "Jerusalem, Palestine",
+    "district": "Shu'fat",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jerusalem",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 4,
+      "equipment": [
+        "defibrillator",
+        "ventilator",
+        "stretcher"
+      ]
+    },
+    "contact_name": "Dispatch Jerusalem",
+    "contact_phone": "+970 59 4367636",
+    "last_status_update": "2026-02-13T09:19:08.745981"
+  },
+  {
+    "id": "5553fe6d-6c98-4701-a7ec-b2eab25b88e4",
+    "name": "Ambulance JER-004",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 31.73291,
+    "longitude": 35.176346,
+    "address": "Jerusalem, Palestine",
+    "district": "Al-Ram",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jerusalem",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 2,
+      "equipment": [
+        "oxygen",
+        "stretcher",
+        "ventilator"
+      ]
+    },
+    "contact_name": "Dispatch Jerusalem",
+    "contact_phone": "+970 59 9474614",
+    "last_status_update": "2026-02-13T09:33:08.745989"
+  },
+  {
+    "id": "dbb4bc09-e90d-4cbf-9a8e-2ab660fbe908",
+    "name": "Ambulance JER-005",
+    "resource_type": "ambulance",
+    "status": "available",
+    "latitude": 31.779133,
+    "longitude": 35.18361,
+    "address": "Jerusalem, Palestine",
+    "district": "Shu'fat",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jerusalem",
+    "details": {
+      "vehicle_type": "ALS",
+      "crew_size": 3,
+      "equipment": [
+        "stretcher",
+        "IV",
+        "defibrillator"
+      ]
+    },
+    "contact_name": "Dispatch Jerusalem",
+    "contact_phone": "+970 59 8962169",
+    "last_status_update": "2026-02-13T09:27:08.745998"
+  },
+  {
+    "id": "5c7ea3a0-2800-4e86-8df7-3e34579471cf",
+    "name": "Ambulance JER-006",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.772407,
+    "longitude": 35.20124,
+    "address": "Jerusalem, Palestine",
+    "district": "Anata",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jerusalem",
+    "details": {
+      "vehicle_type": "MICU",
+      "crew_size": 2,
+      "equipment": [
+        "oxygen",
+        "defibrillator",
+        "ventilator"
+      ]
+    },
+    "contact_name": "Dispatch Jerusalem",
+    "contact_phone": "+970 59 1833006",
+    "last_status_update": "2026-02-13T09:40:08.746006"
+  },
+  {
+    "id": "5a488566-9e2a-4e3b-98b4-abe789c7c820",
+    "name": "Ambulance JER-007",
+    "resource_type": "ambulance",
+    "status": "in_use",
+    "latitude": 31.796606,
+    "longitude": 35.236086,
+    "address": "Jerusalem, Palestine",
+    "district": "Qalandiya",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Emergency ambulance unit serving Jerusalem",
+    "details": {
+      "vehicle_type": "BLS",
+      "crew_size": 4,
+      "equipment": [
+        "ventilator",
+        "stretcher",
+        "IV"
+      ]
+    },
+    "contact_name": "Dispatch Jerusalem",
+    "contact_phone": "+970 59 7870390",
+    "last_status_update": "2026-02-13T09:29:08.746014"
+  },
+  {
+    "id": "da8fe571-6c54-4d96-b5d0-75784fe03b1e",
+    "name": "Deir Dibwan Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 31.940263,
+    "longitude": 35.250114,
+    "address": "Beit Rima, Ramallah and Al-Bireh",
+    "district": "Al-Bireh",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "bandages",
+        "antibiotics",
+        "painkillers"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNICEF"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 6124763",
+    "last_status_update": "2026-02-12T21:46:08.746034"
+  },
+  {
+    "id": "fa991808-37e5-46f3-83eb-57dc46724067",
+    "name": "Beit Rima Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 31.950502,
+    "longitude": 35.217674,
+    "address": "Bani Zeid, Ramallah and Al-Bireh",
+    "district": "Birzeit",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "blood_products",
+        "antibiotics",
+        "insulin",
+        "painkillers",
+        "surgical_kits"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNICEF"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 2716512",
+    "last_status_update": "2026-02-13T08:46:08.746047"
+  },
+  {
+    "id": "6269a9ad-8a36-42d8-a3a2-c349a8924cc3",
+    "name": "Huwwara Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.227246,
+    "longitude": 35.263777,
+    "address": "Tell, Nablus",
+    "district": "Nablus City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "antibiotics",
+        "painkillers",
+        "IV_fluids",
+        "surgical_kits",
+        "blood_products"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "WHO"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 6012883",
+    "last_status_update": "2026-02-13T05:46:08.746058"
+  },
+  {
+    "id": "0971ab7d-d4e8-41e4-8543-234aecd21907",
+    "name": "Nablus City Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "depleted",
+    "latitude": 32.186093,
+    "longitude": 35.280947,
+    "address": "Beit Furik, Nablus",
+    "district": "Tell",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "painkillers",
+        "surgical_kits",
+        "bandages",
+        "insulin"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "WHO"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 5352450",
+    "last_status_update": "2026-02-13T02:46:08.746070"
+  },
+  {
+    "id": "cc41769f-41e5-4d29-80f3-210c39ebb412",
+    "name": "Asira Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "depleted",
+    "latitude": 32.21156,
+    "longitude": 35.278073,
+    "address": "Asira, Nablus",
+    "district": "Aqraba",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "surgical_kits",
+        "vaccines",
+        "IV_fluids"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNRWA"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 9969688",
+    "last_status_update": "2026-02-12T22:46:08.746079"
+  },
+  {
+    "id": "aa2973fd-1ef7-4188-9877-3884d5d2d909",
+    "name": "Tell Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.24959,
+    "longitude": 35.295053,
+    "address": "Asira, Nablus",
+    "district": "Huwwara",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "painkillers",
+        "vaccines",
+        "bandages"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "MSF"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 3146546",
+    "last_status_update": "2026-02-12T21:46:08.746088"
+  },
+  {
+    "id": "d197d8da-9c68-4b0c-a01f-83ee78ee634f",
+    "name": "Dura Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "depleted",
+    "latitude": 31.555119,
+    "longitude": 35.105703,
+    "address": "Yatta, Hebron",
+    "district": "Sa'ir",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "insulin",
+        "painkillers"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNRWA"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 6152035",
+    "last_status_update": "2026-02-13T02:46:08.746097"
+  },
+  {
+    "id": "29c8a45c-933d-4773-a796-ae888cffe7e8",
+    "name": "Yatta Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "depleted",
+    "latitude": 31.561409,
+    "longitude": 35.082932,
+    "address": "Yatta, Hebron",
+    "district": "Halhul",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "vaccines",
+        "bandages"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNICEF"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 2194801",
+    "last_status_update": "2026-02-13T01:46:08.746106"
+  },
+  {
+    "id": "5f31e552-ab0c-4446-abd8-5cbeb67b3cd1",
+    "name": "Taffouh Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "depleted",
+    "latitude": 31.571543,
+    "longitude": 35.099848,
+    "address": "Halhul, Hebron",
+    "district": "Beit Ummar",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "IV_fluids",
+        "bandages",
+        "antibiotics",
+        "surgical_kits"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNRWA"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 6749046",
+    "last_status_update": "2026-02-13T02:46:08.746115"
+  },
+  {
+    "id": "ba108128-b2ce-4c0d-b7d2-fe5be1155cee",
+    "name": "Halhul Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 31.581319,
+    "longitude": 35.139085,
+    "address": "Yatta, Hebron",
+    "district": "Taffouh",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "antibiotics",
+        "insulin",
+        "painkillers"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNRWA"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 6258215",
+    "last_status_update": "2026-02-12T22:46:08.746124"
+  },
+  {
+    "id": "60e3751f-35b9-40b8-b762-a0e2549cd200",
+    "name": "Beit Jala Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "depleted",
+    "latitude": 31.655871,
+    "longitude": 35.179753,
+    "address": "Beit Jala, Bethlehem",
+    "district": "Al-Khader",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "painkillers",
+        "blood_products"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "MSF"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 8204299",
+    "last_status_update": "2026-02-13T02:46:08.746133"
+  },
+  {
+    "id": "f1855fec-55ac-4d9b-86eb-80b9c3af7cc3",
+    "name": "Bethlehem City Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 31.698303,
+    "longitude": 35.20014,
+    "address": "Tuqu', Bethlehem",
+    "district": "Beit Jala",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "bandages",
+        "painkillers",
+        "blood_products",
+        "antibiotics"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "Palestinian Red Crescent"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 1069186",
+    "last_status_update": "2026-02-12T22:46:08.746142"
+  },
+  {
+    "id": "a85f1d78-4994-4d0c-acde-b7487333256a",
+    "name": "Qabatiya Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.433627,
+    "longitude": 35.337499,
+    "address": "Jenin City, Jenin",
+    "district": "Arraba",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "painkillers",
+        "bandages",
+        "IV_fluids",
+        "vaccines"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "WHO"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 8649174",
+    "last_status_update": "2026-02-12T21:46:08.746152"
+  },
+  {
+    "id": "7c9c4429-b4bf-449c-baff-c96eb32c967b",
+    "name": "Arraba Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "depleted",
+    "latitude": 32.463029,
+    "longitude": 35.302212,
+    "address": "Jenin Camp, Jenin",
+    "district": "Qabatiya",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "surgical_kits",
+        "IV_fluids",
+        "antibiotics",
+        "vaccines",
+        "insulin"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "Palestinian Red Crescent"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 4832222",
+    "last_status_update": "2026-02-13T05:46:08.746161"
+  },
+  {
+    "id": "47beb8e2-fa98-4282-84a1-0256125058fa",
+    "name": "Burqin Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.483717,
+    "longitude": 35.262921,
+    "address": "Ya'bad, Jenin",
+    "district": "Ya'bad",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "antibiotics",
+        "painkillers",
+        "surgical_kits"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "Palestinian Red Crescent"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 7294684",
+    "last_status_update": "2026-02-12T22:46:08.746169"
+  },
+  {
+    "id": "88e0ad1c-7035-495d-ac48-c2622609e27e",
+    "name": "Illar Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.337525,
+    "longitude": 35.040913,
+    "address": "Deir al-Ghusun, Tulkarm",
+    "district": "Tulkarm City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "bandages",
+        "surgical_kits"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "Palestinian Red Crescent"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 7992333",
+    "last_status_update": "2026-02-13T01:46:08.746178"
+  },
+  {
+    "id": "87513585-aa3a-40cc-a78e-bb9786e3e452",
+    "name": "Bal'a Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "depleted",
+    "latitude": 32.298425,
+    "longitude": 35.033328,
+    "address": "Tulkarm Camp, Tulkarm",
+    "district": "Tulkarm Camp",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "blood_products",
+        "insulin"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "Palestinian Red Crescent"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 9729340",
+    "last_status_update": "2026-02-13T04:46:08.746187"
+  },
+  {
+    "id": "abc21a1d-888f-43f9-b285-43a39d00324a",
+    "name": "Bal'a Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.32268,
+    "longitude": 35.048673,
+    "address": "Illar, Tulkarm",
+    "district": "Deir al-Ghusun",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "blood_products",
+        "bandages"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "Palestinian Red Crescent"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 9350675",
+    "last_status_update": "2026-02-13T05:46:08.746196"
+  },
+  {
+    "id": "e8fbec4f-60e2-468d-97d1-7919f3a0ca19",
+    "name": "Illar Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.3213,
+    "longitude": 35.056396,
+    "address": "Anabta, Tulkarm",
+    "district": "Deir al-Ghusun",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "blood_products",
+        "antibiotics",
+        "bandages",
+        "vaccines",
+        "insulin"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNRWA"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 9064202",
+    "last_status_update": "2026-02-13T03:46:08.746205"
+  },
+  {
+    "id": "d94905e4-e730-424e-934f-0a5a356fe213",
+    "name": "Qalqilya City Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "depleted",
+    "latitude": 32.139474,
+    "longitude": 34.987763,
+    "address": "Kafr Thulth, Qalqilya",
+    "district": "Azzun",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "antibiotics",
+        "surgical_kits"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "Palestinian Red Crescent"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 5293157",
+    "last_status_update": "2026-02-12T22:46:08.746214"
+  },
+  {
+    "id": "58dd4de5-5c12-4bad-9424-207d48051b40",
+    "name": "Jayous Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.162316,
+    "longitude": 35.019467,
+    "address": "Kafr Thulth, Qalqilya",
+    "district": "Qalqilya City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "painkillers",
+        "IV_fluids"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "Palestinian Red Crescent"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 5874908",
+    "last_status_update": "2026-02-13T03:46:08.746223"
+  },
+  {
+    "id": "9ea29c5f-cdec-4ae6-bfac-8007ec2bd336",
+    "name": "Qalqilya City Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.21936,
+    "longitude": 34.951871,
+    "address": "Qalqilya City, Qalqilya",
+    "district": "Qalqilya City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "painkillers",
+        "vaccines",
+        "IV_fluids"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "MSF"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 5501484",
+    "last_status_update": "2026-02-12T21:46:08.746232"
+  },
+  {
+    "id": "56352051-0f7d-4482-bd33-58286b9ba22f",
+    "name": "Salfit City Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.070562,
+    "longitude": 35.167572,
+    "address": "Bruqin, Salfit",
+    "district": "Bruqin",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "IV_fluids",
+        "surgical_kits",
+        "insulin",
+        "vaccines"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNRWA"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 2896774",
+    "last_status_update": "2026-02-13T06:46:08.746242"
+  },
+  {
+    "id": "8d1d30fe-ba36-4d54-85b6-a4b0f0eb780c",
+    "name": "Deir Istiya Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.102917,
+    "longitude": 35.139165,
+    "address": "Bruqin, Salfit",
+    "district": "Kifl Haris",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "vaccines",
+        "antibiotics",
+        "blood_products",
+        "insulin",
+        "painkillers"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNICEF"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 1483456",
+    "last_status_update": "2026-02-12T22:46:08.746251"
+  },
+  {
+    "id": "fffd0429-b06a-4147-835f-c36b8ad71d36",
+    "name": "Aqaba Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.319108,
+    "longitude": 35.368212,
+    "address": "Tubas City, Tubas",
+    "district": "Tubas City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "surgical_kits",
+        "bandages",
+        "vaccines",
+        "blood_products"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNICEF"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 4757843",
+    "last_status_update": "2026-02-12T22:46:08.746260"
+  },
+  {
+    "id": "6429190f-1362-4042-9b04-1372ce1ec719",
+    "name": "Bardala Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.358114,
+    "longitude": 35.37131,
+    "address": "Aqaba, Tubas",
+    "district": "Tammun",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "surgical_kits",
+        "vaccines",
+        "IV_fluids",
+        "insulin",
+        "antibiotics"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNICEF"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 1915467",
+    "last_status_update": "2026-02-13T08:46:08.746270"
+  },
+  {
+    "id": "3e84e1de-e88b-4c68-89e2-b5f82cdf7765",
+    "name": "Aqaba Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 32.33514,
+    "longitude": 35.335093,
+    "address": "Tammun, Tubas",
+    "district": "Tubas City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "surgical_kits",
+        "antibiotics",
+        "painkillers",
+        "vaccines",
+        "bandages"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNICEF"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 4736395",
+    "last_status_update": "2026-02-13T00:46:08.746279"
+  },
+  {
+    "id": "153fb74f-0de4-4963-8eb7-914fe214a984",
+    "name": "Ein al-Sultan Camp Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 31.857028,
+    "longitude": 35.4235,
+    "address": "Ein al-Sultan Camp, Jericho",
+    "district": "Jericho City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "vaccines",
+        "painkillers",
+        "bandages",
+        "insulin",
+        "surgical_kits"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "Palestinian Red Crescent"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 7768594",
+    "last_status_update": "2026-02-13T02:46:08.746289"
+  },
+  {
+    "id": "4203d4ca-fcba-49a7-a68e-ac6e03765089",
+    "name": "Jericho City Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "depleted",
+    "latitude": 31.820283,
+    "longitude": 35.45491,
+    "address": "Aqabat Jabr Camp, Jericho",
+    "district": "Al-Auja",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "surgical_kits",
+        "painkillers",
+        "bandages",
+        "antibiotics",
+        "insulin"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "WHO"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 8937865",
+    "last_status_update": "2026-02-12T21:46:08.746298"
+  },
+  {
+    "id": "1b86a460-9e1d-4aa5-9e69-18da38741b44",
+    "name": "Jericho City Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 31.882417,
+    "longitude": 35.471591,
+    "address": "Al-Auja, Jericho",
+    "district": "Jericho City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "surgical_kits",
+        "IV_fluids",
+        "vaccines",
+        "painkillers"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNICEF"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 9757456",
+    "last_status_update": "2026-02-13T03:46:08.746307"
+  },
+  {
+    "id": "da81144e-8bef-49f4-985b-95a9c55d69e4",
+    "name": "Al-Auja Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 31.88691,
+    "longitude": 35.404578,
+    "address": "Al-Auja, Jericho",
+    "district": "Ein al-Sultan Camp",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "blood_products",
+        "vaccines"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "UNRWA"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 4146456",
+    "last_status_update": "2026-02-13T07:46:08.746316"
+  },
+  {
+    "id": "90b949ac-3f36-49d5-967f-866bb80b9f37",
+    "name": "Ein al-Sultan Camp Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 31.909722,
+    "longitude": 35.43929,
+    "address": "Aqabat Jabr Camp, Jericho",
+    "district": "Jericho City",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "bandages",
+        "surgical_kits",
+        "IV_fluids",
+        "blood_products",
+        "vaccines"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "MSF"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 8673695",
+    "last_status_update": "2026-02-12T22:46:08.746325"
+  },
+  {
+    "id": "ed75428e-7cba-40c2-9e81-1bed80d2e556",
+    "name": "Anata Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 31.814685,
+    "longitude": 35.164134,
+    "address": "Al-Eizariya, Jerusalem",
+    "district": "Abu Dis",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "painkillers",
+        "surgical_kits",
+        "blood_products",
+        "antibiotics",
+        "IV_fluids"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "Palestinian Red Crescent"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 7499587",
+    "last_status_update": "2026-02-12T22:46:08.746336"
+  },
+  {
+    "id": "5e0903c9-32de-4035-bdb7-8c6b8e66b69a",
+    "name": "Al-Eizariya Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "available",
+    "latitude": 31.778355,
+    "longitude": 35.25197,
+    "address": "Abu Dis, Jerusalem",
+    "district": "Al-Eizariya",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "blood_products",
+        "insulin",
+        "painkillers"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "WHO"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 8597490",
+    "last_status_update": "2026-02-13T06:46:08.746346"
+  },
+  {
+    "id": "b6bce4b6-6c16-42b4-a18f-5888f6ecc671",
+    "name": "Anata Distribution Point",
+    "resource_type": "distribution_point",
+    "status": "depleted",
+    "latitude": 31.732118,
+    "longitude": 35.223952,
+    "address": "Al-Ram, Jerusalem",
+    "district": "Qalandiya",
+    "total_capacity": null,
+    "current_occupancy": null,
+    "description": "Medical supply and essential goods distribution",
+    "details": {
+      "supplies_available": [
+        "insulin",
+        "antibiotics",
+        "IV_fluids",
+        "blood_products"
+      ],
+      "operating_hours": "08:00-18:00",
+      "organization": "WHO"
+    },
+    "contact_name": "Supply Manager",
+    "contact_phone": "+970 59 6793064",
+    "last_status_update": "2026-02-12T22:46:08.746355"
+  },
+  {
+    "id": "a4c84823-a1d3-41ac-b6e6-5db84404b96d",
+    "name": "Al-Bireh Water Point",
+    "resource_type": "water_point",
+    "status": "depleted",
+    "latitude": 31.951934,
+    "longitude": 35.218409,
+    "address": "Silwad, Ramallah and Al-Bireh",
+    "district": "Deir Dibwan",
+    "total_capacity": 20000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "municipal",
+      "daily_capacity_liters": 20000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 2936178",
+    "last_status_update": "2026-02-12T21:46:08.746373"
+  },
+  {
+    "id": "92385e66-a43c-41a3-b44b-be3466c9ac8a",
+    "name": "Deir Dibwan Water Point",
+    "resource_type": "water_point",
+    "status": "depleted",
+    "latitude": 31.910028,
+    "longitude": 35.211681,
+    "address": "Beit Rima, Ramallah and Al-Bireh",
+    "district": "Deir Dibwan",
+    "total_capacity": 20000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "municipal",
+      "daily_capacity_liters": 10000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 1214253",
+    "last_status_update": "2026-02-12T16:46:08.746384"
+  },
+  {
+    "id": "763da659-e8dc-4b76-9f03-a157349c16c0",
+    "name": "Tell Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 32.173627,
+    "longitude": 35.218933,
+    "address": "Balata, Nablus",
+    "district": "Huwwara",
+    "total_capacity": 5000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "municipal",
+      "daily_capacity_liters": 20000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 5203716",
+    "last_status_update": "2026-02-13T04:46:08.746393"
+  },
+  {
+    "id": "b31de25f-bf2a-4af2-a749-9d00759b4783",
+    "name": "Taffouh Water Point",
+    "resource_type": "water_point",
+    "status": "depleted",
+    "latitude": 31.551659,
+    "longitude": 35.079314,
+    "address": "Hebron City, Hebron",
+    "district": "Yatta",
+    "total_capacity": 10000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "tanker",
+      "daily_capacity_liters": 20000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 4763253",
+    "last_status_update": "2026-02-12T09:46:08.746402"
+  },
+  {
+    "id": "2bb13149-429a-4fd8-9e54-3373b4bf60c8",
+    "name": "Za'tara Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 31.67916,
+    "longitude": 35.230831,
+    "address": "Za'tara, Bethlehem",
+    "district": "Za'tara",
+    "total_capacity": 5000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "NGO_supply",
+      "daily_capacity_liters": 10000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 7988821",
+    "last_status_update": "2026-02-12T11:46:08.746411"
+  },
+  {
+    "id": "17751ec0-4edc-457f-97cf-87cfdfdfc70b",
+    "name": "Bethlehem City Water Point",
+    "resource_type": "water_point",
+    "status": "depleted",
+    "latitude": 31.686665,
+    "longitude": 35.207612,
+    "address": "Beit Sahour, Bethlehem",
+    "district": "Beit Jala",
+    "total_capacity": 20000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "NGO_supply",
+      "daily_capacity_liters": 5000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 7169672",
+    "last_status_update": "2026-02-12T14:46:08.746422"
+  },
+  {
+    "id": "3344afbc-8bb3-43b2-970d-4fe539434118",
+    "name": "Za'tara Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 31.710062,
+    "longitude": 35.212739,
+    "address": "Beit Sahour, Bethlehem",
+    "district": "Al-Khader",
+    "total_capacity": 5000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "tanker",
+      "daily_capacity_liters": 5000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 3915798",
+    "last_status_update": "2026-02-12T09:46:08.746430"
+  },
+  {
+    "id": "f0910928-9fa3-41b2-8347-59e1bab1ad62",
+    "name": "Al-Khader Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 31.706785,
+    "longitude": 35.19012,
+    "address": "Tuqu', Bethlehem",
+    "district": "Beit Sahour",
+    "total_capacity": 5000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "well",
+      "daily_capacity_liters": 20000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 5278461",
+    "last_status_update": "2026-02-13T08:46:08.746438"
+  },
+  {
+    "id": "964c7997-f4a8-4753-84ae-4321ae5edb11",
+    "name": "Jenin City Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 32.457633,
+    "longitude": 35.343549,
+    "address": "Qabatiya, Jenin",
+    "district": "Ya'bad",
+    "total_capacity": 5000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "municipal",
+      "daily_capacity_liters": 10000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 7007679",
+    "last_status_update": "2026-02-13T06:46:08.746447"
+  },
+  {
+    "id": "a2944702-dd2a-4fed-a783-731e41846967",
+    "name": "Jenin Camp Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 32.489403,
+    "longitude": 35.281586,
+    "address": "Ya'bad, Jenin",
+    "district": "Jenin City",
+    "total_capacity": 20000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "well",
+      "daily_capacity_liters": 10000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 7768215",
+    "last_status_update": "2026-02-13T06:46:08.746456"
+  },
+  {
+    "id": "36bedea1-820b-40b3-8438-0508f2f5e7fc",
+    "name": "Burqin Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 32.44594,
+    "longitude": 35.33814,
+    "address": "Qabatiya, Jenin",
+    "district": "Qabatiya",
+    "total_capacity": 10000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "well",
+      "daily_capacity_liters": 20000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 9900294",
+    "last_status_update": "2026-02-12T17:46:08.746464"
+  },
+  {
+    "id": "afb89fcb-1d7a-4c62-9465-69a88103dbcd",
+    "name": "Tulkarm Camp Water Point",
+    "resource_type": "water_point",
+    "status": "depleted",
+    "latitude": 32.271872,
+    "longitude": 35.013201,
+    "address": "Illar, Tulkarm",
+    "district": "Illar",
+    "total_capacity": 5000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "tanker",
+      "daily_capacity_liters": 20000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 6384429",
+    "last_status_update": "2026-02-12T20:46:08.746474"
+  },
+  {
+    "id": "bce2a46c-bb64-48c2-aa51-dec5eb60666e",
+    "name": "Jayous Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 32.177788,
+    "longitude": 34.974624,
+    "address": "Habla, Qalqilya",
+    "district": "Jayous",
+    "total_capacity": 20000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "NGO_supply",
+      "daily_capacity_liters": 10000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 1735708",
+    "last_status_update": "2026-02-12T23:46:08.746482"
+  },
+  {
+    "id": "f1ccd494-1757-4890-afdb-c06c21c8380f",
+    "name": "Salfit City Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 32.065331,
+    "longitude": 35.141535,
+    "address": "Kifl Haris, Salfit",
+    "district": "Kifl Haris",
+    "total_capacity": 5000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "tanker",
+      "daily_capacity_liters": 5000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 4576485",
+    "last_status_update": "2026-02-12T11:46:08.746491"
+  },
+  {
+    "id": "db89753d-9b12-4452-afe2-04ca35a07806",
+    "name": "Kifl Haris Water Point",
+    "resource_type": "water_point",
+    "status": "depleted",
+    "latitude": 32.075721,
+    "longitude": 35.143693,
+    "address": "Bruqin, Salfit",
+    "district": "Salfit City",
+    "total_capacity": 20000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "well",
+      "daily_capacity_liters": 5000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 8704520",
+    "last_status_update": "2026-02-12T10:46:08.746500"
+  },
+  {
+    "id": "880d01f7-3789-4222-b552-81ff5e8ebf23",
+    "name": "Tammun Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 32.274589,
+    "longitude": 35.326725,
+    "address": "Bardala, Tubas",
+    "district": "Tubas City",
+    "total_capacity": 20000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "well",
+      "daily_capacity_liters": 10000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 7838943",
+    "last_status_update": "2026-02-12T20:46:08.746509"
+  },
+  {
+    "id": "60912c21-ab6d-41f0-bb74-3336e824c750",
+    "name": "Tayasir Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 32.315913,
+    "longitude": 35.359845,
+    "address": "Aqaba, Tubas",
+    "district": "Tubas City",
+    "total_capacity": 20000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "tanker",
+      "daily_capacity_liters": 20000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 2060950",
+    "last_status_update": "2026-02-12T09:46:08.746517"
+  },
+  {
+    "id": "41559ea1-eb65-4391-b495-ee0c3606cbe3",
+    "name": "Tubas City Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 32.329361,
+    "longitude": 35.389488,
+    "address": "Bardala, Tubas",
+    "district": "Tubas City",
+    "total_capacity": 10000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "municipal",
+      "daily_capacity_liters": 20000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 2451316",
+    "last_status_update": "2026-02-12T23:46:08.746525"
+  },
+  {
+    "id": "0445070b-d7f3-4f7e-a73c-b57456b24908",
+    "name": "Jericho City Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 31.854841,
+    "longitude": 35.482212,
+    "address": "Al-Auja, Jericho",
+    "district": "Al-Auja",
+    "total_capacity": 5000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "NGO_supply",
+      "daily_capacity_liters": 20000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 5948917",
+    "last_status_update": "2026-02-12T12:46:08.746534"
+  },
+  {
+    "id": "90822dc5-6b62-4e7b-8f1e-982b8fcec8ce",
+    "name": "Aqabat Jabr Camp Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 31.831108,
+    "longitude": 35.467729,
+    "address": "Al-Auja, Jericho",
+    "district": "Jericho City",
+    "total_capacity": 5000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "tanker",
+      "daily_capacity_liters": 20000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 7611593",
+    "last_status_update": "2026-02-12T15:46:08.746542"
+  },
+  {
+    "id": "b52436a5-1452-4bee-a535-c299176a5e9a",
+    "name": "Al-Auja Water Point",
+    "resource_type": "water_point",
+    "status": "depleted",
+    "latitude": 31.871453,
+    "longitude": 35.408513,
+    "address": "Aqabat Jabr Camp, Jericho",
+    "district": "Al-Auja",
+    "total_capacity": 10000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "well",
+      "daily_capacity_liters": 5000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 4086885",
+    "last_status_update": "2026-02-13T01:46:08.746551"
+  },
+  {
+    "id": "7ad7f83c-89b1-43a1-982d-4dde8335f1ae",
+    "name": "Jericho City Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 31.878388,
+    "longitude": 35.425274,
+    "address": "Jericho City, Jericho",
+    "district": "Ein al-Sultan Camp",
+    "total_capacity": 20000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "tanker",
+      "daily_capacity_liters": 10000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 2130159",
+    "last_status_update": "2026-02-13T00:46:08.746559"
+  },
+  {
+    "id": "8eb11da2-b864-4a7a-a50e-c982cd9c5b80",
+    "name": "Al-Ram Water Point",
+    "resource_type": "water_point",
+    "status": "available",
+    "latitude": 31.738042,
+    "longitude": 35.22176,
+    "address": "Shu'fat, Jerusalem",
+    "district": "Anata",
+    "total_capacity": 20000,
+    "current_occupancy": null,
+    "description": "Clean water distribution point",
+    "details": {
+      "water_source": "well",
+      "daily_capacity_liters": 5000
+    },
+    "contact_name": "Water Coordinator",
+    "contact_phone": "+970 59 5783807",
+    "last_status_update": "2026-02-12T13:46:08.746568"
+  }
+]
