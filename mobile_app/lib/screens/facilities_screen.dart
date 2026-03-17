@@ -7,15 +7,12 @@ import '../providers/auth_provider.dart';
 import '../providers/language_provider.dart';
 import '../widgets/scroll_reveal.dart';
 
-final facilitiesProvider = FutureProvider.family<List<Facility>, Map<String, dynamic>>(
+final facilitiesProvider = FutureProvider.family<List<Facility>, ({String? type, String? status})>(
   (ref, filters) async {
     final api = ref.watch(apiServiceProvider);
     return api.getFacilities(
-      facilityType: filters['facility_type'],
-      status: filters['status'],
-      district: filters['district'],
-      hasPower: filters['has_power'],
-      hasOxygen: filters['has_oxygen'],
+      facilityType: filters.type,
+      status: filters.status,
     );
   },
 );
@@ -33,10 +30,7 @@ class _FacilitiesScreenState extends ConsumerState<FacilitiesScreen> {
   String _searchQuery = '';
   String _sortBy = 'name'; // name, beds, status
 
-  Map<String, dynamic> get _filters => {
-        'facility_type': _typeFilter,
-        'status': _statusFilter,
-      };
+  ({String? type, String? status}) get _filters => (type: _typeFilter, status: _statusFilter);
 
   List<Facility> _sortFacilities(List<Facility> list) {
     final sorted = [...list];

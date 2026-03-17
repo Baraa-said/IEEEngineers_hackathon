@@ -9,7 +9,7 @@ from fastapi.responses import FileResponse
 
 from app.config import settings
 from app.database import init_db, close_db
-from app.routers import query, facilities, resources, routes, status, auth, incidents, dashboard
+from app.routers import query, facilities, resources, routes, status, auth, incidents, dashboard, chat
 from app.middleware.rate_limiter import RateLimitMiddleware
 
 
@@ -54,6 +54,7 @@ app.include_router(routes.router, prefix="/api/v1", tags=["Routing"])
 app.include_router(status.router, prefix="/api/v1", tags=["System Status"])
 app.include_router(incidents.router, prefix="/api/v1", tags=["Incidents"])
 app.include_router(dashboard.router, prefix="/api/v1", tags=["Dashboard"])
+app.include_router(chat.router, prefix="/api/v1", tags=["AI Chat Agent"])
 
 # Serve the admin dashboard
 _dashboard_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "dashboard")
@@ -75,6 +76,19 @@ async def root():
         "status": "operational",
         "docs": "/docs",
     }
+
+
+@app.get("/health", tags=["Root"])
+async def health():
+    return {"status": "healthy"}
+
+
+@app.post("/api/v1/rag/reload", tags=["AI Chat Agent"])
+async def reload_rag():
+    """Re-read the RAG markdown files from data/rag/."""
+    from app.services.ollama_rag import reload_rag_documents
+    reload_rag_documents()
+    return {"status": "ok", "message": "RAG documents reloaded"}
 
 
 @app.get("/health", tags=["Health"])

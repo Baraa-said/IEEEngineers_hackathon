@@ -1,13 +1,24 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:hive/hive.dart';
 import '../core/constants.dart';
 import '../models/query_result.dart';
 import '../models/facility.dart';
+import 'offline_queue_service.dart';
+import 'connectivity_service.dart';
 
 /// API service for communicating with the backend.
 class ApiService {
   late final Dio _dio;
   String? _authToken;
+  ConnectivityService? _connectivity;
+
+  /// Attach the connectivity service so we can check online/offline.
+  void attachConnectivity(ConnectivityService cs) => _connectivity = cs;
+
+  /// Whether we believe we are online right now.
+  bool get _isOnline => _connectivity?.isOnline ?? true;
 
   ApiService() {
     _dio = Dio(BaseOptions(
@@ -21,6 +32,13 @@ class ApiService {
       },
     ));
 
+    // Accept all certificates (ngrok free tier uses certs that iOS rejects)
+    (_dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+      final client = HttpClient();
+      client.badCertificateCallback = (cert, host, port) => true;
+      return client;
+    };
+
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
         if (_authToken != null) {
@@ -30,6 +48,18 @@ class ApiService {
       },
       onError: (error, handler) {
         print('API Error: ${error.message}');
+        // If 401, clear stale token and retry without auth
+        if (error.response?.statusCode == 401 && _authToken != null) {
+          print('Token expired — clearing and retrying');
+          setAuthToken(null);
+          final opts = error.requestOptions;
+          opts.headers.remove('Authorization');
+          _dio.fetch(opts).then(
+            (r) => handler.resolve(r),
+            onError: (e) => handler.next(e is DioException ? e : error),
+          );
+          return;
+        }
         return handler.next(error);
       },
     ));
@@ -129,6 +159,35 @@ class ApiService {
     return null;
   }
 
+  // --- AI Chat Agent ---
+
+  Future<Map<String, dynamic>> sendChatMessage({
+    required String message,
+    List<Map<String, dynamic>> history = const [],
+    String? imageDescription,
+    double? latitude,
+    double? longitude,
+    String language = 'en',
+  }) async {
+    try {
+      final response = await _dio.post('/chat', data: {
+        'message': message,
+        'history': history,
+        if (imageDescription != null) 'image_description': imageDescription,
+        'latitude': latitude,
+        'longitude': longitude,
+        'language': language,
+      });
+      return Map<String, dynamic>.from(response.data);
+    } catch (e) {
+      // If offline, return a helpful placeholder instead of crashing
+      return {
+        'response': 'You are currently offline. Your question has been noted — please try again when connectivity is restored.',
+        'offline': true,
+      };
+    }
+  }
+
   // --- Facilities ---
 
   Future<List<Facility>> getFacilities({
@@ -153,10 +212,34 @@ class ApiService {
     if (radiusKm != null) params['radius_km'] = radiusKm;
     params['limit'] = limit;
 
-    final response =
-        await _dio.get('/facilities', queryParameters: params);
-    final list = response.data as List;
-    return list.map((e) => Facility.fromJson(e)).toList();
+    try {
+      final response =
+          await _dio.get('/facilities', queryParameters: params);
+      final list = response.data as List;
+      // Cache full unfiltered fetches for offline
+      if (facilityType == null && status == null && district == null) {
+        OfflineQueueService.cacheFacilities(list);
+      }
+      return list.map((e) => Facility.fromJson(e)).toList();
+    } catch (e) {
+      // Offline fallback — return cached data
+      final cached = OfflineQueueService.getCachedFacilities();
+      if (cached != null) {
+        print('📴 Returning ${cached.length} cached facilities (offline)');
+        var facilities = cached
+            .map((e) => Facility.fromJson(Map<String, dynamic>.from(e as Map)))
+            .toList();
+        // Apply basic filters on cached data
+        if (facilityType != null) {
+          facilities = facilities.where((f) => f.facilityType == facilityType).toList();
+        }
+        if (status != null) {
+          facilities = facilities.where((f) => f.status == status).toList();
+        }
+        return facilities;
+      }
+      rethrow;
+    }
   }
 
   Future<Map<String, dynamic>> getFacilityStats() async {
@@ -180,9 +263,32 @@ class ApiService {
     if (longitude != null) params['longitude'] = longitude;
     if (radiusKm != null) params['radius_km'] = radiusKm;
 
-    final response =
-        await _dio.get('/resources', queryParameters: params);
-    return List<Map<String, dynamic>>.from(response.data);
+    try {
+      final response =
+          await _dio.get('/resources', queryParameters: params);
+      final list = List<Map<String, dynamic>>.from(response.data);
+      // Cache unfiltered fetches
+      if (resourceType == null && status == null) {
+        OfflineQueueService.cacheResources(list);
+      }
+      return list;
+    } catch (e) {
+      final cached = OfflineQueueService.getCachedResources();
+      if (cached != null) {
+        print('📴 Returning ${cached.length} cached resources (offline)');
+        var resources = cached
+            .map((e) => Map<String, dynamic>.from(e as Map))
+            .toList();
+        if (resourceType != null) {
+          resources = resources.where((r) => r['resource_type'] == resourceType).toList();
+        }
+        if (status != null) {
+          resources = resources.where((r) => r['status'] == status).toList();
+        }
+        return resources;
+      }
+      rethrow;
+    }
   }
 
   // --- Route ---
@@ -214,6 +320,7 @@ class ApiService {
   // --- SOS Report ---
 
   /// Send an SOS emergency report with the user's GPS location.
+  /// If offline, queues the request and returns a placeholder response.
   Future<Map<String, dynamic>> sendSOSReport({
     required String emergencyType,
     required double latitude,
@@ -221,14 +328,34 @@ class ApiService {
     String? description,
     String? reportedBy,
   }) async {
-    final response = await _dio.post('/sos', data: {
+    final body = {
       'emergency_type': emergencyType,
       'latitude': latitude,
       'longitude': longitude,
       'description': description,
       'reported_by': reportedBy,
-    });
-    return Map<String, dynamic>.from(response.data);
+    };
+
+    try {
+      final response = await _dio.post('/sos', data: body);
+      return Map<String, dynamic>.from(response.data);
+    } catch (e) {
+      // Queue for later if we appear to be offline
+      OfflineQueueService.enqueue(PendingRequest(
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        method: 'POST',
+        path: '/sos',
+        data: body,
+        createdAt: DateTime.now(),
+        label: 'SOS: $emergencyType',
+      ));
+      print('📴 SOS queued for later delivery (offline)');
+      return {
+        'status': 'queued',
+        'message': 'SOS report saved and will be sent when you are back online.',
+        'offline': true,
+      };
+    }
   }
 
   /// Get operational hospitals sorted by distance from given coordinates.

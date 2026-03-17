@@ -1,9 +1,31 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../services/api_service.dart';
+import '../services/connectivity_service.dart';
 
-/// Global API service provider.
+/// Global connectivity service (initialized once).
+final connectivityServiceProvider = Provider<ConnectivityService>((ref) {
+  final cs = ConnectivityService();
+  try {
+    cs.init();
+  } catch (e) {
+    print('ConnectivityService init error: $e');
+  }
+  ref.onDispose(() => cs.dispose());
+  return cs;
+});
+
+/// Global API service provider — wired to connectivity.
 final apiServiceProvider = Provider<ApiService>((ref) {
-  return ApiService();
+  final api = ApiService();
+  final cs = ref.watch(connectivityServiceProvider);
+  api.attachConnectivity(cs);
+  return api;
+});
+
+/// Convenience stream: emits true/false as connectivity changes.
+final isOnlineProvider = StreamProvider<bool>((ref) {
+  final cs = ref.watch(connectivityServiceProvider);
+  return cs.onlineStream;
 });
 
 /// Auth state

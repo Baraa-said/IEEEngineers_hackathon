@@ -41,7 +41,7 @@ def load_users_from_csv(csv_path: Path) -> list[User]:
                     hashed_password=hash_password(row["password"].strip()),
                     full_name=row["full_name"].strip(),
                     role=UserRole(row["role"].strip()),
-                    organization=row.get("organization", "").strip() or None,
+                    organization=(row.get("organization") or "").strip() or None,
                 )
             )
     return users

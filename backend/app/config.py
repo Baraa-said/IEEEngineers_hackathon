@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     # JWT
     JWT_SECRET_KEY: str = "change-me-in-production"
     JWT_ALGORITHM: str = "HS256"
-    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 10080  # 7 days
 
     # CORS
     CORS_ORIGINS: str = '["http://localhost:3000","http://localhost:8080"]'

@@ -1,7 +1,7 @@
 /// API configuration constants.
 class ApiConfig {
-  static const String baseUrl = 'https://24bb-84-242-57-177.ngrok-free.app/api/v1';
-  static const String wsUrl = 'wss://24bb-84-242-57-177.ngrok-free.app/ws';
+  static const String baseUrl = 'http://172.19.3.183:8000/api/v1';
+  static const String wsUrl = 'ws://172.19.3.183:8000/ws';
   static const Duration timeout = Duration(seconds: 60);
   static const int maxRetries = 3;
 }

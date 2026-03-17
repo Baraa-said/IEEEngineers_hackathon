@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/theme.dart';
 import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
-import 'screens/query_screen.dart';
+import 'screens/ai_chat_screen.dart';
 import 'screens/map_screen.dart';
 import 'screens/facilities_screen.dart';
 import 'screens/settings_screen.dart';
@@ -59,7 +59,7 @@ class SituationRoomApp extends ConsumerWidget {
         final routes = <String, WidgetBuilder>{
           '/login': (_) => const LoginScreen(),
           '/home': (_) => const HomeScreen(),
-          '/query': (_) => const QueryScreen(),
+          '/query': (_) => const AiChatScreen(),
           '/map': (_) => const MapScreen(),
           '/facilities': (_) => const FacilitiesScreen(),
           '/settings': (_) => const SettingsScreen(),

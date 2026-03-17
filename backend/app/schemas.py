@@ -112,6 +112,28 @@ class QueryResponse(BaseModel):
     language: str
 
 
+# --- Chat Schemas ---
+
+class ChatMessage(BaseModel):
+    role: str = Field(..., description="'user' or 'assistant'")
+    content: str
+    image_description: Optional[str] = None
+
+class ChatRequest(BaseModel):
+    message: str = Field(..., min_length=1, max_length=2000)
+    history: List[ChatMessage] = Field(default_factory=list)
+    image_description: Optional[str] = Field(None, description="Description of attached photo for context")
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    language: str = "en"
+
+class ChatResponse(BaseModel):
+    reply: str
+    map_markers: List[MapMarker] = []
+    confidence: float = Field(ge=0.0, le=1.0)
+    response_time_ms: int
+
+
 # --- Facility Schemas ---
 
 class FacilityBase(BaseModel):

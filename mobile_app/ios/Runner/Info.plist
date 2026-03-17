@@ -9,16 +9,24 @@
 	</dict>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app needs microphone access for voice queries</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs camera access to attach photos for the AI assistant</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs photo library access to attach images for the AI assistant</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>This app uses speech recognition for natural language queries</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app needs your location to find nearby health facilities</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Aid NAV reads your health data (heart rate, steps, blood oxygen, etc.) to display on your profile for emergency responders</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Aid NAV may update health records for crisis tracking</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Situation Room</string>
+	<string>Aid NAV</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

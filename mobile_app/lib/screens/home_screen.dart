@@ -6,6 +6,7 @@ import '../core/theme.dart';
 import '../providers/auth_provider.dart';
 import '../providers/language_provider.dart';
 import '../services/api_service.dart';
+import '../services/offline_queue_service.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -285,6 +286,42 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
     }
   }
 
+  // ── Offline banner ────────────────────────────────────────
+  Widget _buildOfflineBanner() {
+    final onlineAsync = ref.watch(isOnlineProvider);
+    return onlineAsync.when(
+      data: (online) {
+        if (online) return const SizedBox.shrink();
+        final pending = OfflineQueueService.pendingCount;
+        return Container(
+          width: double.infinity,
+          margin: const EdgeInsets.only(bottom: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+          decoration: BoxDecoration(
+            color: Colors.orange.shade800,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Row(
+            children: [
+              const Icon(Icons.cloud_off, color: Colors.white, size: 20),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  pending > 0
+                      ? 'You are offline  ·  $pending request${pending > 1 ? 's' : ''} queued'
+                      : 'You are offline  ·  cached data shown',
+                  style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final auth = ref.watch(authProvider);
@@ -330,6 +367,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // ── Offline banner ──
+                _buildOfflineBanner(),
                 // Welcome — fade in
                 _staggerItem(
                   0,
@@ -402,7 +441,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
                         2,
                         6,
                         _BigActionCard(
-                          icon: Icons.chat_outlined,
+                          icon: Icons.smart_toy,
                           label: tr('ask_question'),
                           subtitle: tr('ask_subtitle'),
                           color: AppTheme.accentColor,

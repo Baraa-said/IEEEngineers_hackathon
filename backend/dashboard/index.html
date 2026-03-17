@@ -53,10 +53,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--txt);min-height:10
 .kpi .label{font-size:12px;color:var(--muted);margin-bottom:2px}
 .kpi .value{font-size:28px;font-weight:900}
 .kpi .sub-val{font-size:11px;color:var(--muted)}
-.kpi::before{content:'';position:absolute;top:0;right:0;left:0;height:3px}
-.kpi.green::before{background:var(--green)}.kpi.red::before{background:var(--red)}
-.kpi.amber::before{background:var(--amber)}.kpi.blue::before{background:var(--blue)}
+.kpi::before{content:'';position:absolute;top:0;right:0;left:0;height:4px}
+.kpi.green::before{background:var(--green)}.kpi.green{border-color:color-mix(in srgb,var(--green) 40%,transparent)}
+.kpi.red::before{background:var(--red)}.kpi.red{border-color:color-mix(in srgb,var(--red) 40%,transparent)}
+.kpi.amber::before{background:var(--amber)}.kpi.amber{border-color:color-mix(in srgb,var(--amber) 40%,transparent)}
+.kpi.blue::before{background:var(--blue)}.kpi.blue{border-color:color-mix(in srgb,var(--blue) 40%,transparent)}
 .kpi.purple::before{background:var(--purple)}.kpi.cyan::before{background:var(--cyan)}
+.kpi .value.tl-green{color:var(--green)}.kpi .value.tl-amber{color:var(--amber)}.kpi .value.tl-red{color:var(--red)}
 
 /* ───── Charts ───── */
 .charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:14px;margin-bottom:18px}
@@ -637,7 +640,11 @@ function toast(msg,type='success'){
 
 function sevBadge(s){const c=s==='critical'||s==='high'?'badge-red':s==='medium'?'badge-amber':'badge-green';return `<span class="badge ${c}">${sevLabel(s)}</span>`;}
 function statusBadge(s){const c=s==='operational'?'badge-green':s==='damaged'||s==='offline'?'badge-red':'badge-amber';return `<span class="badge ${c}">${sLabel(s)}</span>`;}
-function makeKPI(label,value,sub,cls){return `<div class="kpi ${cls}"><div class="label">${label}</div><div class="value">${value}</div>${sub?`<div class="sub-val">${sub}</div>`:''}</div>`;}
+function makeKPI(label,value,sub,cls,valCls){return `<div class="kpi ${cls}"><div class="label">${label}</div><div class="value ${valCls||''}">${value}</div>${sub?`<div class="sub-val">${sub}</div>`:''}</div>`;}
+/* Traffic-light: green < 40%, amber 40-70%, red > 70% (for "bad is high" metrics like occupancy/incidents) */
+function tlBad(pct){return pct>=70?'red':pct>=40?'amber':'green';}
+/* Inverse: green > 70%, amber 40-70%, red < 40% (for "good is high" metrics like power/oxygen) */
+function tlGood(pct){return pct>=70?'green':pct>=40?'amber':'red';}
 
 /* ═══════ Theme & Lang ═══════ */
 function applyTheme(){
@@ -682,17 +689,25 @@ function bar(id,labels,datasets){
 async function loadDashboard(){
   try{
     const d=await api('/api/v1/dashboard/stats');
-    const bedPct=d.facilities.total_beds?Math.round(d.facilities.available_beds/d.facilities.total_beds*100):0;
     const shPct=d.resources.shelter_capacity?Math.round(d.resources.shelter_occupancy/d.resources.shelter_capacity*100):0;
+    /* Compute traffic-light percentages */
+    const opPct=d.facilities.total?Math.round((d.facilities.by_status?.operational||0)/d.facilities.total*100):0;
+    const bedOccPct=d.facilities.total_beds?Math.round((d.facilities.total_beds-d.facilities.available_beds)/d.facilities.total_beds*100):0;
+    const icuOccPct=d.facilities.total_icu?Math.round((d.facilities.total_icu-d.facilities.available_icu)/d.facilities.total_icu*100):0;
+    const resAvailPct=d.resources.total?Math.round((d.resources.by_status?.available||0)/d.resources.total*100):0;
+    const incPct=d.incidents.total?Math.round(d.incidents.active/d.incidents.total*100):0;
+    const pwrPct=d.facilities.total?Math.round(d.facilities.with_power/d.facilities.total*100):0;
+    const oxyPct=d.facilities.total?Math.round(d.facilities.with_oxygen/d.facilities.total*100):0;
+
     document.getElementById('kpi-row').innerHTML=[
-      makeKPI(t('total_fac'),d.facilities.total,`${d.facilities.by_status?.operational||0} ${t('operational')}`,'green'),
-      makeKPI(t('avail_beds'),`${d.facilities.available_beds}/${d.facilities.total_beds}`,`${bedPct}% ${t('occupancy')}`,'blue'),
-      makeKPI(t('icu_beds'),`${d.facilities.available_icu}/${d.facilities.total_icu}`,``,'purple'),
-      makeKPI(t('total_res'),d.resources.total,`${d.resources.by_status?.available||0} ${t('available')}`,'cyan'),
-      makeKPI(t('active_inc'),d.incidents.active,`${t('of')} ${d.incidents.total} ${t('total')}`,'red'),
-      makeKPI(t('shelter_cap'),d.resources.shelter_capacity,`${shPct}% ${t('occupancy')}`,'amber'),
-      makeKPI(t('with_power'),d.facilities.with_power,`${t('of')} ${d.facilities.total} ${t('facility')}`,'green'),
-      makeKPI(t('with_oxygen'),d.facilities.with_oxygen,`${t('of')} ${d.facilities.total} ${t('facility')}`,'blue'),
+      makeKPI(t('total_fac'),d.facilities.total,`${d.facilities.by_status?.operational||0} ${t('operational')}`,tlGood(opPct),'tl-'+tlGood(opPct)),
+      makeKPI(t('avail_beds'),`${d.facilities.available_beds}/${d.facilities.total_beds}`,`${bedOccPct}% ${t('occupancy')}`,tlBad(bedOccPct),'tl-'+tlBad(bedOccPct)),
+      makeKPI(t('icu_beds'),`${d.facilities.available_icu}/${d.facilities.total_icu}`,`${icuOccPct}% ${t('occupancy')}`,tlBad(icuOccPct),'tl-'+tlBad(icuOccPct)),
+      makeKPI(t('total_res'),d.resources.total,`${d.resources.by_status?.available||0} ${t('available')}`,tlGood(resAvailPct),'tl-'+tlGood(resAvailPct)),
+      makeKPI(t('active_inc'),d.incidents.active,`${t('of')} ${d.incidents.total} ${t('total')}`,tlBad(incPct),'tl-'+tlBad(incPct)),
+      makeKPI(t('shelter_cap'),d.resources.shelter_capacity,`${shPct}% ${t('occupancy')}`,tlBad(shPct),'tl-'+tlBad(shPct)),
+      makeKPI(t('with_power'),d.facilities.with_power,`${t('of')} ${d.facilities.total} ${t('facility')}`,tlGood(pwrPct),'tl-'+tlGood(pwrPct)),
+      makeKPI(t('with_oxygen'),d.facilities.with_oxygen,`${t('of')} ${d.facilities.total} ${t('facility')}`,tlGood(oxyPct),'tl-'+tlGood(oxyPct)),
     ].join('');
 
     destroyCharts();

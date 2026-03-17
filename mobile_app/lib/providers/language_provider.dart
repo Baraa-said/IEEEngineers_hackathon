@@ -66,8 +66,8 @@ class S {
 
     // Home
     'welcome': 'Welcome',
-    'ask_question': 'Ask a Question',
-    'ask_subtitle': 'Query facilities, resources & incidents',
+    'ask_question': 'AI Agent',
+    'ask_subtitle': 'Chat with text, voice & photos',
     'quick_actions': 'Quick Actions',
     'facilities': 'Facilities',
     'facilities_sub': 'Hospitals & clinics',
@@ -79,7 +79,7 @@ class S {
     'incidents_sub': 'Active alerts',
     'try_queries': 'Try These Queries',
 
-    // Query
+    // Query / Chat
     'ask_hint': 'Ask about facilities, resources...',
     'analyzing': 'Analyzing your query...',
     'ai_response': 'AI Response',
@@ -96,6 +96,17 @@ class S {
     'high_confidence': 'High Confidence',
     'medium_confidence': 'Medium Confidence',
     'low_confidence': 'Low Confidence',
+    'ai_agent': 'Aid NAV AI',
+    'chat_welcome': 'Your crisis-response assistant.\nAsk anything using text, voice, or photos.',
+    'chat_hint': 'Type a message...',
+    'chat_clear': 'Clear Chat',
+    'chat_text': 'Text',
+    'chat_voice': 'Voice',
+    'chat_photo': 'Photo',
+    'chat_camera': 'Take Photo',
+    'chat_gallery': 'Choose from Gallery',
+    'chat_try': 'Try asking:',
+    'chat_locations': 'locations found — view on map',
 
     // Facilities
     'health_facilities': 'Health Facilities',
@@ -154,6 +165,23 @@ class S {
     'logout': 'Logout',
     'no_alerts': 'No new alerts',
 
+    // Health
+    'health_data': 'Health Data',
+    'health_sync': 'Sync from Health App',
+    'health_syncing': 'Syncing...',
+    'health_no_perm': 'Health permissions not granted',
+    'health_steps': 'Steps Today',
+    'health_heart_rate': 'Heart Rate',
+    'health_bpm': 'BPM',
+    'health_spo2': 'Blood Oxygen',
+    'health_temp': 'Body Temp',
+    'health_weight': 'Weight',
+    'health_bp': 'Blood Pressure',
+    'health_glucose': 'Blood Glucose',
+    'health_resp': 'Respiratory Rate',
+    'health_no_data': 'No data available',
+    'health_tap_sync': 'Tap sync to import from Apple Health',
+
     // Sample queries
     'q1': 'Where is the nearest hospital?',
     'q2': 'Show shelters within 5km of Ramallah',
@@ -198,8 +226,8 @@ class S {
 
     // Home
     'welcome': 'مرحباً',
-    'ask_question': 'اطرح سؤالاً',
-    'ask_subtitle': 'استعلم عن المرافق والموارد والحوادث',
+    'ask_question': 'مساعد ذكي',
+    'ask_subtitle': 'تحدّث بالنص أو الصوت أو الصور',
     'quick_actions': 'إجراءات سريعة',
     'facilities': 'المرافق',
     'facilities_sub': 'مستشفيات وعيادات',
@@ -211,7 +239,7 @@ class S {
     'incidents_sub': 'تنبيهات نشطة',
     'try_queries': 'جرّب هذه الاستعلامات',
 
-    // Query
+    // Query / Chat
     'ask_hint': 'اسأل عن المرافق والموارد...',
     'analyzing': 'جارٍ تحليل استعلامك...',
     'ai_response': 'استجابة الذكاء الاصطناعي',
@@ -228,6 +256,17 @@ class S {
     'high_confidence': 'ثقة عالية',
     'medium_confidence': 'ثقة متوسطة',
     'low_confidence': 'ثقة منخفضة',
+    'ai_agent': 'مساعد Aid NAV',
+    'chat_welcome': 'مساعدك في الأزمات.\nاسأل أي شيء بالنص أو الصوت أو الصور.',
+    'chat_hint': 'اكتب رسالة...',
+    'chat_clear': 'مسح المحادثة',
+    'chat_text': 'نص',
+    'chat_voice': 'صوت',
+    'chat_photo': 'صورة',
+    'chat_camera': 'التقط صورة',
+    'chat_gallery': 'اختر من المعرض',
+    'chat_try': 'جرّب أن تسأل:',
+    'chat_locations': 'مواقع — عرض على الخريطة',
 
     // Facilities
     'health_facilities': 'المرافق الصحية',
@@ -285,6 +324,23 @@ class S {
     'licenses': 'تراخيص مفتوحة المصدر',
     'logout': 'تسجيل الخروج',
     'no_alerts': 'لا توجد تنبيهات جديدة',
+
+    // Health
+    'health_data': 'البيانات الصحية',
+    'health_sync': 'مزامنة من تطبيق الصحة',
+    'health_syncing': 'جاري المزامنة...',
+    'health_no_perm': 'لم يتم منح أذونات الصحة',
+    'health_steps': 'خطوات اليوم',
+    'health_heart_rate': 'معدل ضربات القلب',
+    'health_bpm': 'نبضة/د',
+    'health_spo2': 'أكسجين الدم',
+    'health_temp': 'حرارة الجسم',
+    'health_weight': 'الوزن',
+    'health_bp': 'ضغط الدم',
+    'health_glucose': 'سكر الدم',
+    'health_resp': 'معدل التنفس',
+    'health_no_data': 'لا توجد بيانات متاحة',
+    'health_tap_sync': 'اضغط مزامنة للاستيراد من Apple Health',
 
     // Sample queries
     'q1': 'أين أقرب مستشفى؟',
