@@ -126,7 +126,7 @@ A three-tier architecture:
 
 ### Prerequisites
 
-- (Optional) Flutter SDK 3.x for mobile development
+- (Optional) Flutter SDK  3.x for mobile development
 
 ### 1. Clone & Configure
 
